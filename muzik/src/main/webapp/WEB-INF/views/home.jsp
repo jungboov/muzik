@@ -10,6 +10,6 @@
 	Hello world!  
 </h1>
 
-<P>   ${serverTime}. </P>
+<P>${serverTime}. </P>
 </body>
 </html>
