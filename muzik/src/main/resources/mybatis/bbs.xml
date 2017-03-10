@@ -4,7 +4,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="bbs">
-<!-- 
+
+
+	<select id="pageRead" parameterType="int" resultType="Map">
+		SELECT * FROM
+		(
+		select
+		lag(bbsid,1,bbsid) over (order by bbsid) pre_bbsno1),
+		bbsid,
+		lead(bbsid,1,bbsid) over (order by bbsid) nex_bbsno1)
+		from(
+			select bbsid
+			from bbs
+			order by bbsid desc
+			)
+		)
+		WHERE bbsid = #{bbsid}
+	</select>
+
+
 	<update id="upViewcnt" parameterType="int">
 		update m_bbs
 		set viewcnt = viewcnt + 1
@@ -19,8 +37,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="update" parameterType="BbsDTO">
 		update m_bbs 
 		set title=#{title}, content=#{content}
-		<if test="filename>0">
-			,filename = #{filename}
+		<if test="filesize > 0">
+			,filename = #{filename},
+			filesize = #{filesize}
 		</if>	
 		where bbsid = #{bbsid}
 	</update>
@@ -44,9 +63,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	
 	<insert id="create" parameterType="BbsDTO" >
-		insert into m_bbs(bbsid, title, content, id, cdate, filename, )
+		insert into m_bbs(bbsid, title, content, id, cdate, filename, filesize)
 		VALUES((SELECT NVL(MAX(bbsid), 0) + 1 as bbsid FROM m_bbs),
-		 #{title}, #{content}, #{id}, sysdate, #{filename})                                    
+		 #{title}, #{content}, #{id}, sysdate, #{filename}, #{filesize})                                    
 	</insert>
 	
 	<select id="list" resultType="BbsDTO" parameterType="Map">
@@ -82,5 +101,5 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		FROM m_bbs
 		WHERE bbsid = #{bbsid}
 	</select>
- -->
+
 </mapper>

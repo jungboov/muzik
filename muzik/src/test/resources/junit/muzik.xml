@@ -25,4 +25,8 @@
         <constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory" />
     </bean>
     
+    <!-- Test하기 위해서 생성 -->
+    <bean id="bdao" class="spring.model.bbs.BbsDAO" p:sqlSession-ref="sqlSession"/>
+    
+    
 </beans>
