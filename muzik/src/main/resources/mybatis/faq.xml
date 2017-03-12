@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="faq">
+
+	<insert id="create" parameterType="FaqDTO">
+		INSERT INTO m_FAQ(FAQID, title, content)
+		VALUES((SELECT NVL(MAX(FAQID), 0) + 1 as FAQID FROM m_FAQ), 
+		#{title}, #{content})
+	</insert>
+	
+	<select id="read" resultType="FaqDTO" parameterType="int">
+		select * from m_FAQ
+		where FAQID = #{FAQID}
+	</select>
+
+	<update id="update" parameterType="FaqDTO">
+		UPDATE m_FAQ
+		SET title=#{title}, content=#{content}
+		WHERE FAQID = #{FAQID}
+	</update>
+	
+	<delete id="delete" parameterType="int">
+		DELETE FROM m_FAQ 
+		WHERE FAQID = #{FAQID}
+	</delete>
+
+	<select id="list" resultType="FaqDTO" parameterType="Map">
+		select FAQID, title, content
+		from m_FAQ
+		<where>
+			<choose>
+				<when test="col=='title'">
+					title like '%'||#{word}||'%'
+				</when>
+				<when test="col=='content'">
+					content like '%'||#{word}||'%'
+				</when>
+			</choose>
+		</where>
+		order by FAQID desc                                                                   
+	   <![CDATA[where r>=#{sno} and r<=#{eno}]]>
+	</select>
+
+	<select id="total" parameterType="map" resultType="int">
+		select count(*) from m_FAQ
+		<where>
+			<choose>
+				<when test="col=='title'">
+					title like '%'||#{word}||'%'
+				</when>
+				<when test="col=='content'">
+					content like '%'||#{word}||'%'
+				</when>
+			</choose>
+		</where>
+	</select>
+
+</mapper>

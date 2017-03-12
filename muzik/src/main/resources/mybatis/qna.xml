@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="qna">
+
+<!-- 	<insert id="create" parameterType="QnADTO"> -->
+<!-- 		INSERT INTO m_QnA(QnAID, title, content, id, cdate, grpno)   -->
+<!-- 		VALUES((SELECT NVL(MAX(QnAID), 0) + 1 as m_QnA FROM m_QnA),  -->
+<!-- 		#{title}, #{content}, #{id}, sysdate,  -->
+<!-- 		(SELECT NVL(MAX(grpno),0) + 1 asgrpno from m_QnA)) -->
+<!-- 	</insert> -->
+	
+<!-- 	<insert id="createReply" parameterType="Map"> -->
+<!-- 		INSERT INTO m_QnA(QnAID, title, content, id, cdate, grpno, indent, ansnum, refno) -->
+<!-- 		VALUES((SELECT NVL(MAX(QnAID), 0) + 1 as m_QnA FROM m_QnA), -->
+<!-- 		#{title}, #{content}, #{id}, sysdate, #{grpno}, #{indent}+1, #{ansnum}+1, #{QnAID}) -->
+<!-- 	</insert> -->
+	
+<!-- 	<select id="read" resultType="QnaDTO" parameterType="int"> -->
+<!-- 		SELECT QnAID, title, content, id, cdate -->
+<!-- 		FROM m_QnA -->
+<!-- 		WHERE QnAID = #{QnAID} -->
+<!-- 	</select> -->
+	
+<!-- 	<select id="readReply" resultType="QnaDTO" parameterType="int"> -->
+<!-- 		SELECT QnAID, title, grpno, indent, ansnum -->
+<!-- 		FROM m_QnA -->
+<!-- 		WHERE QnAID = #{QnAID} -->
+<!-- 		ORDER BY QnAID DESC -->
+<!-- 	</select> -->
+	
+<!-- 	<update id="update" parameterType="QnaDTO"> -->
+<!-- 		UPDATE m_QnA SET -->
+<!-- 		title=#{title}, content=#{content} -->
+<!-- 		WHERE QnAID = #{QnAID} -->
+<!-- 	</update> -->
+	
+<!-- 	<update id="upViewcnt" parameterType="int"> -->
+<!-- 		UPDATE m_QnA  -->
+<!-- 		SET viewcnt = viewcnt + 1  -->
+<!-- 		WHERE QnAID = #{QnAID} -->
+<!-- 	</update> -->
+	
+<!-- 	<update id="upAnsnum" parameterType="Map"> -->
+<!-- 		UPDATE m_QnA -->
+<!-- 		SET ansnum = ansnum + 1 -->
+<!-- 		WHERE grpno = #{grpno} AND ansnum > #{ansnum} -->
+<!-- 	</update> -->
+	
+<!-- 	<delete id="delete" parameterType="int"> -->
+<!-- 		DELETE FROM m_QnA -->
+<!-- 		WHERE QnAID = #{QnAID} -->
+<!-- 	</delete> -->
+
+<!-- 	<select id="list" resultType="QnaDTO" parameterType="Map"> -->
+<!-- 		SELECT QnAID, title, to_char(cdate, 'yyyy-mm-dd') cdate, viewcnt,  -->
+<!-- 		grpno, indent, ansnum, rownum r -->
+<!-- 		FROM( -->
+<!-- 		SELECT QnAID, title, cdate, viewcnt, grpno, indent, ansnum, rownum r -->
+<!-- 		FROM( -->
+<!-- 		SELECT QnAID, title, cdate, viewcnt, grpno, indent, ansnum -->
+<!-- 		FROM m_QnA -->
+<!-- 		<where> -->
+<!-- 			<choose> -->
+<!-- 				<when test="col=='title'"> -->
+<!-- 					title like '%'||#{word}||'%' -->
+<!-- 				</when> -->
+<!-- 				<when test="col=='content'"> -->
+<!-- 					content like '%'||#{word}||'%' -->
+<!-- 				</when> -->
+<!-- 			</choose> -->
+<!-- 		</where> -->
+<!-- 		ORDER BY grpno DESC, ansnum ASC -->
+<!-- 			) -->
+<!-- 		) -->
+<!-- 		<![CDATA[ -->
+<!-- 		WHERE r>=#{sno} and r<=#{eno} -->
+<!-- 		]]> -->
+<!-- 	</select> -->
+	
+<!-- 	<select id="total" parameterType="map" resultType="int"> -->
+<!-- 		SELECT COUNT(*) FROM m_QnA -->
+<!-- 		<where> -->
+<!-- 			<choose> -->
+<!-- 				<when test="col=='title'"> -->
+<!-- 					title like '%'||#{word}||'%' -->
+<!-- 				</when> -->
+<!-- 				<when test="col=='content'"> -->
+<!-- 					content like '%'||#{word}||'%' -->
+<!-- 				</when> -->
+<!-- 			</choose> -->
+<!-- 		</where> -->
+<!-- 	</select> -->
+	
+</mapper>
