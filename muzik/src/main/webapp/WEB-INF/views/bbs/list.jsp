@@ -14,9 +14,9 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 <script type="text/javascript">
-function read(bbsno) {
+function read(bbsid) {
 	var url = "read"
-	url += "?bbsno=" +bbsno;
+	url += "?bbsid=" +bbsid;
 	url += "&col=${col}";
 	url += "&word=${word}";
 	url += "&nowPage=${nowPage}";
@@ -98,30 +98,25 @@ color: navy;
 <c:forEach items="${list}" var="dto">
 
 	 <TR>
-      <TD>${dto.bbsno}</TD>
+      <TD>${dto.bbsid}</TD>
       
       <TD align="left">
-      <c:forEach begin="1" end="${dto.indent}"> 
-	  <c:out value="&nbsp;" escapeXml="false"></c:out>
-	  </c:forEach>
-
-	  <c:if test="${dto.indent>0}">ㄴ</c:if>
 	   
  	 <!-- <img src="./img/p.jpg" width="20px" height="20px"> --> 
- 	 <c:set var="rcount" value="${util:rcount(dto.bbsno,irdao)}"/>
-      <a class="a" href="javascript:read('${dto.bbsno}')" >
+ 	 <%-- <c:set var="rcount" value="${util:rcount(dto.bbsid,irdao)}"/> --%>
+      <a class="a" href="javascript:read('${dto.bbsid}')" >
       ${dto.title}
-       <c:if test="${rcount>0}"><span style="color:red;">(${rcount})</span></c:if>
+      <%--  <c:if test="${rcount>0}"><span style="color:red;">(${rcount})</span></c:if> --%>
       </a>
 	
-	  <c:if test="${util:newImg(fn:substring(dto.wdate,0,10))}">     
+	  <c:if test="${util:newImg(fn:substring(dto.cdate,0,10))}">     
       <img src="${pageContext.request.contextPath}/bbs/storage/new.gif">
       </c:if>
       </TD>
       
-      <TD>${dto.wname}</TD>
+      <TD>${dto.id}</TD>
 	  <TD>${dto.viewcnt}</TD>
-      <TD>${fn:substring(dto.wdate,0, 10)}</TD>
+      <TD>${fn:substring(dto.cdate,0, 10)}</TD>
      
       <TD>
       <c:choose>
