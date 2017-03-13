@@ -24,5 +24,4 @@ public class FaqDTO {
 		this.content = content;
 	}
 	
-	
 }

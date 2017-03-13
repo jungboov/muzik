@@ -75,15 +75,15 @@ public class FaqDAOTest {
 
 	@Test @Ignore
 	public void testRead() throws Exception {
-		Object dto = fdao.read(5);
+		Object dto = fdao.read(1);
 		
 		assertNotNull(dto);	
 	}
 
-	@Test
+	@Test @Ignore
 	public void testUpdate() {
 		FaqDTO dto = new FaqDTO();
-		dto.setFaqid(2);
+		dto.setFaqid(1);
 		dto.setTitle("JUnit4 제목변경");
 		dto.setContent("JUnit4 내용변경");
 		
@@ -107,9 +107,9 @@ public class FaqDAOTest {
 		}
 	}
 
-	@Test @Ignore
+	@Test
 	public void testTotal() {
-		fail("Not yet implemented");
+		
 	}
 
 }
