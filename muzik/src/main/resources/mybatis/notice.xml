@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="notice">
+
+<!-- 	<select id="checkRefno" parameterType="int" resultType="int"> -->
+<!-- 	select count(refno) from bbs -->
+<!-- 	where refno = #{bbsno}          -->
+<!-- 	</select> -->
+	
+	<delete id="delete" parameterType="int">
+	delete from m_notice
+	where noticeid = #{noticeid} 
+	</delete>
+	
+		
+<!-- 	<select id="readReply" resultType="BbsDTO" parameterType="int"> -->
+<!-- 	SELECT bbsno, title, grpno, indent, ansnum -->
+<!-- 	FROM bbs                               -->
+<!-- 	WHERE bbsno = #{bbsno}                        -->
+<!-- 	</select> -->
+	
+<!-- 	<update id="upAnsnum" parameterType="Map"> -->
+<!-- 	update bbs           -->
+<!-- 	set ansnum = ansnum + 1  -->
+<!-- 	where grpno = #{grpno} -->
+<!-- 	and ansnum > #{ansnum} -->
+<!-- 	</update> -->
+	
+	
+<!-- 	<insert id="createReply" parameterType="BbsDTO"> -->
+<!-- 	INSERT INTO bbs(bbsno, wname, title, content, passwd, wdate, grpno, indent, ansnum, refno, filename, filesize) -->
+<!-- 	VALUES((SELECT NVL(MAX(bbsno), 0) + 1 FROM bbs),                                                        -->
+<!-- 	#{wname}, #{title}, #{content}, #{passwd}, sysdate,                                                                                 -->
+<!-- 	 #{grpno}, #{indent}+1, #{ansnum}+1, #{bbsno}, #{filename}, #{filesize} )                                                                                      -->
+<!-- 	</insert> -->
+
+<!-- 	<select id="passCheck" parameterType="Map" resultType="int"> -->
+<!-- 	SELECT COUNT(no) as cnt  -->
+<!-- 	FROM notice              -->
+<!-- 	WHERE no=#{no} AND passwd=#{passwd}  -->
+<!-- 	</select> -->
+	
+	<update id="update" parameterType="NoticeDTO">
+	UPDATE m_notice                     
+	SET title=#{title}, content=#{content}
+	WHERE noticeid = #{noticeid}
+	</update>
+	
+	<insert id="create" parameterType="NoticeDTO">
+	INSERT INTO m_notice(noticeid, title, content, cdate)
+	VALUES((SELECT NVL(MAX(noticeid), 0) + 1 FROM m_notice),                                   
+	#{title}, #{content}, sysdate)                                      
+	</insert>
+
+	<update id="upViewcnt" parameterType="int">
+	update m_notice
+	set viewcnt = viewcnt + 1
+	where noticeid = #{noticeid}
+	</update>
+
+	<select id="total" parameterType="Map" resultType="int">
+	select count(*) from m_notice
+	<where>
+	<choose>
+	<when test="col=='grade'">
+	grade like '%'||#{word}||'%'
+	</when>
+	<when test="col=='title'">
+	title like '%'||#{word}||'%'
+	</when>
+	<when test="col=='content'">
+	content like '%'||#{word}||'%'
+	</when>
+	
+	</choose>	
+	</where>
+	
+	</select>
+
+
+  <select id="list" resultType="NoticeDTO" parameterType="Map">
+  
+    SELECT noticeid, content, title, cdate, r
+FROM (
+SELECT noticeid, content, title, cdate, rownum as r
+FROM (
+  SELECT noticeid, content, title, cdate
+  FROM m_notice
+            order by noticeid desc
+        )
+    )                                                                            
+   <![CDATA[
+     where r>=#{sno} and r<=#{eno}
+    ]]>
+  </select>
+ 
+  <select id="read" resultType="NoticeDTO" parameterType="int" >
+    SELECT noticeid, title, cdate, content, viewcnt
+	FROM m_notice
+	WHERE noticeid = #{noticeid}
+  </select>
+      
+</mapper>

@@ -25,4 +25,8 @@
         <constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory" />
     </bean>
     
+    <bean id="nodao" 
+    	  class="spring.model.notice.NoticeDAO"
+    	  p:mybatis-ref="sqlSession" />
+    
 </beans>
