@@ -41,19 +41,19 @@ public class BbsDAOTest {
 	public void tearDown() throws Exception {
 	}
 
-	@Test
+	@Ignore //완료
 	public void testCreate() throws Exception {
 		BbsDTO dto = new BbsDTO();
-		dto.setTitle("Create");
-		dto.setContent("Create");
+		dto.setTitle("1Create");
+		dto.setContent("1Create");
 		dto.setId("CR7");
-		dto.setFilename("Create.jpg");
+		dto.setFilename("1Create.jpg");
 		dto.setFilesize(50);
 		assertTrue(bdao.create(dto));
 
 	}
 
-	@Ignore
+	@Ignore //완료
 	public void testList() throws Exception {
 		Map map = new HashMap();
 		map.put("sno", 1);
@@ -64,14 +64,14 @@ public class BbsDAOTest {
 		assertEquals(list.size(), 4);
 	}
 
-/*	@Ignore
-	public void testRead() {
-		bdao.upViewcnt(1);
-		BbsDTO dto = bdao.read(1);
+	@Test //완료
+	public void testRead() throws Exception {
+		bdao.upViewcnt(3);
+		Object dto = bdao.read(3);
 		assertNotNull(dto);
-	}*/
+	}
 
-	@Ignore
+	@Ignore //완료
 	public void testUpdate() {
 		BbsDTO dto = new BbsDTO();
 		dto.setBbsid(3);
@@ -87,7 +87,7 @@ public class BbsDAOTest {
 		}
 	}
 
-	 @Ignore
+	@Ignore //완료
 	public void testDelete() {
 		try {
 			assertTrue(bdao.delete(1));
@@ -97,9 +97,17 @@ public class BbsDAOTest {
 		}
 	}
 
-	@Ignore 
+	@Ignore //완료
 	public void testTotal() {
-		fail("Not yet implemented");
+		Map map = new HashMap();
+		map.put("col", "id");
+		map.put("word", "CR7");
+		try {
+			assertEquals(bdao.total(map),4);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@Ignore

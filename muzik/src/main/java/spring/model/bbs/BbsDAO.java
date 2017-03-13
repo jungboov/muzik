@@ -52,9 +52,12 @@ public class BbsDAO implements IBbsDAO {
 		if(cnt>0) flag = true;
 		return flag;
 	}
-
+	
+	@Override
 	public int total(Map map) throws Exception {
-		return 0;
+		map.put("col", map.get("col"));
+		map.put("word", map.get("word"));
+		return sqlSession.selectOne("bbs.total",map);
 	}
 
 	@Override

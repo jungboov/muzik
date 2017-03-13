@@ -11,7 +11,7 @@ public class BbsDTO {
 	private String cdate;
 	private String filename;
 	private int filesize;
-	private MultipartFile fileMf;
+	private MultipartFile fileMF;
 	
 	public int getFilesize() {
 		return filesize;
@@ -62,11 +62,11 @@ public class BbsDTO {
 	public void setFilename(String filename) {
 		this.filename = filename;
 	}
-	public MultipartFile getFileMf() {
-		return fileMf;
+	public MultipartFile getFileMF() {
+		return fileMF;
 	}
-	public void setFileMf(MultipartFile fileMf) {
-		this.fileMf = fileMf;
+	public void setFileMF(MultipartFile fileMF) {
+		this.fileMF = fileMF;
 	}
 }
  

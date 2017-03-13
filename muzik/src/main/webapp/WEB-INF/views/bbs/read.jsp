@@ -1,0 +1,240 @@
+<%@ page contentType="text/html; charset=UTF-8" %> 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> 
+
+<!DOCTYPE html> 
+<html> 
+<head> 
+<meta charset="UTF-8"> 
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link href="${pageContext.request.contextPath}/css/style.css" type="text/css" rel="Stylesheet">
+<script type="text/javascript">
+//댓글관련 javascript 시작//
+// no  -> bbsno의 값
+// ino -> bbsno의 식별자
+function rcheck(tarea) {
+	if ('${sessionScope.id}' == "") {
+		if (confirm("로그인후 댓글를 쓰세요")) {
+			var url = "../member/login";
+			url = url + "?no=${dto.bbsno}";
+			url = url + "&ino=bbsno";
+			url = url + "&nowPage=${param.nowPage}";
+			url = url + "&nPage=${nPage}";
+			url = url + "&col=${param.col}";
+			url = url + "&word=${param.word}";
+			url = url + "&bflag=../bbs/read";//로그인 하여 read로 이동
+			location.href = url;
+		} else {
+			tarea.blur();// 포커스 제거
+		}
+	}
+}
+
+function input(f) {
+	if ('${sessionScope.id}' == "") {
+		if (confirm("로그인후 댓글를 쓰세요")) {
+			var url = "../member/login";
+			url = url + "?no=${dto.bbsno}";
+			url = url + "&ino=bbsno";
+			url = url + "&nowPage=${param.nowPage}";
+			url = url + "&nPage=${nPage}";
+			url = url + "&col=${param.col}";
+			url = url + "&word=${param.word}";
+			url = url + "&bflag=../bbs/read";
+			location.href = url;
+			return false;
+		} else {
+
+			return false;
+		}
+	} else if (f.content.value == "") {
+		alert("댓글 내용을 입력하세요.");
+		f.content.focus();
+		return false;
+	}
+}
+
+function rupdate(rnum, rcontent) {
+	var f = document.rform;
+	f.content.value = rcontent;
+	f.rnum.value = rnum;
+	f.rsubmit.value = "수정";
+	f.action = "./rupdate"
+}
+
+function rdelete(rnum) {
+	if (confirm("정말삭제 하겠습니까?")) {
+		var url = "./rdelete";
+		url = url + "?rnum=" + rnum;
+		url = url + "&bbsno=${dto.bbsno}";
+		url = url + "&nowPage=${param.nowPage}";
+		url = url + "&nPage=${nPage}";
+		url = url + "&col=${param.col}";
+		url = url + "&word=${param.word}";
+		location.href = url;
+	}
+}
+
+
+function blist() {
+	var url = "list";
+	url += "?col=${param.col}";
+	url += "&word=${param.word}";
+	url += "&nowPage=${param.nowPage}";
+	location.href = url;
+}	
+
+function bupdate() {
+	var url = "update";
+	url += "?bbsno=${dto.bbsno}";
+	url += "&col=${param.col}";
+	url += "&word=${param.word}";
+	url += "&nowPage=${param.nowPage}";
+	location.href=url;
+}
+
+function bdelete(bbsno) {
+	var url = "delete";
+	url += "?bbsno=${dto.bbsno}";
+	url += "&col=${param.col}";
+	url += "&word=${param.word}";
+	url += "&nowPage=${param.nowPage}";
+	url += "&oldfile=${dto.filename}";
+	location.href=url;
+}
+
+function breply(bbsno) {
+	var url = "reply";
+	url += "?bbsno=${dto.bbsno}";
+	url += "&col=${param.col}";
+	url += "&word=${param.word}";
+	url += "&nowPage=${param.nowPage}";
+	location.href=url;
+}
+
+function down(filename) {
+	var url = "${pageContext.request.contextPath}/download";
+	url += "?dir=/bbs/storage";
+	url += "&filename="+filename;
+	location.href = url
+}
+
+</script>
+<style type="text/css">
+a{
+	color: white;
+}
+.a{
+	color: navy;
+}
+
+</style>
+
+</head> 
+
+<body>
+
+
+<div class="w3-container mainPosition" id="services">
+<h2 class="iconPosition"><span class="glyphicon glyphicon-th-list"></span>_게시판</h2>
+<hr class="w3-round border-position">
+</div> 
+
+
+ 
+<div class="container">
+<div class="row">
+<div class="col-sm-3"></div>
+<div class="col-sm-6">
+  <TABLE class="table table-hover">
+    <TR>
+      <TH>제목</TH>
+      <TD>${dto.title}</TD>
+    </TR>
+     
+     <TR>
+      <TH>내용</TH>
+      <TD>${dto.content}</TD>
+     </TR> 
+      
+     <TR> 
+      <TH>성명</TH>
+      <TD>${dto.wname}</TD>
+     </TR> 
+      
+     <TR> 
+      <TH>조회수</TH>
+      <TD>${dto.wdate}</TD>
+     </TR> 
+      
+     <TR> 
+      <TH>등록</TH>
+      <TD>${fn:substring(dto.wdate,0,10)}</TD>
+    </TR>
+    
+    <TR> 
+      <TH>파일명</TH>
+      <TD>
+      <c:choose>
+      <c:when test="${empty dto.filename}">파일없음</c:when>
+      <c:otherwise>
+       ${dto.filename}(${dto.filesize div 1024}KB) 
+      <a class="a" href="javascript:down('${dto.filename}')">
+      <span class="glyphicon glyphicon-save"></span>
+      </a>
+      </c:otherwise>
+      </c:choose>
+      </TD>
+    </TR>
+  </TABLE>
+  
+  <DIV class='bottom'>
+    <input type='button' class="btn btn-default" value='등록' onclick="location.href='./create'">
+    <input type='button' class="btn btn-default" value='목록' onclick="blist()">
+    <input type='button' class="btn btn-default" value='수정' onclick="bupdate()">
+    <input type='button' class="btn btn-default" value='삭제' onclick="bdelete()">
+    <input type='button' class="btn btn-default" value='답변' onclick="breply()">
+  </DIV>
+
+ <hr>
+  <c:forEach var="rdto" items="${rlist}">
+  <div class="rlist">
+   ${rdto.id}<br/>
+   <p>${rdto.content}</p>
+   ${rdto.regdate}
+   <c:if test="${sessionScope.id==rdto.id || sessionScope.grade=='A'}">
+   <span style="float: right;">
+   <a href="javascript:rupdate('${rdto.rnum}','${rdto.content }')">수정</a>|
+   <a href="javascript:rdelete('${rdto.rnum}')">삭제</a>
+   </span>
+   </c:if>
+  </div>
+  </c:forEach>
+  
+  <div class="rcreate">
+  <form name="rform" action="./rcreate" method="post" onsubmit="return input(this)">
+  <textarea rows="1" cols="60" name="content" onclick="rcheck(this)"></textarea>
+  <input type="submit" name="rsubmit" value="등록">
+  <input type="hidden" name="bbsno" value="${dto.bbsno}">
+  <input type="hidden" name="id" value="${sessionScope.id}">
+  <input type="hidden" name="nowPage" value="${param.nowPage}">
+  <input type="hidden" name="nPage" value="${nPage}">           
+  <input type="hidden" name="col" value="${param.col}">
+  <input type="hidden" name="word" value="${param.word}">
+  <input type="hidden" name="rnum" value="0">
+  </form>
+  </div>
+  
+  <div class="bottom">
+  ${paging}
+  </div>
+  
+ </div>
+ </div>
+ </div>
+</body>
+
+</html> 
