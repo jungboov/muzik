@@ -67,7 +67,7 @@ public class BbsDAO implements IBbsDAO {
 	}
 
 	@Override
-	public int pageRead(int bbsid) {
+	public Map pageRead(int bbsid) {
 		return sqlSession.selectOne("bbs.pageRead", bbsid);
 	}
 

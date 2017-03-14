@@ -1,5 +1,6 @@
 package spring.sts.muzik;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,6 +22,27 @@ import spring.utility.muzik.Utility;
 public class BbsController {
 	@Autowired
 	private BbsDAO dao;
+	
+	@RequestMapping("/bbs/read")
+	public String read(Model model, int bbsid, int nowPage, String col, String word,
+			HttpServletRequest request) throws Exception{
+		
+		dao.upViewcnt(bbsid);
+		BbsDTO dto = (BbsDTO)dao.read(bbsid);
+		dto.getContent().replaceAll("\r\n", "<br>");
+		
+		Map pageRead = dao.pageRead(bbsid);
+		BigDecimal noArr[] = {
+		((BigDecimal)pageRead.get("PRE_BBSID1")),
+		//((BigDecimal)pageRead.get("bbsid")),
+		((BigDecimal)pageRead.get("NEX_BBSID1"))	
+		};
+		
+		model.addAttribute("dto", dto);
+		model.addAttribute("noArr", noArr);
+		
+		return "/bbs/read";
+	}
 	
 	@RequestMapping("/bbs/list")
 	public String list(HttpServletRequest request) throws Exception{
@@ -69,7 +91,7 @@ public class BbsController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return "/bbs/update";
+		return "/bbs/updateForm";
 	}
 	
 	@RequestMapping(value="/bbs/update", method=RequestMethod.POST)
@@ -106,11 +128,21 @@ public class BbsController {
 		return url;
 	}
 	
-	@RequestMapping(value="/bbs/delete", method=RequestMethod.GET)
-	public String delete(String id, Model model){
-		return "/bbs/delete";
+	@RequestMapping("/bbs/delete")
+	public String delete(int bbsid, Model model, String col, String word, 
+			String nowPage, String oldfile, HttpServletRequest request) throws Exception{
+		
+		String upDir = request.getRealPath("/bbs/storage");
+		String url = "";
+		dao.delete(bbsid);
+		/*Utility.deleteFile(upDir, oldfile);
+		model.addAttribute("col", col);
+		model.addAttribute("word", word);
+		model.addAttribute("nowPage", nowPage);*/
+		url = "redirect:./list";
+		
+		return url;
 	}
-	
 	
 	@RequestMapping(value="/bbs/create", method=RequestMethod.GET)
 	public String create(){

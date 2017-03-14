@@ -16,7 +16,7 @@
 <script type="text/javascript">
 function read(bbsid) {
 	var url = "read"
-	url += "?bbsid=" +bbsid;
+	url += "?bbsid="+bbsid;
 	url += "&col=${col}";
 	url += "&word=${word}";
 	url += "&nowPage=${nowPage}";
@@ -54,8 +54,8 @@ color: navy;
 
 <select name="col"><%-- 검색할 컬럼 --%>
 
-	<option value="wname" 
-	<c:if test="${col==wname}">selected='selected'</c:if>	
+	<option value="id" 
+	<c:if test="${col==id}">selected='selected'</c:if>	
 	>성명</option>
 	
 	<option value="title"
@@ -68,7 +68,7 @@ color: navy;
 	
 	<option value="tot">전체출력</option>
 </select>
-
+<input type="text" name="serch" id="tag">
 <input type="text" name="word" value="${word}"><%-- 검색어 --%>
 <input type="submit" class="btn btn-default" value="검색">
 <input type='button' class="btn btn-default" value='등록' onclick="location.href='./create'">

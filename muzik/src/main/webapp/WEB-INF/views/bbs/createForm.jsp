@@ -21,7 +21,7 @@ $(document).ready(function() {
             validating: 'glyphicon glyphicon-refresh'
         },
         fields: {
-            wname: {
+            id: {
                 validators: {
                     notEmpty: {
                         message: '이름을 입력해주세요.'
@@ -108,18 +108,6 @@ a{
       id="contactForm"
       class="form-horizontal">
       
- <div class="form-group">
-        <label class="col-md-3 control-label">성명</label>
-        <div class="col-md-6">
-            <input type="text" class="form-control" name="wname" />
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-3 control-label">이메일</label>
-        <div class="col-md-6">
-            <input type="text" class="form-control" name="email" />
-        </div>
-    </div>
     <div class="form-group">
         <label class="col-md-3 control-label">제목</label>
         <div class="col-md-6">
@@ -132,16 +120,16 @@ a{
             <textarea class="form-control" name="content" rows="5"></textarea>
         </div>
     </div>
-    <div class="form-group">
-        <label class="col-md-3 control-label">패스워드</label>
+ 	<div class="form-group">
+        <label class="col-md-3 control-label">성명</label>
         <div class="col-md-6">
-            <input type="password" class="form-control" name="passwd" />
+            <input type="text" class="form-control" name="id" />
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-3 control-label">파일등록</label>
         <div class="col-md-6">
-            <input type="file" class="form-control buttonPadding" name="fileMF" value="file"/>
+            <input type="file" class="form-control buttonPadding" name="fileMF"/>
         </div>
     </div>
     

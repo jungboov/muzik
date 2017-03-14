@@ -22,7 +22,7 @@ $(document).ready(function() {
             validating: 'glyphicon glyphicon-refresh'
         },
         fields: {
-              wname: {
+              id: {
                 validators: {
                     notEmpty: {
                         message: '이름을 입력하세요.'
@@ -94,19 +94,12 @@ a{
 	  enctype="multipart/form-data"
 	  class="form-horizontal"  
 	  id="contactForm" >
-<input name="bbsno" type="hidden" value="${dto.bbsno}">
+<input name="bbsid" type="hidden" value="${dto.bbsid}">
 <input name="col" type="hidden" value="${param.col}">
 <input name="word" type="hidden" value="${param.word}">
 <input name="nowPage" type="hidden" value="${param.nowPage}">
 <input name="oldfile" type="hidden" value="${dto.filename}">
 
- 	<div class="form-group">
-        <label class="col-md-3 control-label">이름</label>
-        <div class="col-md-6">
-            <input type="text" class="form-control" name="wname" value="${dto.wname}">
-        </div>
-    </div>
-    
  	<div class="form-group">
         <label class="col-md-3 control-label">제목</label>
         <div class="col-md-6">
@@ -123,16 +116,9 @@ a{
     </div>
     
     <div class="form-group">
-        <label class="col-md-3 control-label">비밀번호</label>
-        <div class="col-md-6">
-            <input type="password" class="form-control" name="passwd">
-        </div>
-    </div>
-    
-    <div class="form-group">
         <label class="col-md-3 control-label">파일</label>
         <div class="col-md-4">
-            <input type="file" class="form-control buttonPadding" name="filename">
+            <input type="file" class="form-control buttonPadding" name="fileMF">
         </div> 
         <div class="col-md-2 filePosition">   
         (${dto.filename})

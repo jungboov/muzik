@@ -10,13 +10,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT * FROM
 		(
 		select
-		lag(bbsid,1,bbsid) over (order by bbsid) pre_bbsno1),
+		lag(bbsid,1,bbsid) over (order by bbsid) pre_bbsid1,
 		bbsid,
-		lead(bbsid,1,bbsid) over (order by bbsid) nex_bbsno1)
+		lead(bbsid,1,bbsid) over (order by bbsid) nex_bbsid1
 		from(
 			select bbsid
-			from bbs
-			order by bbsid desc
+			from m_bbs
+			order by bbsid DESC
 			)
 		)
 		WHERE bbsid = #{bbsid}
@@ -88,7 +88,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				</when>
 			</choose>
 		</where>
-		ORDER BY id ASC
+		ORDER BY bbsid DESC
 			)
 		)                                                                            
    <![CDATA[                                                                        

@@ -13,49 +13,51 @@
 <link href="${pageContext.request.contextPath}/css/style.css" type="text/css" rel="Stylesheet">
 <script type="text/javascript">
 //댓글관련 javascript 시작//
-// no  -> bbsno의 값
-// ino -> bbsno의 식별자
-function rcheck(tarea) {
-	if ('${sessionScope.id}' == "") {
-		if (confirm("로그인후 댓글를 쓰세요")) {
-			var url = "../member/login";
-			url = url + "?no=${dto.bbsno}";
-			url = url + "&ino=bbsno";
-			url = url + "&nowPage=${param.nowPage}";
-			url = url + "&nPage=${nPage}";
-			url = url + "&col=${param.col}";
-			url = url + "&word=${param.word}";
-			url = url + "&bflag=../bbs/read";//로그인 하여 read로 이동
-			location.href = url;
-		} else {
-			tarea.blur();// 포커스 제거
-		}
-	}
-}
+// no  -> bbsid의 값
+// ino -> bbsid의 식별자
+// function rcheck(tarea) {
+// 	if ('${sessionScope.id}' == "") {
+// 		if (confirm("로그인후 댓글를 쓰세요")) {
+// 			var url = "read";
+// 			url = url + "?no=${dto.bbsid}";
+// 			url = url + "&ino=bbsid";
+// 			url = url + "&nowPage=${param.nowPage}";
+// 			url = url + "&nPage=${nPage}";
+// 			url = url + "&col=${param.col}";
+// 			url = url + "&word=${param.word}";
+// 			url = url + "&bflag=../bbs/read";//로그인 하여 read로 이동
+// 			location.href = url;
+// 		} else {
+// 			tarea.blur();// 포커스 제거
+// 		}
+// 	}
+// }
 
-function input(f) {
-	if ('${sessionScope.id}' == "") {
-		if (confirm("로그인후 댓글를 쓰세요")) {
-			var url = "../member/login";
-			url = url + "?no=${dto.bbsno}";
-			url = url + "&ino=bbsno";
-			url = url + "&nowPage=${param.nowPage}";
-			url = url + "&nPage=${nPage}";
-			url = url + "&col=${param.col}";
-			url = url + "&word=${param.word}";
-			url = url + "&bflag=../bbs/read";
-			location.href = url;
-			return false;
-		} else {
 
-			return false;
-		}
-	} else if (f.content.value == "") {
-		alert("댓글 내용을 입력하세요.");
-		f.content.focus();
-		return false;
-	}
-}
+
+// function input(f) {
+// 	if ('${sessionScope.id}' == "") {
+// 		if (confirm("로그인후 댓글를 쓰세요")) {
+// 			var url = "../member/login";
+// 			url = url + "?no=${dto.bbsid}";
+// 			url = url + "&ino=bbsid";
+// 			url = url + "&nowPage=${param.nowPage}";
+// 			url = url + "&nPage=${nPage}";
+// 			url = url + "&col=${param.col}";
+// 			url = url + "&word=${param.word}";
+// 			url = url + "&bflag=../bbs/read";
+// 			location.href = url;
+// 			return false;
+// 		} else {
+
+// 			return false;
+// 		}
+// 	} else if (f.content.value == "") {
+// 		alert("댓글 내용을 입력하세요.");
+// 		f.content.focus();
+// 		return false;
+// 	}
+// }
 
 function rupdate(rnum, rcontent) {
 	var f = document.rform;
@@ -65,18 +67,18 @@ function rupdate(rnum, rcontent) {
 	f.action = "./rupdate"
 }
 
-function rdelete(rnum) {
-	if (confirm("정말삭제 하겠습니까?")) {
-		var url = "./rdelete";
-		url = url + "?rnum=" + rnum;
-		url = url + "&bbsno=${dto.bbsno}";
-		url = url + "&nowPage=${param.nowPage}";
-		url = url + "&nPage=${nPage}";
-		url = url + "&col=${param.col}";
-		url = url + "&word=${param.word}";
-		location.href = url;
-	}
-}
+// function rdelete(rnum) {
+// 	if (confirm("정말삭제 하겠습니까?")) {
+// 		var url = "./rdelete";
+// 		url = url + "?rnum=" + rnum;
+// 		url = url + "&bbsid=${dto.bbsid}";
+// 		url = url + "&nowPage=${param.nowPage}";
+// 		url = url + "&nPage=${nPage}";
+// 		url = url + "&col=${param.col}";
+// 		url = url + "&word=${param.word}";
+// 		location.href = url;
+// 	}
+// }
 
 
 function blist() {
@@ -89,37 +91,39 @@ function blist() {
 
 function bupdate() {
 	var url = "update";
-	url += "?bbsno=${dto.bbsno}";
+	url += "?bbsid=${dto.bbsid}";
 	url += "&col=${param.col}";
 	url += "&word=${param.word}";
 	url += "&nowPage=${param.nowPage}";
 	location.href=url;
 }
 
-function bdelete(bbsno) {
+function bdelete(bbsid) {
+	if(confirm("삭제하시겠습니까?")){
 	var url = "delete";
-	url += "?bbsno=${dto.bbsno}";
+	url += "?bbsid=${dto.bbsid}";
 	url += "&col=${param.col}";
 	url += "&word=${param.word}";
 	url += "&nowPage=${param.nowPage}";
 	url += "&oldfile=${dto.filename}";
 	location.href=url;
+	}
 }
 
-function breply(bbsno) {
-	var url = "reply";
-	url += "?bbsno=${dto.bbsno}";
-	url += "&col=${param.col}";
-	url += "&word=${param.word}";
-	url += "&nowPage=${param.nowPage}";
-	location.href=url;
-}
 
 function down(filename) {
 	var url = "${pageContext.request.contextPath}/download";
 	url += "?dir=/bbs/storage";
 	url += "&filename="+filename;
 	location.href = url
+}
+function readGo(bbsid) {
+	var url = "read";
+	url += "?bbsid="+bbsid;
+	url += "&col=${param.col}";
+	url += "&word=${param.word}";
+	url += "&nowPage=${param.nowPage}";
+	location.href=url;
 }
 
 </script>
@@ -162,17 +166,17 @@ a{
       
      <TR> 
       <TH>성명</TH>
-      <TD>${dto.wname}</TD>
+      <TD>${dto.id}</TD>
      </TR> 
       
      <TR> 
       <TH>조회수</TH>
-      <TD>${dto.wdate}</TD>
+      <TD>${dto.cdate}</TD>
      </TR> 
       
      <TR> 
       <TH>등록</TH>
-      <TD>${fn:substring(dto.wdate,0,10)}</TD>
+      <TD>${fn:substring(dto.cdate,0,10)}</TD>
     </TR>
     
     <TR> 
@@ -195,11 +199,25 @@ a{
     <input type='button' class="btn btn-default" value='등록' onclick="location.href='./create'">
     <input type='button' class="btn btn-default" value='목록' onclick="blist()">
     <input type='button' class="btn btn-default" value='수정' onclick="bupdate()">
-    <input type='button' class="btn btn-default" value='삭제' onclick="bdelete()">
-    <input type='button' class="btn btn-default" value='답변' onclick="breply()">
+    <input type='button' class="btn btn-default" value='삭제' onclick="bdelete('${dto.bbsid}')">
   </DIV>
-
- <hr>
+<c:set var="noArr" value="${noArr}"/>
+<c:forEach var="i" begin="0" end="1">
+	<c:choose>
+		<c:when test="${noArr[i]>dto.bbsid}">
+			<a style="color: red;" href="javascript:readGo('${noArr[i]}')">다음글</a>
+		</c:when>
+		<c:otherwise>
+			<c:choose>
+				<c:when test="${noArr[i]==dto.bbsid}"></c:when>
+				<c:otherwise>
+				<a style="color: red;" href="javascript:readGo('${noArr[i]}')">이전글</a>
+				</c:otherwise>
+			</c:choose>
+		</c:otherwise>
+	</c:choose>
+</c:forEach>
+<%--  <hr>
   <c:forEach var="rdto" items="${rlist}">
   <div class="rlist">
    ${rdto.id}<br/>
@@ -218,7 +236,7 @@ a{
   <form name="rform" action="./rcreate" method="post" onsubmit="return input(this)">
   <textarea rows="1" cols="60" name="content" onclick="rcheck(this)"></textarea>
   <input type="submit" name="rsubmit" value="등록">
-  <input type="hidden" name="bbsno" value="${dto.bbsno}">
+  <input type="hidden" name="bbsid" value="${dto.bbsid}">
   <input type="hidden" name="id" value="${sessionScope.id}">
   <input type="hidden" name="nowPage" value="${param.nowPage}">
   <input type="hidden" name="nPage" value="${nPage}">           
@@ -230,7 +248,7 @@ a{
   
   <div class="bottom">
   ${paging}
-  </div>
+  </div> --%>
   
  </div>
  </div>
