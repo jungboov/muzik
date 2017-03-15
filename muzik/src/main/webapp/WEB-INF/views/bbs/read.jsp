@@ -16,69 +16,51 @@
 // no  -> bbsid의 값
 // ino -> bbsid의 식별자
 // function rcheck(tarea) {
-// 	if ('${sessionScope.id}' == "") {
-// 		if (confirm("로그인후 댓글를 쓰세요")) {
+// 	if ('${sessionScope.id}' == "") { 
+// 		 if (confirm("로그인후 댓글를 쓰세요")) { 
 // 			var url = "read";
 // 			url = url + "?no=${dto.bbsid}";
 // 			url = url + "&ino=bbsid";
 // 			url = url + "&nowPage=${param.nowPage}";
-// 			url = url + "&nPage=${nPage}";
 // 			url = url + "&col=${param.col}";
 // 			url = url + "&word=${param.word}";
-// 			url = url + "&bflag=../bbs/read";//로그인 하여 read로 이동
+// 			url = url + "&nPage=${nPage}"; 
+// 			url = url + "&bflag=../bbs/read";//로그인 하여 read로 이동 
 // 			location.href = url;
-// 		} else {
+// 		 } else {
 // 			tarea.blur();// 포커스 제거
-// 		}
-// 	}
-// }
+// 		} 
+// 	 } 
+// } 
 
+function input(f) {
+	if(f.content.value == ""){
+		alert("댓글 내용을 입력하세요.");
+		f.content.focus();
+		return false;
+	}
+}
 
-
-// function input(f) {
-// 	if ('${sessionScope.id}' == "") {
-// 		if (confirm("로그인후 댓글를 쓰세요")) {
-// 			var url = "../member/login";
-// 			url = url + "?no=${dto.bbsid}";
-// 			url = url + "&ino=bbsid";
-// 			url = url + "&nowPage=${param.nowPage}";
-// 			url = url + "&nPage=${nPage}";
-// 			url = url + "&col=${param.col}";
-// 			url = url + "&word=${param.word}";
-// 			url = url + "&bflag=../bbs/read";
-// 			location.href = url;
-// 			return false;
-// 		} else {
-
-// 			return false;
-// 		}
-// 	} else if (f.content.value == "") {
-// 		alert("댓글 내용을 입력하세요.");
-// 		f.content.focus();
-// 		return false;
-// 	}
-// }
-
-function rupdate(rnum, rcontent) {
+function rupdate(rbbsid, rcontent) {
 	var f = document.rform;
 	f.content.value = rcontent;
-	f.rnum.value = rnum;
+	f.rbbsid.value = rbbsid;
 	f.rsubmit.value = "수정";
 	f.action = "./rupdate"
 }
 
-// function rdelete(rnum) {
-// 	if (confirm("정말삭제 하겠습니까?")) {
-// 		var url = "./rdelete";
-// 		url = url + "?rnum=" + rnum;
-// 		url = url + "&bbsid=${dto.bbsid}";
-// 		url = url + "&nowPage=${param.nowPage}";
-// 		url = url + "&nPage=${nPage}";
-// 		url = url + "&col=${param.col}";
-// 		url = url + "&word=${param.word}";
-// 		location.href = url;
-// 	}
-// }
+function rdelete(rbbsid) {
+	if (confirm("정말삭제 하겠습니까?")) {
+		var url = "./rdelete";
+		url = url + "?rbbsid="+rbbsid;
+		url = url + "&bbsid=${dto.bbsid}";
+		url = url + "&nowPage=${param.nowPage}";
+		url = url + "&nPage=${nPage}";
+		url = url + "&col=${param.col}";
+		url = url + "&word=${param.word}";
+		location.href = url;
+	}
+}
 
 
 function blist() {
@@ -109,7 +91,6 @@ function bdelete(bbsid) {
 	location.href=url;
 	}
 }
-
 
 function down(filename) {
 	var url = "${pageContext.request.contextPath}/download";
@@ -217,38 +198,38 @@ a{
 		</c:otherwise>
 	</c:choose>
 </c:forEach>
-<%--  <hr>
+ <hr>
   <c:forEach var="rdto" items="${rlist}">
   <div class="rlist">
    ${rdto.id}<br/>
    <p>${rdto.content}</p>
-   ${rdto.regdate}
-   <c:if test="${sessionScope.id==rdto.id || sessionScope.grade=='A'}">
+   <p style="color: red;">${rdto.cdate}</p>
+   <%-- <c:if test="${rdto.id}"> --%>
    <span style="float: right;">
-   <a href="javascript:rupdate('${rdto.rnum}','${rdto.content }')">수정</a>|
-   <a href="javascript:rdelete('${rdto.rnum}')">삭제</a>
+   <a style="color: red;" href="javascript:rupdate('${rdto.rbbsid}','${rdto.content}')">수정</a>|
+   <a style="color: red;" href="javascript:rdelete('${rdto.rbbsid}')">삭제</a>
    </span>
-   </c:if>
+   <%-- </c:if> --%>
   </div>
   </c:forEach>
   
   <div class="rcreate">
-  <form name="rform" action="./rcreate" method="post" onsubmit="return input(this)">
-  <textarea rows="1" cols="60" name="content" onclick="rcheck(this)"></textarea>
+  <form name="rform" action="./rcreate" method="post" onsubmit="return input(this)"><!-- onsubmit="return input(this)" -->
+  <textarea rows="1" cols="60" name="content" ></textarea> <!-- onclick="rcheck(this)" -->
   <input type="submit" name="rsubmit" value="등록">
   <input type="hidden" name="bbsid" value="${dto.bbsid}">
-  <input type="hidden" name="id" value="${sessionScope.id}">
+  <input type="hidden" name="id" value="CR7">
   <input type="hidden" name="nowPage" value="${param.nowPage}">
   <input type="hidden" name="nPage" value="${nPage}">           
   <input type="hidden" name="col" value="${param.col}">
   <input type="hidden" name="word" value="${param.word}">
-  <input type="hidden" name="rnum" value="0">
+  <input type="hidden" name="rbbsid" value="0">
   </form>
   </div>
   
   <div class="bottom">
   ${paging}
-  </div> --%>
+  </div>
   
  </div>
  </div>

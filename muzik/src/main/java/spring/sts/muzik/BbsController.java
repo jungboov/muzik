@@ -16,16 +16,68 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import spring.model.bbs.BbsDAO;
 import spring.model.bbs.BbsDTO;
+import spring.model.bbs.BbsService;
+import spring.model.bbsReply.BbsReplyDAO;
+import spring.model.bbsReply.BbsReplyDTO;
 import spring.utility.muzik.Utility;
 
-@Controller //delete 완성하기
+@Controller
 public class BbsController {
 	@Autowired
 	private BbsDAO dao;
 	
+	@Autowired
+	private BbsReplyDAO rdao;
+	
+	@Autowired
+	private BbsService service;
+	
+	@RequestMapping("/bbs/rdelete")
+	public String rdelete(int rbbsid, int bbsid, int nowPage, int nPage, String col, String word, Model model){
+		
+		int total = rdao.total(bbsid);
+		int totalPage = (int)(Math.ceil((double) total/3));
+		if(rdao.delete(rbbsid)){
+			if(nPage != 1 && nPage ==totalPage && total%3==1);{
+				nPage = nPage - 1;
+			}
+			model.addAttribute("bbsid", bbsid);
+			model.addAttribute("nowPage", nowPage);
+			model.addAttribute("nPage", nPage);
+			model.addAttribute("col", col);
+			model.addAttribute("word", word);
+		}
+		
+		return "redirect:./read";
+	}
+	
+	
+	@RequestMapping("/bbs/rupdate")
+	public String rupdate(BbsReplyDTO dto, Model model, String col, String word, int nowPage, int nPage){
+		rdao.update(dto);
+		model.addAttribute("bbsid", dto.getBbsid());
+		model.addAttribute("col", col);
+		model.addAttribute("word", word);
+		model.addAttribute("nowPage", nowPage);
+		model.addAttribute("nPage", nPage);
+		return "redirect:./read";
+	}
+	
+	@RequestMapping("/bbs/rcreate")
+	public String rcreate(BbsReplyDTO dto, String col, String word, int nowPage, Model model){
+		
+		rdao.create(dto);
+		model.addAttribute("bbsid", dto.getBbsid());
+		model.addAttribute("nowPage", nowPage);
+		model.addAttribute("col", col);
+		model.addAttribute("word", word);
+		
+		return "redirect:./read";
+	}
+	
+	
 	@RequestMapping("/bbs/read")
-	public String read(Model model, int bbsid, int nowPage, String col, String word,
-			HttpServletRequest request) throws Exception{
+	public String read(Model model, int bbsid, int nowPage, String col, String word, HttpServletRequest request) throws Exception{
 		
 		dao.upViewcnt(bbsid);
 		BbsDTO dto = (BbsDTO)dao.read(bbsid);
@@ -38,8 +90,33 @@ public class BbsController {
 		((BigDecimal)pageRead.get("NEX_BBSID1"))	
 		};
 		
+		//댓글
+		String url = "read";
+		String no = "bbsid";
+		int nPage = 1;
+		
+		if(request.getParameter("nPage") != null){
+			nPage = Integer.parseInt(request.getParameter("nPage"));
+		}
+		int recordPerPage = 10;
+		int sno = ((nPage-1) * recordPerPage) + 1; 
+		int eno = nPage * recordPerPage;
+		
+		Map map = new HashMap();
+		map.put("sno", sno);
+		map.put("eno", eno);
+		map.put("bbsid", bbsid);
+		
+		List<BbsReplyDTO> list = rdao.list(map);
+		int total = rdao.total(bbsid);
+		
+		String paging = Utility.paging(total, nPage, recordPerPage, url, no, bbsid, nowPage, col, word);
+		
 		model.addAttribute("dto", dto);
+		model.addAttribute("paging", paging);
 		model.addAttribute("noArr", noArr);
+		model.addAttribute("rlist", list);
+		model.addAttribute("nPage", nPage);
 		
 		return "/bbs/read";
 	}
@@ -58,7 +135,7 @@ public class BbsController {
 		if(request.getParameter("nowPage")!=null){
 			nowPage = Integer.parseInt(request.getParameter("nowPage"));
 		}
-		int recordPerPage = 5;
+		int recordPerPage = 15;
 		int sno = ((nowPage - 1)*recordPerPage)+1;
 		int eno = nowPage * recordPerPage;
 		
@@ -135,10 +212,10 @@ public class BbsController {
 		String upDir = request.getRealPath("/bbs/storage");
 		String url = "";
 		dao.delete(bbsid);
-		/*Utility.deleteFile(upDir, oldfile);
+		Utility.deleteFile(upDir, oldfile);
 		model.addAttribute("col", col);
 		model.addAttribute("word", word);
-		model.addAttribute("nowPage", nowPage);*/
+		model.addAttribute("nowPage", nowPage);
 		url = "redirect:./list";
 		
 		return url;

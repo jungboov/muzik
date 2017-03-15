@@ -6,6 +6,7 @@ public class BbsReplyDTO {
 	private String content;
 	private String cdate;
 	private String id;
+	
 	public int getRbbsid() {
 		return rbbsid;
 	}
