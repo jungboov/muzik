@@ -3,6 +3,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="util" uri="/ELFunctions" %>
 
+
 <!DOCTYPE html> 
 <html> 
 <head> 
@@ -103,10 +104,10 @@ color: navy;
       <TD align="left">
 	   
  	 <!-- <img src="./img/p.jpg" width="20px" height="20px"> --> 
- 	 <%-- <c:set var="rcount" value="${util:rcount(dto.bbsid,irdao)}"/> --%>
+ 	 <c:set var="rcount" value="${util:rcount(dto.bbsid,irdao)}"/>
       <a class="a" href="javascript:read('${dto.bbsid}')" >
       ${dto.title}
-      <%--  <c:if test="${rcount>0}"><span style="color:red;">(${rcount})</span></c:if> --%>
+       <c:if test="${rcount>0}"><span style="color:red;">(${rcount})</span></c:if>
       </a>
 	
 	  <c:if test="${util:newImg(fn:substring(dto.cdate,0,10))}">     

@@ -13,7 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-
+import spring.model.iReplyDAO;
 import spring.model.bbs.BbsDAO;
 import spring.model.bbs.BbsDTO;
 import spring.model.bbs.BbsService;
@@ -36,10 +36,10 @@ public class BbsController {
 	public String rdelete(int rbbsid, int bbsid, int nowPage, int nPage, String col, String word, Model model){
 		
 		int total = rdao.total(bbsid);
-		int totalPage = (int)(Math.ceil((double) total/3));
+		int totalPage = (int)(Math.ceil((double) total/10));
 		if(rdao.delete(rbbsid)){
-			if(nPage != 1 && nPage ==totalPage && total%3==1);{
-				nPage = nPage - 1;
+			if(nPage != 1 && nPage == totalPage && total % 10 == 1);{
+				nPage = nPage ;
 			}
 			model.addAttribute("bbsid", bbsid);
 			model.addAttribute("nowPage", nowPage);
@@ -135,7 +135,7 @@ public class BbsController {
 		if(request.getParameter("nowPage")!=null){
 			nowPage = Integer.parseInt(request.getParameter("nowPage"));
 		}
-		int recordPerPage = 15;
+		int recordPerPage = 10;
 		int sno = ((nowPage - 1)*recordPerPage)+1;
 		int eno = nowPage * recordPerPage;
 		
@@ -156,6 +156,9 @@ public class BbsController {
 		request.setAttribute("nowPage", nowPage);
 		request.setAttribute("paging", paging);
 		request.setAttribute("list", list);
+		
+		iReplyDAO irdao = rdao;
+		request.setAttribute("irdao", irdao);
 		
 		return "/bbs/list";
 	}
@@ -210,15 +213,15 @@ public class BbsController {
 			String nowPage, String oldfile, HttpServletRequest request) throws Exception{
 		
 		String upDir = request.getRealPath("/bbs/storage");
-		String url = "";
-		dao.delete(bbsid);
+
+		//dao.delete(bbsid);
+		service.delete(bbsid);
 		Utility.deleteFile(upDir, oldfile);
 		model.addAttribute("col", col);
 		model.addAttribute("word", word);
 		model.addAttribute("nowPage", nowPage);
-		url = "redirect:./list";
 		
-		return url;
+		return "redirect:./list";
 	}
 	
 	@RequestMapping(value="/bbs/create", method=RequestMethod.GET)

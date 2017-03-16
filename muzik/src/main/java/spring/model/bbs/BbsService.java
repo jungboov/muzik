@@ -4,13 +4,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import spring.model.bbsReply.BbsReplyDAO;
+
  
 @Service 
 public class BbsService {
-       @Autowired
-       private BbsDAO dao;
-       @Autowired
-        private BbsReplyDAO rdao;
+	
+	   @Autowired
+	   private BbsDAO dao;
+	   
+	   @Autowired
+	   private BbsReplyDAO rdao;
  
       public void delete(int bbsid) throws Exception{
  

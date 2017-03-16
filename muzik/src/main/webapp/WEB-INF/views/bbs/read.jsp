@@ -11,6 +11,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <link href="${pageContext.request.contextPath}/css/style.css" type="text/css" rel="Stylesheet">
+<%-- <script type="text/javascript" src="<c:url value="/js/js.js"/>"></script> --%>
 <script type="text/javascript">
 //댓글관련 javascript 시작//
 // no  -> bbsid의 값
@@ -200,7 +201,6 @@ a{
 </c:forEach>
  <hr>
   <c:forEach var="rdto" items="${rlist}">
-  <div class="rlist">
    ${rdto.id}<br/>
    <p>${rdto.content}</p>
    <p style="color: red;">${rdto.cdate}</p>
@@ -210,7 +210,6 @@ a{
    <a style="color: red;" href="javascript:rdelete('${rdto.rbbsid}')">삭제</a>
    </span>
    <%-- </c:if> --%>
-  </div>
   </c:forEach>
   
   <div class="rcreate">
@@ -230,7 +229,7 @@ a{
   <div class="bottom">
   ${paging}
   </div>
-  
+
  </div>
  </div>
  </div>

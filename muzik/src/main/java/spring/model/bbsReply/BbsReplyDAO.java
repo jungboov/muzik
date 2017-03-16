@@ -7,8 +7,10 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import spring.model.iReplyDAO;
+
 @Repository
-public class BbsReplyDAO implements IBbsReplyDAO {
+public class BbsReplyDAO implements IBbsReplyDAO, iReplyDAO {
 	
 	@Autowired
 	private SqlSessionTemplate sqlSession;
@@ -20,8 +22,7 @@ public class BbsReplyDAO implements IBbsReplyDAO {
 
 	@Override
 	public int rcount(int bbsid) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.selectOne("bbsReply.rcount", bbsid);
 	}
 
 	@Override
