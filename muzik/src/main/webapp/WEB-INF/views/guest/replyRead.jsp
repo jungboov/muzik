@@ -51,6 +51,7 @@
 		$("td#updatePanel" + guestrid).hide();
 	}
 
+	/* 삭제버튼을 누르면 컨트롤러의 replyCheckRefno로 가서 자식검사를 하고 delete 여부를 결정한다. */
 	$(document).on("click", "#rdelete", function() {
 		var guestrid = $(this).data("rid");
 		$.post("./replyCheckRefno", {
@@ -63,6 +64,27 @@
 			} else {
 				alert("오류");
 			}
+		});
+	});
+
+	/* 대댓글 달기 버튼을 누르면 대댓글 작성창이 나오게 하는기능 */
+	$(document).ready(function() {
+		$("a#reReplyCreate").click(function() {
+			var guestrid = $(this).data("guestrid");
+			alert("대댓글을 다려고 하는 댓글의번호 : " + guestrid);
+			$.post("./reReplyCreate", {
+				guestrid : guestrid,
+				col : '${param.col}',
+				word : '${param.word}',
+				nowPage : '${param.nowPage}'
+			}, function(data, status) {
+				if (status = "success") {
+					$("div[data-guestrid=" + guestrid + "]").show();
+					$("div[data-guestrid=" + guestrid + "]").html(data);
+				} else {
+					alert("오류");
+				}
+			});
 		});
 	});
 </script>
@@ -110,10 +132,15 @@
 							</tr>
 							<tr>
 								<td class="col-sm-2">
-									<button type="button" class="btn btn-default" onclick="reReplySubmit('${rdto.guestrid}')">댓글달기</button>
+									<a id="reReplyCreate" data-guestrid="${rdto.guestrid}">
+										<button type="button" class="btn btn-default">대댓글달기</button>
+									</a>
 								</td>
 							</tr>
 						</table>
+						<div data-guestrid="${rdto.guestrid}" style="margin-top: 10px;" align="center">
+							<!-- 대댓글 작성창이 나올 위치 -->
+						</div>
 					</div>
 				</c:forEach>
 			</c:otherwise>

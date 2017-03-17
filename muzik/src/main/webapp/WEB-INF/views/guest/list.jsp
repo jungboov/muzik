@@ -57,7 +57,7 @@
 			});
 		});
 	});
-	/* 댓글쓰기 */
+	/* 댓글달기 버튼을 눌렀을때 쓰임 */
 	$(document).ready(function() {
 		$("a#replyCreate").click(function() {
 			var guestid = $(this).data("guestid");
@@ -76,17 +76,6 @@
 			});
 		});
 	});
-	/* $(document).ready(function(){
-		 var id=$("#replyCount").html();
-	   console.log(id);
-	$.ajax({
-		url:"./GuestReplyCount",
-		data:{"guestid":id},
-		success:function(data){
-			$("td#replyCount").html(data);
-		}
-				}) ;
-	}); */
 </script>
 <%-- <link href="${pageContext.request.contextPath}/css/style.css" rel="Stylesheet" type="text/css"> --%>
 </head>
@@ -162,12 +151,14 @@
 										<input type='button' class="btn btn-default" value='댓글 보기'>
 									</a>
 									<a id="replyCreate" data-guestid="${dto.guestid}">
-										<button type="button" class="btn btn-default"<%--  onclick="replySubmit('${dto.guestid}')" --%>>댓글달기</button>
+										<button type="button" class="btn btn-default">댓글달기</button>
 									</a>
 								</td>
 							</tr>
 						</table>
-						<div data-guest="${dto.guestid}" style="margin-top: 15px;" align="center"></div>
+						<div data-guest="${dto.guestid}" style="margin-top: 15px;" align="center">
+						<!-- 댓글보기, 댓글작성창이 나올 위치 -->
+						</div>
 					</div>
 				</c:forEach>
 			</c:otherwise>

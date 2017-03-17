@@ -228,32 +228,49 @@ public class GuestController {
 		return "/guest/replyRead";
 	}
 
-	@RequestMapping(value = "/guest/replyAjax", method = RequestMethod.POST)
-	public String replyAjax(HttpServletResponse res, String guestid, GuestReplyDTO rdto, Model model, String nowPage,
-			String col, String word, HttpServletRequest request) throws IOException {
-		Map map = new HashMap();
-		map.put("guestid", rdto.getGuestid());
-		map.put("ansnum", rdto.getAnsnum());
-		rdao.upAnsnum(map);
-		boolean flag = rdao.create(rdto);
-		model.addAttribute("guestid", guestid);
-		System.out.println("guestid : " + guestid);
-		/*
-		 * res.setContentType(""); PrintWriter print = res.getWriter();
-		 * print.println(flag);
-		 */
-		return "redirect:./replyRead";
-		// if (flag) {
-		// model.addAttribute("nowPage", nowPage);
-		// model.addAttribute("word", word);
-		// model.addAttribute("col", col);
-		// } else {
-		// System.out.println("replyAjax controller Error");
-		// }
-		// System.out.println("replyajax return 직전");
-		//
+	@RequestMapping(value = "/guest/reReplyCreate")
+	public String reReplyCreate(int guestrid, String col, String word, String nowPage, Model model) {
+		try {
+			model.addAttribute("rdto", rdao.read(guestrid));
+			model.addAttribute("guestrid", guestrid);
+			model.addAttribute("nowPage", nowPage);
+			model.addAttribute("col", col);
+			model.addAttribute("word", word);
+			System.out.println("대댓글 창 열림");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "/guest/reReplyCreate";
 	}
 
+	/* 대댓글작성창에서 내용입력후 작성누르면 db에 insert하고 댓글목록을 list화면에서 바로 보여준다 */
+	@RequestMapping(value = "/guest/reReplyAjax", method = RequestMethod.POST)
+	public void reReplyAjax(int guestid, String col, String word, String nowPage, int guestrid, String content,
+			String id, int indent, int ansnum, GuestReplyDTO rdto, Model model, HttpServletRequest request)
+			throws IOException {
+		System.out.println(guestid + "." + col + "." + word + "." + nowPage + "." + guestrid + "." + id + "." + indent
+				+ "." + ansnum + ".\n" + content);
+		Map map = new HashMap();
+		map.put("guestid", guestid);
+		map.put("col", col);
+		map.put("word", word);
+		map.put("nowPage", nowPage);
+		map.put("guestrid", guestrid);
+		map.put("content", content);
+		map.put("id", id);
+		map.put("indent", indent);
+		map.put("ansnum", ansnum);
+
+		/* rdao.upAnsnum(map); */
+
+		/*
+		 * boolean flag = rdao.create(rdto); model.addAttribute("guestid",
+		 * guestid); System.out.println("guestid : " + guestid); return
+		 * "redirect:./replyRead";
+		 */
+	}
+
+	/* list에서 댓글달기 버튼을 눌러서 댓글작성창이 있는 replyCreate.jsp을 불러온다 */
 	@RequestMapping(value = "/guest/replyCreate")
 	public String replyCreate(int guestid, String col, String word, String nowPage, Model model) {
 		model.addAttribute("guestid", guestid);
@@ -262,6 +279,20 @@ public class GuestController {
 		model.addAttribute("word", word);
 		System.out.println("reply 창 열림");
 		return "/guest/replyCreate";
+	}
+
+	/* 댓글작성창에서 내용입력후 작성누르면 db에 insert하고 댓글목록을 list화면에서 바로 보여준다 */
+	@RequestMapping(value = "/guest/replyAjax", method = RequestMethod.POST)
+	public String replyAjax(String guestid, GuestReplyDTO rdto, Model model, HttpServletRequest request)
+			throws IOException {
+		Map map = new HashMap();
+		map.put("guestid", rdto.getGuestid());
+		map.put("ansnum", rdto.getAnsnum());
+		rdao.upAnsnum(map);
+		boolean flag = rdao.create(rdto);
+		model.addAttribute("guestid", guestid);
+		System.out.println("guestid : " + guestid);
+		return "redirect:./replyRead";
 	}
 
 	@RequestMapping("/guest/rupdate")
