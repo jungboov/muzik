@@ -1,10 +1,13 @@
 package spring.sts.muzik;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,13 +30,13 @@ public class GuestController {
 
 	@Autowired
 	private GuestReplyDAO rdao;
-	
-	/*@RequestMapping("/guest/GuestReplyCount")
-    public String GuestReplyCount(Model model,@RequestParam("guestid")int guestid){
-        model.addAttribute("guestid", guestid);
-    	model.addAttribute("rdao",rdao);
-    	return "/guest/guestReplyCount";
-    }*/
+
+	/*
+	 * @RequestMapping("/guest/GuestReplyCount") public String
+	 * GuestReplyCount(Model model,@RequestParam("guestid")int guestid){
+	 * model.addAttribute("guestid", guestid); model.addAttribute("rdao",rdao);
+	 * return "/guest/guestReplyCount"; }
+	 */
 
 	@RequestMapping("/guest/list")
 	public String list(HttpServletRequest request) {
@@ -148,7 +151,8 @@ public class GuestController {
 	}
 
 	@RequestMapping(value = "/guest/delete", method = RequestMethod.POST)
-	public String delete(int guestid,  String col, String nowPage, String word, Model model, HttpServletRequest request) {
+	public String delete(int guestid, String col, String nowPage, String word, Model model,
+			HttpServletRequest request) {
 		Map map = new HashMap();
 		map.put("guestid", guestid);
 		String url = "/error";
@@ -176,7 +180,6 @@ public class GuestController {
 	@RequestMapping(value = "/guest/reply", method = RequestMethod.POST)
 	public String reply(GuestReplyDTO rdto, Model model, String nowPage, String col, String word,
 			HttpServletRequest request) {
-
 		Map map = new HashMap();
 		map.put("guestid", rdto.getGuestid());
 		map.put("ansnum", rdto.getAnsnum());
@@ -224,13 +227,41 @@ public class GuestController {
 		System.out.println("replyRead 확인");
 		return "/guest/replyRead";
 	}
-	
-	@RequestMapping(value = "/guest/replyCreate")
-	public String replyCreate(int guestid, Model model){
+
+	@RequestMapping(value = "/guest/replyAjax", method = RequestMethod.POST)
+	public String replyAjax(HttpServletResponse res, String guestid, GuestReplyDTO rdto, Model model, String nowPage,
+			String col, String word, HttpServletRequest request) throws IOException {
 		Map map = new HashMap();
-		map.put("guestid", guestid);
-		
-		return null;
+		map.put("guestid", rdto.getGuestid());
+		map.put("ansnum", rdto.getAnsnum());
+		rdao.upAnsnum(map);
+		boolean flag = rdao.create(rdto);
+		model.addAttribute("guestid", guestid);
+		System.out.println("guestid : " + guestid);
+		/*
+		 * res.setContentType(""); PrintWriter print = res.getWriter();
+		 * print.println(flag);
+		 */
+		return "redirect:./replyRead";
+		// if (flag) {
+		// model.addAttribute("nowPage", nowPage);
+		// model.addAttribute("word", word);
+		// model.addAttribute("col", col);
+		// } else {
+		// System.out.println("replyAjax controller Error");
+		// }
+		// System.out.println("replyajax return 직전");
+		//
+	}
+
+	@RequestMapping(value = "/guest/replyCreate")
+	public String replyCreate(int guestid, String col, String word, String nowPage, Model model) {
+		model.addAttribute("guestid", guestid);
+		model.addAttribute("nowPage", nowPage);
+		model.addAttribute("col", col);
+		model.addAttribute("word", word);
+		System.out.println("reply 창 열림");
+		return "/guest/replyCreate";
 	}
 
 	@RequestMapping("/guest/rupdate")
@@ -253,24 +284,15 @@ public class GuestController {
 		model.addAttribute("guestrid", guestrid);
 		return "/guest/replyDelete";
 	}
-	
+
 	@RequestMapping("/guest/replyDelete")
 	public void replyDelete(int guestrid, Model model) {
-		System.out.println("댓글번호"+guestrid+"-replyDelete");
+		System.out.println("댓글번호" + guestrid + "-replyDelete");
 		System.out.println(guestrid);
-//		String url = "/error";
 		try {
-			if (rdao.delete(guestrid)) {
-				/*model.addAttribute("col", col);
-				model.addAttribute("word", word);
-				model.addAttribute("nowPage", nowPage);*/
-//				url = "/guest/list";
-			} else {
-//				url = "/error";
-			}
+			rdao.delete(guestrid);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-//		return url;
 	}
 }

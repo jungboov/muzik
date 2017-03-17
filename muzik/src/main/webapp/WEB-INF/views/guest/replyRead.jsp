@@ -53,83 +53,71 @@
 
 	$(document).on("click", "#rdelete", function() {
 		var guestrid = $(this).data("rid");
-			$.post("./replyCheckRefno", {
-				guestrid : guestrid,
-			}, function(data, status) {
-				if (status = "success") {
-					$("td#contentPanel" + guestrid).hide();
-					$("td#deletePanel" + guestrid).show();
-					$("td#deletePanel" + guestrid).html(data);
-				} else {
-					alert("오류");
-				}
-			});
+		$.post("./replyCheckRefno", {
+			guestrid : guestrid,
+		}, function(data, status) {
+			if (status = "success") {
+				$("td#contentPanel" + guestrid).hide();
+				$("td#deletePanel" + guestrid).show();
+				$("td#deletePanel" + guestrid).html(data);
+			} else {
+				alert("오류");
+			}
 		});
+	});
 </script>
 <%-- <link href="${pageContext.request.contextPath}/css/style.css" rel="Stylesheet" type="text/css"> --%>
 </head>
 <body class="board_body">
-	<c:choose>
-		<c:when test="${empty rlist}">
-			<div class="well" style="text-align: center;">등록된 댓글이 없습니다.</div>
-		</c:when>
-		<c:otherwise>
-			<c:forEach items="${rlist}" var="rdto">
-				<div class="well" id="replyDiv${rdto.guestrid}">
-					<table style="margin-left: ${(rdto.indent+1) * 30}px;">
-						<tr>
-							<td class="col-sm-1" rowspan="3" align="center">
-								<span class="glyphicon glyphicon-book"></span>
-								<br>
-								<a id="rupdate" data-rid='${rdto.guestrid}'>
-									<span style="size: 10px">수정/</span>
-								</a>
+	<div id="replyContent${dto.guestid}">
+		<c:choose>
+			<c:when test="${empty rlist}">
+				<div class="well" style="text-align: center;">등록된 댓글이 없습니다.</div>
+			</c:when>
+			<c:otherwise>
+				<c:forEach items="${rlist}" var="rdto">
+					<div class="well" id="replyDiv${rdto.guestrid}">
+						<table style="margin-left: ${(rdto.indent+1) * 30}px;">
+							<tr>
+								<td class="col-sm-1" rowspan="3" align="center">
+									<span class="glyphicon glyphicon-book"></span>
+									<br>
+									<a id="rupdate" data-rid='${rdto.guestrid}'>
+										<span style="size: 10px">수정/</span>
+									</a>
 
-								<a id="rdelete" data-rid='${rdto.guestrid}'>
-									<span style="size: 10px">삭제</span>
-								</a>
-							</td>
-							
-							<td class="col-sm-5" rowspan="3" id="contentPanel${rdto.guestrid}">${rdto.content}</td>
-							
-							<td class="col-sm-5" rowspan="3" id="updatePanel${rdto.guestrid}" style="display: none;">
-								<div class="row">
-									<input type="text" value="${rdto.content}" id="updateContent${rdto.guestrid}" class="col-sm-8" size="18">
-									<button type="button" class="btn btn-default" onclick="updateSubmit('${rdto.guestrid}')">수정</button>
-									<button type="button" class="btn btn-default" onclick="updateCancel('${rdto.guestrid}')">취소</button>
-								</div>
-							</td>
-							
-							<td class="col-sm-5" rowspan="3" id="deletePanel${rdto.guestrid}" style="display: none;"></td>
-							
-							<td class="col-sm-2">${rdto.cdate}</td>
-						</tr>
-						<tr>
-							<td class="col-sm-2">ID : ${rdto.id}</td>
-						</tr>
-						<tr>
-							<td class="col-sm-2"><button type="button" class="btn btn-default" onclick="reReplySubmit('${rdto.guestrid}')">댓글달기</button></td>
-						</tr>
-					</table>
-				</div>
-			</c:forEach>
-		</c:otherwise>
-	</c:choose>
-	<div class="well" class="col-sm-8" align="center">
-		<FORM name='frm' method='POST' action='./reply'>
-			<!-- 답변을 등록하기 위해서 -->
-			<input type="hidden" name="id" value="guest" />
-			<input type="hidden" name="guestid" value="${dto.guestid}">
-			<input type="hidden" name="indent" value="0">
-			<input type="hidden" name="ansnum" value="0">
-			<input type="hidden" name="guestrid" value="0">
-			<!-- 페이지와 검색 유지를 위해서 -->
-			<input name="col" value="${col}" type="hidden">
-			<input name="word" value="${word}" type="hidden">
-			<input name="nowPage" value="${nowPage}" type="hidden">
-			<textarea rows="2" class="col-sm-8" placeholder="댓글 작성" name="content" id="textarea"></textarea>
-			<input type="submit" name="rsubmit" class="btn btn-default" value="댓글 작성">
-		</FORM>
+									<a id="rdelete" data-rid='${rdto.guestrid}'>
+										<span style="size: 10px">삭제</span>
+									</a>
+								</td>
+
+								<td class="col-sm-5" rowspan="3" id="contentPanel${rdto.guestrid}">${rdto.content}</td>
+
+								<td class="col-sm-5" rowspan="3" id="updatePanel${rdto.guestrid}" style="display: none;">
+									<div class="row">
+										<input type="text" value="${rdto.content}" id="updateContent${rdto.guestrid}" class="col-sm-8" size="18">
+										<button type="button" class="btn btn-default" onclick="updateSubmit('${rdto.guestrid}')">수정</button>
+										<button type="button" class="btn btn-default" onclick="updateCancel('${rdto.guestrid}')">취소</button>
+									</div>
+								</td>
+
+								<td class="col-sm-5" rowspan="3" id="deletePanel${rdto.guestrid}" style="display: none;"></td>
+
+								<td class="col-sm-2">${rdto.cdate}</td>
+							</tr>
+							<tr>
+								<td class="col-sm-2">ID : ${rdto.id}</td>
+							</tr>
+							<tr>
+								<td class="col-sm-2">
+									<button type="button" class="btn btn-default" onclick="reReplySubmit('${rdto.guestrid}')">댓글달기</button>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</c:forEach>
+			</c:otherwise>
+		</c:choose>
 	</div>
 </body>
 </html>

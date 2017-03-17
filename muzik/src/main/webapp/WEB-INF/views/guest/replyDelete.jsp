@@ -12,6 +12,7 @@
 			guestrid : guestrid,
 		}, function(status) {
 			if (status = "success") {
+				alert("댓글이 삭제 되었습니다.");
 				$("div#replyDiv" + guestrid).remove();
 			} else {
 				alert("오류");

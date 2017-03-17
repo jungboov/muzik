@@ -47,7 +47,25 @@
 				col : '${param.col}',
 				word : '${param.word}',
 				nowPage : '${param.nowPage}'
-
+			}, function(data, status) {
+				if (status = "success") {
+					$("div[data-guest=" + guestid + "]").show();
+					$("div[data-guest=" + guestid + "]").html(data);
+				} else {
+					alert("오류");
+				}
+			});
+		});
+	});
+	/* 댓글쓰기 */
+	$(document).ready(function() {
+		$("a#replyCreate").click(function() {
+			var guestid = $(this).data("guestid");
+			$.post("./replyCreate", {
+				guestid : guestid,
+				col : '${param.col}',
+				word : '${param.word}',
+				nowPage : '${param.nowPage}'
 			}, function(data, status) {
 				if (status = "success") {
 					$("div[data-guest=" + guestid + "]").show();
@@ -143,7 +161,9 @@
 									<a id="replyRead" data-guestid="${dto.guestid}">
 										<input type='button' class="btn btn-default" value='댓글 보기'>
 									</a>
-									<button type="button" class="btn btn-default" onclick="replySubmit('${dto.guestid}')">댓글달기</button>
+									<a id="replyCreate" data-guestid="${dto.guestid}">
+										<button type="button" class="btn btn-default"<%--  onclick="replySubmit('${dto.guestid}')" --%>>댓글달기</button>
+									</a>
 								</td>
 							</tr>
 						</table>
