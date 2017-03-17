@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+ 
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="guestreply">
+
+	<insert id="createReply" parameterType="GuestReplyDTO">
+		INSERT INTO M_guestreply
+		(guestrid, content, cdate, guestid, id)
+		VALUES((SELECT
+		NVL(MAX(guestrid), 0)+ 1 as guestrid FROM M_guestreply),
+		#{content},
+		sysdate, #{guestid}, #{id} )
+	</insert>
+
+	<insert id="createReReply" parameterType="GuestReplyDTO">
+		INSERT INTO
+		M_guestreply (guestrid, content, cdate, indent, ansnum, refno,
+		guestid, id)
+		VALUES((SELECT NVL(MAX(guestrid), 0)+ 1 as guestrid FROM
+		M_guestreply),
+		#{content}, sysdate, #{indent}+1, #{ansnum}+1,
+		#{guestrid}, #{guestid}, #{id} )
+	</insert>
+
+	<update id="upAnsnum" parameterType="Map">
+		update M_guestreply set
+		ansnum = ansnum + 1 where guestid = #{guestid} and ansnum > #{ansnum}
+	</update>
+	
+	<update id="downAnsnum" parameterType="Map">
+		update M_guestreply set
+		ansnum = ansnum - 1 where guestid = #{guestid} and ansnum > #{ansnum}
+	</update>
+
+	<select id="list" parameterType="Map" resultType="GuestReplyDTO">
+		select guestrid, content, to_char(cdate,'yyyy-mm-dd HH24:MI')
+		cdate,indent, ansnum, refno, guestid, id, r
+		FROM( select guestrid,
+		content, cdate, indent, ansnum, refno, guestid, id, rownum r
+		FROM( select guestrid, content, cdate, indent, ansnum, refno, guestid, id
+		from M_guestreply
+		where guestid = #{guestid}
+		order by ansnum ASC
+		)
+		)
+	<!-- 	<![CDATA[
+		WHERE r >= #{sno} and r <= #{eno}
+		]]> -->
+	</select>
+
+	<select id="rcount" parameterType="int" resultType="int">
+		SELECT count(*) FROM M_guestreply WHERE guestid = #{guestid}
+	</select>
+
+	<select id="read" parameterType="int" resultType="GuestReplyDTO">
+		select * from M_guestreply where guestrid = #{guestrid}
+	</select>
+
+	<update id="update" parameterType="GuestReplyDTO">
+		update M_guestreply set content = #{content} where guestrid = #{guestrid}
+	</update>
+
+	<delete id="delete" parameterType="int">
+		delete from M_guestreply where guestrid = #{guestrid}
+	</delete>
+
+	<select id="total" parameterType="Map" resultType="int">
+		SELECT count(*) FROM M_guestreply WHERE guestid = #{guestid}
+	</select>
+
+	<select id="checkRefno" parameterType="int" resultType="int"> 
+		select count(refno) from M_guestreply where refno = #{guestrid} 
+	</select> 
+
+</mapper>
