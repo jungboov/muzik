@@ -53,14 +53,13 @@ public class BbsController {
 	
 	
 	@RequestMapping("/bbs/rupdate")
-	public String rupdate(BbsReplyDTO dto, Model model, String col, String word, int nowPage, int nPage){
+	public String rupdate(BbsReplyDTO dto, Model model ){
+//		public String rupdate(BbsReplyDTO dto, Model model, String col, String word, int nowPage, int nPage){
 		rdao.update(dto);
-		model.addAttribute("bbsid", dto.getBbsid());
-		model.addAttribute("col", col);
-		model.addAttribute("word", word);
-		model.addAttribute("nowPage", nowPage);
-		model.addAttribute("nPage", nPage);
-		return "redirect:./read";
+		
+		model.addAttribute("readReply", rdao.read(dto.getRbbsid()).getContent());
+		
+		return "/bbs/replyUpdate";
 	}
 	
 	@RequestMapping("/bbs/rcreate")

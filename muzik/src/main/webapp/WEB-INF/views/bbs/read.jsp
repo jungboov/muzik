@@ -7,9 +7,9 @@
 <head> 
 <meta charset="UTF-8"> 
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link href="${pageContext.request.contextPath}/css/style.css" type="text/css" rel="Stylesheet">
 <%-- <script type="text/javascript" src="<c:url value="/js/js.js"/>"></script> --%>
 <script type="text/javascript">
@@ -34,6 +34,76 @@
 // 	 } 
 // } 
 
+///////////////////////////////////////////////////////////////////////////
+$(document).on("click", "#rupdate", function() {
+	var rbbsid = $(this).data("rbbsid");
+	$("#contentPanel" + rbbsid).hide();
+	$("#updatePanel" + rbbsid).show();
+});
+$(function(){
+	$("#rupdateSubmit").click(function(){
+		var rbbsid=$(this).data("rbbsid");
+		var content=$("#rcontent").val();
+		
+		$.post("./rupdate",
+		        {
+					rbbsid: rbbsid,	         
+					content: content
+		        },		      
+		        function(data,status){
+		            if(status="success"){
+		            	$("#contentPanel" + rbbsid).show();
+		            	$("#contentPanel" + rbbsid).html(data);
+		            	$("#updatePanel" + rbbsid).hide();
+		            }else{
+		            	alert("오류");
+		            }
+		            	
+		 });
+
+	});
+});
+
+function updateCancel(rbbsid) {
+	$("#contentPanel" + rbbsid).show();
+	$("#updatePanel" + rbbsid).hide();
+}
+
+/*  function updateSubmit(rbbsid){
+	var content = $("#updateContent" + rbbsid).val();
+	$.post("./rupdate",{
+		rbbsid : rbbsid,
+		content : content,
+	}, function(data, status){
+			if(status = "success"){
+				$("#contentPanel"+ rbbsid).show();
+				$("#contentPanel"+ rbbsid).hide();
+				$("#contentPanel"+ rbbsid).html(data);
+			}else{
+				alert("오류");
+			}
+	});
+}  */
+
+
+/* $(document).on("click", "#rdelete", function() {
+	var rbbsid = $(this).data("rbbsid");
+		$.post("./rdelete", {
+				rbbsid : rbbsid,
+		}, function (data, status) {
+				if(status = "success"){
+					$("#contentPanel"+ rbbsid).show();
+					$("#contentPanel"+ rbbsid).hide();
+					$("#contentPanel"+ rbbsid).html(data);
+				}else{
+					alert("오류");
+				}			
+		});
+}); */
+
+//////////////////////////////////////////////////////////////////
+</script>
+<script type="text/javascript">
 function input(f) {
 	if(f.content.value == ""){
 		alert("댓글 내용을 입력하세요.");
@@ -42,13 +112,13 @@ function input(f) {
 	}
 }
 
-function rupdate(rbbsid, rcontent) {
-	var f = document.rform;
-	f.content.value = rcontent;
-	f.rbbsid.value = rbbsid;
-	f.rsubmit.value = "수정";
-	f.action = "./rupdate"
-}
+// function rupdate(rbbsid, rcontent) {
+// 	var rf = document.fn;
+// 	rf.rcontent.value = rcontent;
+// 	rf.rbbsid.value = rbbsid;
+// 	//rf.rsubmit.value = "수정";
+// 	rf.action = "./rupdate"
+// }
 
 function rdelete(rbbsid) {
 	if (confirm("정말삭제 하겠습니까?")) {
@@ -107,8 +177,8 @@ function readGo(bbsid) {
 	url += "&nowPage=${param.nowPage}";
 	location.href=url;
 }
-
 </script>
+
 <style type="text/css">
 a{
 	color: white;
@@ -199,19 +269,37 @@ a{
 		</c:otherwise>
 	</c:choose>
 </c:forEach>
+
  <hr>
+ <form action="./rupdate" name="fn" onsubmit="return input(this)" method="POST">
+  <input type="hidden" name="nowPage" value="${param.nowPage}">
+  <input type="hidden" name="nPage" value="${nPage}">           
+  <input type="hidden" name="bbsid" value="${dto.bbsid}">
+  <input type="hidden" name="id" value="CR7">
+  <input type="hidden" name="col" value="${param.col}">
+  <input type="hidden" name="word" value="${param.word}">
+  <input type="hidden" name="rcontent" value="${param.content}">
+  <input type="hidden" name="rbbsid" value="0">
+</form>
   <c:forEach var="rdto" items="${rlist}">
-   ${rdto.id}<br/>
-   <p>${rdto.content}</p>
+  
+  <div style="color: blue;" id="contentPanel${rdto.rbbsid}">${rdto.content}</div>
+  
+  <div style="color: blue; display: none;" id="updatePanel${rdto.rbbsid}" >
+	  <input id="rcontent" type="text" value="${rdto.content}">
+	  <button type="submit" id="rupdateSubmit" data-rbbsid='${rdto.rbbsid}'>수정</button>
+<%-- 	  <button type="submit" onclick="rupdate('${rdto.rbbsid},${rdto.content}')">수정</button> --%>
+	  <button type="button" onclick="updateCancel('${rdto.rbbsid}')">취소</button>
+  </div>
+
    <p style="color: red;">${rdto.cdate}</p>
-   <%-- <c:if test="${rdto.id}"> --%>
-   <span style="float: right;">
-   <a style="color: red;" href="javascript:rupdate('${rdto.rbbsid}','${rdto.content}')">수정</a>|
+   <a style="color: red;" id="rupdate" data-rbbsid='${rdto.rbbsid}'>수정</a>
    <a style="color: red;" href="javascript:rdelete('${rdto.rbbsid}')">삭제</a>
-   </span>
-   <%-- </c:if> --%>
   </c:forEach>
   
+<%--<a style="color: red;" href="javascript:rupdate('${rdto.rbbsid}','${rdto.content}')">수정</a> --%>
+<%--<button type="submit" onclick="updateSubmit('${rdto.rbbsid}')">수정</button> --%>
+ 
   <div class="rcreate">
   <form name="rform" action="./rcreate" method="post" onsubmit="return input(this)"><!-- onsubmit="return input(this)" -->
   <textarea rows="1" cols="60" name="content" ></textarea> <!-- onclick="rcheck(this)" -->
