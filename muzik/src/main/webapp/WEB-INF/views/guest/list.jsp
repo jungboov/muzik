@@ -105,65 +105,67 @@
 				<input type='button' value='새글 작성' class="btn btn-default" onclick="location.href='./create'">
 			</form>
 		</div>
-		<c:choose>
-			<c:when test="${fn:length(list)==0}">
-				<div class="well" style="text-align: center;">등록된 글이 없습니다.</div>
-			</c:when>
-			<c:otherwise>
-				<c:forEach items="${list}" var="dto">
+		<div id="guestList">
+			<c:choose>
+				<c:when test="${fn:length(list)==0}">
+					<div class="well" style="text-align: center;">등록된 글이 없습니다.</div>
+				</c:when>
+				<c:otherwise>
+					<c:forEach items="${list}" var="dto">
 
-					<div class="well">
-						<table class="accGuest">
-							<tr>
-								<td class="col-sm-1" rowspan="2" align="center">
-									<a href="javascript:read('${dto.guestid}')"> 글번호 : ${dto.guestid} </a>
-								</td>
-								<td class="col-sm-5" rowspan="4">${dto.content}</td>
-								<td class="col-sm-2">작성일 : ${dto.cdate}</td>
-							</tr>
-							<tr>
-								<td class="col-sm-2">ID : ${dto.id}</td>
-							</tr>
-							<tr>
-								<td class="col-sm-1" align="center">
-									<a href="javascript:gupdate('${dto.guestid}')">
-										<input type='button' class="btn btn-default" value='수정'>
-										<br>
-									</a>
-									<a href="javascript:gdelete('${dto.guestid}')">
-										<br>
-										<input type='button' class="btn btn-default" value='삭제'>
-									</a>
-								</td>
-								<td class="col-sm-2">
-									<c:set var="guestReplyCount" value="${util:guestReplyCount(dto.guestid,rdao)}" />
-									댓글 갯수 :
-									<span style="color: red; size: 15px;"> &nbsp;[${guestReplyCount}] </span>
-								</td>
-							</tr>
-							<tr>
-								<!-- 좌하단 공백을 위해 빈 td 입력 -->
-								<td class="col-sm-1" align="center" />
+						<div class="well">
+							<table class="accGuest">
+								<tr>
+									<td class="col-sm-1" rowspan="2" align="center">
+										<a href="javascript:read('${dto.guestid}')"> 글번호 : ${dto.guestid} </a>
+									</td>
+									<td class="col-sm-5" rowspan="4">${dto.content}</td>
+									<td class="col-sm-2">작성일 : ${dto.cdate}</td>
+								</tr>
+								<tr>
+									<td class="col-sm-2">ID : ${dto.id}</td>
+								</tr>
+								<tr>
+									<td class="col-sm-1" align="center">
+										<a href="javascript:gupdate('${dto.guestid}')">
+											<input type='button' class="btn btn-default" value='수정'>
+											<br>
+										</a>
+										<a href="javascript:gdelete('${dto.guestid}')">
+											<br>
+											<input type='button' class="btn btn-default" value='삭제'>
+										</a>
+									</td>
+									<td class="col-sm-2">
+										<c:set var="guestReplyCount" value="${util:guestReplyCount(dto.guestid,rdao)}" />
+										댓글 갯수 :
+										<span style="color: red; size: 15px;"> &nbsp;[${guestReplyCount}] </span>
+									</td>
+								</tr>
+								<tr>
+									<!-- 좌하단 공백을 위해 빈 td 입력 -->
+									<td class="col-sm-1" align="center" />
 
-								<td>
-									&nbsp;&nbsp;
-									<a id="replyRead" data-guestid="${dto.guestid}">
-										<input type='button' class="btn btn-default" value='댓글 보기'>
-									</a>
-									<a id="replyCreate" data-guestid="${dto.guestid}">
-										<button type="button" class="btn btn-default">댓글달기</button>
-									</a>
-								</td>
-							</tr>
-						</table>
-						<div data-guest="${dto.guestid}" style="margin-top: 15px;" align="center">
-						<!-- 댓글보기, 댓글작성창이 나올 위치 -->
+									<td>
+										&nbsp;&nbsp;
+										<a id="replyRead" data-guestid="${dto.guestid}">
+											<input type='button' class="btn btn-default" value='댓글 보기'>
+										</a>
+										<a id="replyCreate" data-guestid="${dto.guestid}">
+											<button type="button" class="btn btn-default">댓글달기</button>
+										</a>
+									</td>
+								</tr>
+							</table>
+							<div data-guest="${dto.guestid}" style="margin-top: 15px;" align="center">
+								<!-- 댓글보기, 댓글작성창이 나올 위치 -->
+							</div>
 						</div>
-					</div>
-				</c:forEach>
-			</c:otherwise>
-		</c:choose>
-		<DIV class='bottom'>${paging}</DIV>
+					</c:forEach>
+				</c:otherwise>
+			</c:choose>
+			<DIV class='bottom'>${paging}</DIV>
+		</div>
 		<!-- *********************************************** -->
 	</div>
 </body>

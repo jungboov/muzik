@@ -12,6 +12,9 @@
 		var col = $("#reReplyCreateCol" + guestrid).val();
 		var word = $("#reReplyCreateWord" + guestrid).val();
 		var nowPage = $("#reReplyCreateNowPage" + guestrid).val();
+		var guestid = ${rdto.getGuestid()};
+		var indent = ${rdto.getIndent()};
+		var ansnum = ${rdto.getAnsnum()};
 		$.post("./reReplyAjax", {
 			col : col,
 			word : word,
@@ -19,9 +22,9 @@
 			guestrid : guestrid,
 			content : content,
 			id : id,
-			indent : ${rdto.getIndent()},	
-			ansnum : ${rdto.getAnsnum()},
-			guestid : ${rdto.getGuestid()},
+			indent : indent,
+			ansnum : ansnum,
+			guestid : guestid,
 		}, function(data, status) {
 			if (status = "success") {
 				$("div[data-guest=" + guestid + "]").show();
@@ -38,15 +41,12 @@
 	<div class="well" class="col-sm-8" align="center" id="reReplyCreate${guestrid}">
 		<FORM name='frm' method='POST' onsubmit="return createReReSubmit('${guestrid}')">
 			<!-- 답변을 등록하기 위해서 -->
-			<%-- <input type="hidden" name="indent" value="${rdto.getIndent()}">
-			<input type="hidden" name="ansnum" value="${rdto.getAnsnum()}">
-			<input type="hidden" name="guestid" value="${rdto.getGuestid()}"> --%>
 			<input type="hidden" name="id" value="guest" id="reReplyCreateId${guestrid}" />
 			<!-- 페이지와 검색 유지를 위해서 -->
 			<input name="col" value="${col}" type="hidden" id="reReplyCreateCol${guestrid}">
 			<input name="word" value="${word}" type="hidden" id="reReplyCreateWord${guestrid}">
 			<input name="nowPage" value="${nowPage}" type="hidden" id="reReplyCreateNowPage${guestrid}">
-			<textarea rows="2" class="col-sm-8" placeholder="댓글 작성" name="content" id="reReplyCreateContent${guestrid}">${guestrid},${nowPage},${col},${word},${rdto.getIndent()},${rdto.getAnsnum()},${rdto.getGuestid()}</textarea>
+			<textarea rows="2" class="col-sm-8" placeholder="${guestrid}번 댓글의 대댓글 입니다." name="content" id="reReplyCreateContent${guestrid}"></textarea>
 			<input type="submit" name="rsubmit" class="btn btn-default" value="댓글 작성">
 		</FORM>
 	</div>

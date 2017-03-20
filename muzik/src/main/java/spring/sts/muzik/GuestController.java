@@ -31,13 +31,6 @@ public class GuestController {
 	@Autowired
 	private GuestReplyDAO rdao;
 
-	/*
-	 * @RequestMapping("/guest/GuestReplyCount") public String
-	 * GuestReplyCount(Model model,@RequestParam("guestid")int guestid){
-	 * model.addAttribute("guestid", guestid); model.addAttribute("rdao",rdao);
-	 * return "/guest/guestReplyCount"; }
-	 */
-
 	@RequestMapping("/guest/list")
 	public String list(HttpServletRequest request) {
 		System.out.println("guestController - list");
@@ -245,11 +238,12 @@ public class GuestController {
 
 	/* 대댓글작성창에서 내용입력후 작성누르면 db에 insert하고 댓글목록을 list화면에서 바로 보여준다 */
 	@RequestMapping(value = "/guest/reReplyAjax", method = RequestMethod.POST)
-	public void reReplyAjax(int guestid, String col, String word, String nowPage, int guestrid, String content,
+	public String reReplyAjax(int guestid, String col, String word, String nowPage, int guestrid, String content,
 			String id, int indent, int ansnum, GuestReplyDTO rdto, Model model, HttpServletRequest request)
 			throws IOException {
-		System.out.println(guestid + "." + col + "." + word + "." + nowPage + "." + guestrid + "." + id + "." + indent
-				+ "." + ansnum + ".\n" + content);
+		System.out.println("guestid : " + guestid + " col : " + col + " word : " + word + " nowPage : " + nowPage
+				+ " guestrid : " + guestrid + " id : " + id + " indent : " + indent + " ansnum : " + ansnum
+				+ " content : " + content);
 		Map map = new HashMap();
 		map.put("guestid", guestid);
 		map.put("col", col);
@@ -261,13 +255,14 @@ public class GuestController {
 		map.put("indent", indent);
 		map.put("ansnum", ansnum);
 
-		/* rdao.upAnsnum(map); */
+		rdao.upAnsnum(map);
 
-		/*
-		 * boolean flag = rdao.create(rdto); model.addAttribute("guestid",
-		 * guestid); System.out.println("guestid : " + guestid); return
-		 * "redirect:./replyRead";
-		 */
+		boolean flag = rdao.createReReply(map);
+		model.addAttribute("nowPage", nowPage);
+		model.addAttribute("word", word);
+		model.addAttribute("col", col);
+		model.addAttribute("guestid", guestid);
+		return "redirect:./replyRead";
 	}
 
 	/* list에서 댓글달기 버튼을 눌러서 댓글작성창이 있는 replyCreate.jsp을 불러온다 */

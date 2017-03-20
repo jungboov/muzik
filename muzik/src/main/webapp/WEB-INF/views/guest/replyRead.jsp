@@ -71,7 +71,6 @@
 	$(document).ready(function() {
 		$("a#reReplyCreate").click(function() {
 			var guestrid = $(this).data("guestrid");
-			alert("대댓글을 다려고 하는 댓글의번호 : " + guestrid);
 			$.post("./reReplyCreate", {
 				guestrid : guestrid,
 				col : '${param.col}',

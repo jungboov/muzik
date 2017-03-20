@@ -34,17 +34,12 @@
 <body>
 	<div class="well" class="col-sm-8" align="center" id="replyCreate${guestid}">
 		<FORM name='frm' method='POST' onsubmit="return createSubmit('${guestid}')">
-			<!-- 답변을 등록하기 위해서 -->
-			<!-- <input type="hidden" name="indent" value="0">
-			<input type="hidden" name="ansnum" value="0">
-			<input type="hidden" name="guestrid" value="0"> -->
-
 			<input type="hidden" name="id" value="guest" id="replyCreateId${guestid}" />
 			<!-- 페이지와 검색 유지를 위해서 -->
 			<input name="col" value="${col}" type="hidden" id="replyCreateCol${guestid}">
 			<input name="word" value="${word}" type="hidden" id="replyCreateWord${guestid}">
 			<input name="nowPage" value="${nowPage}" type="hidden" id="replyCreateNowPage${guestid}">
-			<textarea rows="2" class="col-sm-8" placeholder="댓글 작성" name="content" id="replyCreateContent${guestid}"></textarea>
+			<textarea rows="2" class="col-sm-8" placeholder="${guestid}번 글의 댓글 입니다." name="content" id="replyCreateContent${guestid}"></textarea>
 			<input type="submit" name="rsubmit" class="btn btn-default" value="댓글 작성">
 		</FORM>
 	</div>
