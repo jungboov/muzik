@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="chart">
+	<insert id="addSelect" parameterType="Map">
+		INSERT INTO
+		M_INVENTORY(invenid,id,invenname,content,cdate)
+		VALUES((select nvl(max(invenid),0)+1 as invenid from M_INVENTORY),#{id}, #{invenname}, #{myList}, sysdate)
+	</insert>
+	<insert id="create" parameterType="ChartDTO">
+		INSERT INTO
+		M_CHART(chartid,rank,chrank,title,artist,album,thumbnail,url,period,mlike)
+		VALUES(#{chartid}, #{rank}, #{chRank}, #{title}, #{artist}, #{album},#{thumbnail},#{url},#{period},
+		(select NVL(max(mlike),0) as mlike from M_CHART where artist=#{artist} and title = #{title}))
+	</insert>
+	<select id="weekList" parameterType="int" resultType="ChartDTO">
+		select chartid, rank, chRank , title, artist, album, thumbnail, url, mlike, period
+		from M_CHART
+		where period=#{period}
+		order by rank
+	</select>
+	<select id="checkedLike" parameterType="Map" resultType="String">
+		select w.chartid
+		from M_CHART w left OUTER JOIN m_like l ON l.chartid= w.chartid
+		where period = #{period} and id= #{id} and separator=#{separator}
+		order by rank
+	</select>
+	<select id="urlList" parameterType="int" resultType="String">
+		select url
+		from M_CHART
+		where period=#{period}
+		order by rank
+	</select>
+	<select id="url" parameterType="String" resultType="String">
+		select url
+		from M_CHART
+		where chartid=#{chartid}
+	</select>
+	<select id="read" parameterType="String" resultType="ChartDTO">
+		select rank,chRank, title, artist,url
+		from M_CHART
+		where chartid=#{chartid}  
+	</select>
+	<select id="readSong" parameterType="String" resultType="ChartDTO">
+		select chartid, title, artist, album, thumbnail, url
+		from M_CHART
+		where chartid=#{chartid}
+	</select>
+	<select id="latest" resultType="int">
+		select max(period) as period
+		from M_CHART
+		where separator=#{separator}
+	</select>
+	<update id="updateMlike" parameterType="Map">
+		update M_CHART 
+		set mlike=mlike+1
+		where artist=#{artist} and title=#{title}
+	</update>
+	<select id="mlike" resultType="int" parameterType="Map">
+		select max(mlike) 
+		from M_CHART
+		where artist=#{artist} and title=#{title}
+	</select>
+	<insert id="like_user" parameterType="Map">
+		INSERT INTO m_like(likeid,chartid,id)
+		VALUES((SELECT NVL(MAX(likeid), 0) + 1 as likeid FROM m_like),#{chartid}, #{id})      
+	</insert>
+	<select id="invenList" parameterType="String" resultType="ChartDTO">
+		select invenid,invenname,CDATE
+		from M_INVENTORY
+		where id=#{id}
+		order by invenid
+	</select>
+	<select id="readInvenTitle" parameterType="Map" resultType="String">
+		select title
+		from M_INVENTORY
+		where id=#{id} and INVENID=#{invenId}
+	</select>
+	<update id="updateInvenTitle" parameterType="Map" >
+		update M_INVENTORY 
+		set title=#{title}
+		where id=#{id} and INVENID=#{invenId}
+	</update>
+	<select id="readInven" parameterType="Map" resultType="String">
+		select content
+		from M_INVENTORY
+		where id=#{id} and INVENID=#{invenId}
+	</select>
+	<delete id="deleteInven" parameterType="Map">
+		delete from M_INVENTORY
+		where id=#{id} and INVENID=#{invenId}
+	</delete>
+	<update id="updateInven" parameterType="Map">
+		update M_INVENTORY
+		set content=#{myList}
+		where id=#{id} and INVENID=#{invenId}
+	</update>
+	<select id="scroll_week" resultType="int">
+		select distinct period
+		from M_CHART
+		order by period desc
+	</select>
+</mapper>
