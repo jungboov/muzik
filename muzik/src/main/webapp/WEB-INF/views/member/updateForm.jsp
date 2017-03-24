@@ -12,7 +12,7 @@
 <head> 
 <meta charset="UTF-8"> 
 <title></title>
-
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
 <script type="text/javascript">
 <%-- function inputCheck(f){
 
@@ -54,7 +54,7 @@
  
 <DIV class="title">수정</DIV>
 <!--  onsubmit="return inputCheck(this)" -->
-	<FORM name='frm' 
+	<FORM name='frm' id="frm"
 	 method='POST' 
 	 action='./update'	 
 	 >
@@ -100,10 +100,19 @@
   </TABLE>
   
   <DIV class='bottom'>
-    <input type='submit' value='회원정보 수정'>
+    <input type='button'  class=”close-button”  value='회원정보수정' onclick="join()"> 
     <input type='reset' value='취소'>
   </DIV>
 </FORM>
+
+
+<script>
+function join() { 	
+	  $("#frm").submit();
+	  parent.document.location.reload();      
+}
+</script>  
+  
  
  
 <!-- *********************************************** -->

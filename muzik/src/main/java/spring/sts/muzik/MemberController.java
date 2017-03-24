@@ -571,7 +571,7 @@ public class MemberController {
 	}
 	
 	@RequestMapping("/admin/list")
-	public String list(HttpServletRequest request){
+	public String list(HttpServletRequest request) throws Exception{
 		//검색관련
 		String col= Utility.checkNull(request.getParameter("col"));
 		String word= Utility.checkNull(request.getParameter("word"));
@@ -600,7 +600,7 @@ public class MemberController {
 		
 		
 		
-		int total= dao.total(col, word);
+		int total= dao.total(map);
 		List <MemberDTO> list= dao.list(map);
 		Iterator<MemberDTO> iter=list.iterator();
 		
@@ -613,6 +613,6 @@ public class MemberController {
 		request.setAttribute("list", list);
 		
 		
-		return "/member/list";
+		return "member/list";
 	}
 }

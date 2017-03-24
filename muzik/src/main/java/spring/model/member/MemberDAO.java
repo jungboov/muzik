@@ -20,12 +20,12 @@ public class MemberDAO implements IMemberDAO{
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	
-	
+	@Override
 	public String getGrade(String id){
 		
 		return sqlSession.selectOne("member.getGrade", id);		
 	}
-	
+	@Override
 	public boolean loginCheck(String id){
 		boolean flag= false;
 		Map map =new HashMap();
@@ -36,7 +36,7 @@ public class MemberDAO implements IMemberDAO{
 		return flag;
 	}
 	
-	
+	@Override
 	public boolean general_loginCheck(String id, String password){
 		boolean flag= false;
 		Map map =new HashMap();
@@ -56,7 +56,7 @@ public class MemberDAO implements IMemberDAO{
 		if(cnt>0) flag=true;
 		return flag;
 	}*/
-	
+	@Override
 	public String getFname(String id){	
 		return sqlSession.selectOne("member.getFname", id);		
 	}	
@@ -66,7 +66,7 @@ public class MemberDAO implements IMemberDAO{
 		if(cnt>0) flag=true;		
 		return flag;
 	}*/
-	
+	@Override
 	public boolean updatePw(String id, String password){
 		boolean flag = false;
 		Map map = new HashMap();
@@ -77,7 +77,7 @@ public class MemberDAO implements IMemberDAO{
 		if(cnt>0) flag=true;
 		return flag;
 		}
-
+	@Override
 	public boolean updateFile(String id, String fname){
 		boolean flag = false;
 		Map map =new HashMap();
@@ -100,14 +100,14 @@ public class MemberDAO implements IMemberDAO{
 		return sqlSession.selectList("member.list", map);
 	}
 	
-     public int total(String col, String word){
+    /* public int total(String col, String word){
 		Map map = new HashMap();
 		map.put("col", col);
 		map.put("word", word);
 		
 		return sqlSession.selectOne("member.total", map);
 		
-	}
+	}*/
 	
 /*	public boolean create(MemberDTO dto){
 		boolean flag=false;
@@ -115,28 +115,28 @@ public class MemberDAO implements IMemberDAO{
 		if(cnt>0)flag=true;
 		return flag;
 	}*/
-	
+	@Override
 	public boolean general_create(MemberDTO dto){
 		boolean flag=false;
 		int cnt=sqlSession.insert("member.general_create", dto);
 		if(cnt>0)flag=true;
 		return flag;
 	}
-
+	@Override
 	public boolean duplicateEmail(String email){
 		boolean flag= false;
 		int cnt=sqlSession.selectOne("member.duplicateEmail", email);
 		if(cnt>0) flag=true;
 		return flag;
 	}
-	
+	@Override
 	public boolean duplicateId(String id){
 		boolean flag= false;
 		int cnt=sqlSession.selectOne("member.duplicateId", id);
 		if(cnt>0) flag=true;
 		return flag;
 	}
-
+	@Override
 	public String getNickname(String id) {
 		// TODO Auto-generated method stub
 	 return sqlSession.selectOne("member.getNickname", id);		
@@ -174,8 +174,11 @@ public class MemberDAO implements IMemberDAO{
 
 	@Override
 	public int total(Map map) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		map.put("col", map.get("col"));
+		map.put("word", map.get("word"));
+		
+		return sqlSession.selectOne("member.total", map);
 	}
 	
 }
