@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="likebest">
+
+<!--   베스트 순위 시작 -->
+  <select id="list" resultType="LikebestDTO" >
+  
+  SELECT * from m_chart
+  
+  
+<!--     SELECT chartid, title, mlike, week, thumbnail, r -->
+<!-- FROM ( -->
+<!-- SELECT chartid, title, mlike, week, thumbnail, rownum as r -->
+<!-- FROM ( -->
+<!--   SELECT chartid, title, mlike, week, thumbnail -->
+<!--   FROM m_chart -->
+<!--              order by week DESC, mlike DESC -->
+<!--         ) -->
+<!--     )                                                                             -->
+<!--    <![CDATA[ -->
+<!--    where r>=#{sno} and r<=#{eno} -->
+<!--    ]]> -->
+   </select>
+    <select id="llist" parameterType="int"  resultType="BestDTO">
+     	SELECT *
+		from m_chart   
+		<![CDATA[                                                                        
+  		where ROWNUM < #{rownum} 
+   		]]>   
+		order by week DESC, mlike DESC
+    </select>
+    
+    <insert id="create1" parameterType="BestDTO">
+	INSERT INTO m_best(bestid, title, mlike, week, url, chartid)
+	VALUES((SELECT NVL(MAX(bestid), 0) + 1 FROM m_best),                                  
+	#{title},#{mlike}, #{week},#{url}, #{chartid})                                     
+	</insert>
+    <insert id="create" parameterType="Map">
+	INSERT INTO m_best(bestid, id_list, week)
+	VALUES((SELECT NVL(MAX(bestid), 0) + 1 FROM m_best),#{id_list},#{week})                                  
+	</insert>
+    
+   
+   
+  
+<!--   베스트 순위 끝 -->  
+
+<!-- <select id="total" parameterType="Map" resultType="int"> -->
+<!-- 	select count(*) from m_chart -->
+<!-- 	<where> -->
+<!-- 	<choose> -->
+<!-- 	<when test="col=='grade'"> -->
+<!-- 	grade like '%'||#{word}||'%' -->
+<!-- 	</when> -->
+<!-- 	<when test="col=='title'"> -->
+<!-- 	title like '%'||#{word}||'%' -->
+<!-- 	</when> -->
+<!-- 	<when test="col=='content'"> -->
+<!-- 	content like '%'||#{word}||'%' -->
+<!-- 	</when> -->
+	
+<!-- 	</choose>	 -->
+<!-- 	</where> -->
+	
+<!-- 	</select> -->
+
+      
+</mapper>
