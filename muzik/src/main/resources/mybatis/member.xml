@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+ 
+<mapper namespace="member"> 
+ 	<select id="total" parameterType="Map" resultType="int">
+		select count(*) from m_member
+	<where>
+ 		<if test="col=='name'">
+	 		 name	LIKE '%'||#{word}||'%'
+     	</if>
+		<if test="col=='email'">
+	 		 email	LIKE '%'||#{word}||'%'
+ 		</if>
+		<if test="col=='id'">
+	 		id	LIKE '%'||#{word}||'%'
+ 		</if> 								 	
+	</where> 
+    </select> 
+
+
+   <select id="list" parameterType="Map" resultType="MemberDTO">
+			 SELECT id, name, email,  r 
+					from( 
+					SELECT id, name, email, rownum r 
+			 			  from( 
+								SELECT id, name, email 
+								FROM m_member
+							 	<where>
+							 		<if test="col=='name'">
+							 		 name	LIKE '%'||#{word}||'%'
+							 		</if>
+							 		<if test="col=='email'">
+							 		 email	LIKE '%'||#{word}||'%'
+							 		</if>
+							 		<if test="col=='id'">
+							 		id	LIKE '%'||#{word}||'%'
+							 		</if> 								 	
+							 	</where> 
+							 
+							 	ORDER BY id ASC
+							  )
+						) 						   
+	<![CDATA[                                                                        
+   where r>=#{sno} and r<=${eno}  
+   ]]>        
+	</select> 
+
+
+	<select id="getFname" parameterType="String" resultType="String">
+	select fname from m_member where id =#{id}	
+	</select> 
+
+	<delete id="delete" parameterType="String">
+		delete from m_member where id=#{id}		
+	</delete>
+
+	<update id="update" parameterType="MemberDTO">
+	update m_member 
+	 set  nickname=#{nickname} 
+	 where id = #{id} 		
+	</update>
+
+	<update id="updatePw" parameterType="Map">
+		 update m_member set password = #{password}  where id = #{id} and grade='Y'	
+	</update>
+
+	<update id="updateFile" parameterType="Map">
+		update m_member set fname = #{fname} where id = #{id} 	
+	</update> 
+
+
+	<select id="read" parameterType="String" resultType="MemberDTO">
+		select id, name, email, fname, image
+			   from m_member
+   			   where id=#{id}	
+	</select>
+
+	<select id="duplicateEmail" parameterType="String" resultType="int">
+		SELECT COUNT(email)  FROM m_member WHERE email=#{email} and grade='Y'	
+	</select> 
+
+	<select id="duplicateId" parameterType="String" resultType="int">
+	SELECT COUNT(id) 
+		 FROM m_member 
+		 WHERE id=#{id}	
+	</select> 
+
+	<insert id="create" parameterType="MemberDTO">
+		INSERT INTO m_member(id, name, image, email, reg_date, grade, nickname)  
+				 VALUES(#{id}, #{name}, #{image}, #{email}, sysdate, #{grade}, #{nickname}) 	
+	</insert>
+	
+	
+    <insert id="general_create" parameterType="MemberDTO">
+		INSERT INTO m_member(id, password, name,  email, reg_date, grade, nickname, fname)  
+				 VALUES(#{id}, #{password}, #{name},  #{email}, sysdate, #{grade}, #{nickname}, #{fname}) 	
+	</insert>
+
+ 	<select id="getGrade" parameterType="String" resultType="String">
+		select grade from m_member where id=#{id}	
+	</select> 
+	
+	<select id="getNickname" parameterType="String" resultType="String">
+		select nickname from m_member where id=#{id}	
+	</select> 
+
+	<select id="loginCheck" parameterType="Map" resultType="int">
+		select count(*) from m_member where id=#{id} 
+	</select>
+	
+	
+   <select id="general_loginCheck" parameterType="Map" resultType="int">
+		select count(*) from m_member where id=#{id} and password=#{password}
+	</select>
+	
+      
+</mapper>
