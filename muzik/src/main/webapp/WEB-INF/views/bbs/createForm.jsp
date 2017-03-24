@@ -87,6 +87,12 @@ $(document).ready(function() {
     });
 });
 </script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/ckeditor/ckeditor.js"></script>
+<script type="text/JavaScript">
+	window.onload = function() {
+		CKEDITOR.replace('content'); // <TEXTAREA>태그 id 값
+	};
+</script>
 <style type="text/css">
 a{
 	color: white;

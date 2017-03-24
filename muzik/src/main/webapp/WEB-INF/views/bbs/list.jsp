@@ -69,7 +69,7 @@ color: navy;
 	
 	<option value="tot">전체출력</option>
 </select>
-<input type="text" name="serch" id="tag">
+<!-- <input type="text" name="serch" id="tag"> -->
 <input type="text" name="word" value="${word}"><%-- 검색어 --%>
 <input type="submit" class="btn btn-default" value="검색">
 <input type='button' class="btn btn-default" value='등록' onclick="location.href='./create'">

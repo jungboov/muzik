@@ -9,9 +9,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/3/w3.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link href="${pageContext.request.contextPath}/css/style.css" type="text/css" rel="Stylesheet">
-<%-- <script type="text/javascript" src="<c:url value="/js/js.js"/>"></script> --%>
+
 <script type="text/javascript">
 //댓글관련 javascript 시작//
 // no  -> bbsid의 값
@@ -40,6 +41,7 @@ $(document).on("click", "#rupdate", function() {
 	$("#contentPanel" + rbbsid).hide();
 	$("#updatePanel" + rbbsid).show();
 });
+
 $(function(){
 	$("#rupdateSubmit").click(function(){
 		var rbbsid=$(this).data("rbbsid");
@@ -220,7 +222,7 @@ a{
       <TH>성명</TH>
       <TD>${dto.id}</TD>
      </TR> 
-      
+     
      <TR> 
       <TH>조회수</TH>
       <TD>${dto.cdate}</TD>
@@ -253,22 +255,27 @@ a{
     <input type='button' class="btn btn-default" value='수정' onclick="bupdate()">
     <input type='button' class="btn btn-default" value='삭제' onclick="bdelete('${dto.bbsid}')">
   </DIV>
+  
+
 <c:set var="noArr" value="${noArr}"/>
 <c:forEach var="i" begin="0" end="1">
+
 	<c:choose>
 		<c:when test="${noArr[i]>dto.bbsid}">
-			<a style="color: red;" href="javascript:readGo('${noArr[i]}')">다음글</a>
+			<a style="color: black;margin-left: 450px; position: absolute;" href="javascript:readGo('${noArr[i]}')"> 다음글> </a>
 		</c:when>
 		<c:otherwise>
 			<c:choose>
 				<c:when test="${noArr[i]==dto.bbsid}"></c:when>
 				<c:otherwise>
-				<a style="color: red;" href="javascript:readGo('${noArr[i]}')">이전글</a>
+				<a style="color: black; size: 30px;" href="javascript:readGo('${noArr[i]}')"> <이전글 </a>
 				</c:otherwise>
 			</c:choose>
 		</c:otherwise>
 	</c:choose>
+
 </c:forEach>
+
 
  <hr>
  <form action="./rupdate" name="fn" onsubmit="return input(this)" method="POST">
@@ -283,18 +290,24 @@ a{
 </form>
   <c:forEach var="rdto" items="${rlist}">
   
-  <div style="color: blue;" id="contentPanel${rdto.rbbsid}">${rdto.content}</div>
-  
-  <div style="color: blue; display: none;" id="updatePanel${rdto.rbbsid}" >
+  <table>
+  	<tr>
+  		<td><div style="color: blue;" id="contentPanel${rdto.rbbsid}">내용: ${rdto.content}</div>
+  	<div style="color: blue; display: none;" id="updatePanel${rdto.rbbsid}" >
 	  <input id="rcontent" type="text" value="${rdto.content}">
 	  <button type="submit" id="rupdateSubmit" data-rbbsid='${rdto.rbbsid}'>수정</button>
-<%-- 	  <button type="submit" onclick="rupdate('${rdto.rbbsid},${rdto.content}')">수정</button> --%>
+<%--<button type="submit" onclick="rupdate('${rdto.rbbsid},${rdto.content}')">수정</button> --%>
 	  <button type="button" onclick="updateCancel('${rdto.rbbsid}')">취소</button>
   </div>
+  		</td>
+  		<td><a style="color: red; padding-left: 170px;" id="rupdate" data-rbbsid='${rdto.rbbsid}'>수정</a></td>
 
-   <p style="color: red;">${rdto.cdate}</p>
-   <a style="color: red;" id="rupdate" data-rbbsid='${rdto.rbbsid}'>수정</a>
-   <a style="color: red;" href="javascript:rdelete('${rdto.rbbsid}')">삭제</a>
+  	</tr>
+  	<tr>
+  		<td><p style="color: red; margin-bottom: 0px;">날짜: ${rdto.cdate}</p></td>
+  		<td><a style="color: red; padding-left: 170px;" href="javascript:rdelete('${rdto.rbbsid}')">삭제</a></td>
+  	</tr>
+  </table><br>
   </c:forEach>
   
 <%--<a style="color: red;" href="javascript:rupdate('${rdto.rbbsid}','${rdto.content}')">수정</a> --%>
@@ -302,7 +315,7 @@ a{
  
   <div class="rcreate">
   <form name="rform" action="./rcreate" method="post" onsubmit="return input(this)"><!-- onsubmit="return input(this)" -->
-  <textarea rows="1" cols="60" name="content" ></textarea> <!-- onclick="rcheck(this)" -->
+  <textarea style="vertical-align: bottom;" rows="1" cols="68" name="content" ></textarea> <!-- onclick="rcheck(this)" -->
   <input type="submit" name="rsubmit" value="등록">
   <input type="hidden" name="bbsid" value="${dto.bbsid}">
   <input type="hidden" name="id" value="CR7">
