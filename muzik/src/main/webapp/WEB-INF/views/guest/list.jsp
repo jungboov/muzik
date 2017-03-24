@@ -89,7 +89,7 @@
 				방명록
 			</a>
 		</h2>
-		<div class="search" align="center">
+		<div align="center">
 			<form method="get" action="./list">
 				<select name="col">
 					<!-- 검색할 컬럼 -->
@@ -149,7 +149,7 @@
 									<td>
 										&nbsp;&nbsp;
 										<a id="replyRead" data-guestid="${dto.guestid}">
-											<input type='button' class="btn btn-default" value='댓글 보기'>
+											<button type="button" class="btn btn-default">댓글보기</button>
 										</a>
 										<a id="replyCreate" data-guestid="${dto.guestid}">
 											<button type="button" class="btn btn-default">댓글달기</button>
