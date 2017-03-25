@@ -4,6 +4,11 @@
 <html>
 <head>
 <title>Insert title here</title>
+<script>
+$(function(){
+ 	$("span#btn_close").prepend('<img style="width:16px;height:16px;margin-bottom:0px; margin-right:3px;" src="${pageContext.request.contextPath}/music/storage/close.png" />');
+});
+</script>
 </head>
 <body>
 <table class="table table-bordered">
@@ -20,8 +25,8 @@
 	<c:otherwise>
 	<c:forEach items="${invenList}" var="dto">
 	<tr>		
-		<td><a id="read_inven" data-toggle="modal" data-target="#readInven" data-invenid="${dto.invenId}">${dto.invenName}</a></td>
-		<td>${dto.invenId}//${dto.cdate}</td>
+		<td>><a id="read_inven" data-toggle="modal" data-target="#readInven" data-invenid="${dto.invenId}">${dto.invenName}</a></td>
+		<td>${dto.cdate}</td>
 	</tr>
 	</c:forEach>	
 	</c:otherwise>
@@ -31,7 +36,7 @@
 
 </table>
 <div class="w3-center">
-	<button type="button" class="btn btn-danger btn-lg" id="closeInven" style=""><span class="">보관함 닫기</span></button>
+	<button type="button" class="btn btn-default" id="closeInven" style=""><span id="btn_close">보관함 닫기</span></button>
 </div>
 </body>
 </html>

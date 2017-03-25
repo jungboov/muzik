@@ -5,6 +5,15 @@
 <head>
 <title>Insert title here</title>
 </head>
+<script>
+$(function(){
+	$("#playMyList > span").prepend('<img style="width:14px;height:16px;margin-bottom:0px; margin-right:3px;" src="${pageContext.request.contextPath}/music/storage/play.png" />');
+ 	$("#appendInven > span").prepend('<img style="width:16px;height:16px;margin-bottom:0px; margin-right:3px;" src="${pageContext.request.contextPath}/music/storage/plus.png" />');
+ 	$("#changeInven > span").prepend('<img style="width:15px;height:15px;margin-bottom:0px; margin-right:3px;" src="${pageContext.request.contextPath}/music/storage/change.png" />');
+ 	$("#deleteBtn > span").prepend('<img style="width:14px;height:14px;margin-bottom:0px; margin-right:3px;" src="${pageContext.request.contextPath}/music/storage/minus.png" />');
+ 	$("#deleteAllBtn > span").prepend('<img style="width:14px;height:14px;margin-bottom:0px; margin-right:3px;" src="${pageContext.request.contextPath}/music/storage/delete.png" />');
+});
+</script>
 <body>
 <!--deleteAll Modal -->
 <div id="confirmDeleteAll" class="modal" role="dialog" data-backdrop="static" aria-hidden="true">
@@ -35,7 +44,7 @@
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <button type="button" class="close" id="dclose2" aria-hidden="true">&times;</button>
         <h4 class="modal-title text-success">선택 삭제</h4>
       </div>
       <div class="modal-body">
@@ -51,12 +60,12 @@
   </div>
 </div>
 
-<button type="button" class="btn btn-default" id="playMyList" data-invenid="${invenId}">리스트 듣기</button>
-<button type="button" class="btn btn-default" id="changeInven" data-invenid="${invenId}" data-title="${title}">이름 변경</button>
-<button type="button" class="btn btn-default" id="appendInven" data-invenid="${invenId}" data-title="${title} title="체크한 곡을 목록에 추가">추가</button>
+<button type="button" class="btn btn-default" id="playMyList" data-invenid="${invenId}"><span>리스트 듣기</span></button>
+<button type="button" class="btn btn-default" id="changeInven" data-invenid="${invenId}" data-title="${title}"><span>이름 변경</span></button>
+<button type="button" class="btn btn-default" id="appendInven" data-invenid="${invenId}" data-title="${title}" title="체크한 곡을 목록에 추가"><span>추가</span></button>
 <span class="w3-right">	
-	<a class="btn btn-warning" id="deleteBtn" data-invenid="${invenId}" data-toggle="modal" href="#confirmDelete">선택 삭제</a>
-	<a class="btn btn-warning" id="deleteAllBtn" data-invenid="${invenId}" data-toggle="modal" href="#confirmDeleteAll">전체 삭제</a>
+	<a  id="deleteBtn" class="btn btn-default" data-invenid="${invenId}" data-toggle="modal" href="#confirmDelete"><span>선택 삭제</span></a>
+	<a  id="deleteAllBtn" class="btn btn-default" data-invenid="${invenId}" data-toggle="modal" href="#confirmDeleteAll"><span>전체 삭제</span></a>
 </span>
 	<button type="button" class="btn btn-success" id="changeInvenSubmit" style="display: none;" ">변경</button>
 	<button type="button" class="btn btn-warning" id="changeInvenCancel" style="display: none;" ">변경 취소</button>

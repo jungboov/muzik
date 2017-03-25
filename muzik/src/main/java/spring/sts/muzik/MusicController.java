@@ -190,8 +190,8 @@ public class MusicController {
 	}
 	
 	@RequestMapping(value="/music/updateMlike",method = RequestMethod.POST)
-	public String updateMlike(Model model,String id,String chartid,String artist,String title){
-		
+	public String updateMlike(Model model,HttpSession seesion,String chartid,String artist,String title){
+		String id=(String) seesion.getAttribute("id");
 		Map map=new HashMap();
 		map.put("artist", artist);
 		map.put("title", title);
@@ -252,14 +252,16 @@ public class MusicController {
 	}
 	@RequestMapping("/music/read")
 	public String read(Model model, String chartid){
-
-		model.addAttribute("dto", cdao.read(chartid));
+		
+		model.addAttribute("dto", cdao.read(chartid.trim()));
 		return "/music/read";
 	}
 	@RequestMapping("/music/top100Player")
-	public String top100Player(Model model,int week){
-		
-		model.addAttribute("urlList", cdao.urlList(week));
+	public String top100Player(Model model,int period,String chartType){
+		Map map=new HashMap();
+		map.put("chartType", chartType);
+		map.put("period", period);
+		model.addAttribute("urlList", cdao.urlList(map));
 			
 		return "/music/iframePlayer";
 	}
@@ -281,20 +283,30 @@ public class MusicController {
 	}
 	@RequestMapping("/music/weekList")
 	public String weekList(Model model, HttpSession session,Integer period){
-		session.setAttribute("id", "KingSung9");
 		long startTime = System.currentTimeMillis();
-		if(period==null)
-			period=cdao.latest("week");
+		session.setAttribute("id", "KingSung9");
+		String chartType="kpop";
+		
+		Map lastestMap=new HashMap();
+		lastestMap.put("separator", "week");
+		lastestMap.put("chartType", chartType);
+		if(period==null){
+			period=Integer.valueOf(cdao.latest(lastestMap));
+		}
+		Map weekMap=new HashMap();
+		weekMap.put("period", period);
+		weekMap.put("chartType", chartType);
 		String id=(String) session.getAttribute("id");
 		if(id==null){
-			model.addAttribute("weekList", cdao.weekList(period));
+			model.addAttribute("weekList", cdao.weekList(weekMap));
 		}else{
 			Map map=new HashMap();
 			map.put("id",session.getAttribute("id"));
 			map.put("period", period);
 			map.put("separator", "week");
-			model.addAttribute("scroll_week", cdao.scroll_week("week"));
-			model.addAttribute("weekList", cdao.weekList(period));
+			
+			model.addAttribute("scroll_week", cdao.scroll_week(chartType));
+			model.addAttribute("weekList", cdao.weekList(weekMap));
 			model.addAttribute("checkedLike", cdao.checkedLike(map));
 		}
 		long endTime = System.currentTimeMillis();
@@ -303,14 +315,48 @@ public class MusicController {
 		System.out.println("ChartList_TIME : " + lTime + "(sec)");
 		return "/music/weekList";
 	}
+	@RequestMapping("/music/weekPopList")
+	public String weekPopList(Model model, HttpSession session,Integer period){
+		long startTime = System.currentTimeMillis();
+		session.setAttribute("id", "KingSung9");
+		String chartType="pop";
+		
+		Map lastestMap=new HashMap();
+		lastestMap.put("separator", "week");
+		lastestMap.put("chartType", chartType);
+		if(period==null){
+			period=Integer.valueOf(cdao.latest(lastestMap));
+		}
+		Map weekMap=new HashMap();
+		weekMap.put("period", period);
+		weekMap.put("chartType", chartType);
+		String id=(String) session.getAttribute("id");
+		if(id==null){
+			model.addAttribute("weekList", cdao.weekList(weekMap));
+		}else{
+			Map map=new HashMap();
+			map.put("id",session.getAttribute("id"));
+			map.put("period", period);
+			map.put("separator", "week");
+			
+			model.addAttribute("scroll_week", cdao.scroll_week(chartType));
+			model.addAttribute("weekList", cdao.weekList(weekMap));
+			model.addAttribute("checkedLike", cdao.checkedLike(map));
+		}
+		long endTime = System.currentTimeMillis();
+		// Total time
+		double lTime = (double) (endTime - startTime) / 1000;
+		System.out.println("ChartList_TIME : " + lTime + "(sec)");
+		return "/music/weekPopList";
+	}
 	@RequestMapping(value = "/music/wcreate", method = RequestMethod.GET)
 	public String create() {
-		return "/music/wcreate";
+		return "/music/weekCreateForm";
 	}
 
 	@RequestMapping(value = "/music/wcreate", method = RequestMethod.POST)
-	public String weekPlaylist(Model model, String week) throws IOException {
-
+	public String weekPlaylist(Model model, String period,String url,String chartType) throws IOException {
+		
 		// 1. 가져오기전 시간 찍기
 
 		System.out.println(" Start Date : " + getCurrentData());
@@ -318,7 +364,8 @@ public class MusicController {
 		// 2. 가져올 HTTP 주소 세팅
 		// http://gaonchart.co.kr/main/section/chart/online.gaon
 		// http://www.naver.com
-		HttpPost http = new HttpPost("http://gaonchart.co.kr/main/section/chart/online.gaon");
+		HttpPost http = new HttpPost(url);
+//		HttpPost http = new HttpPost("http://gaonchart.co.kr/main/section/chart/online.gaon");
 
 		// 3. 가져오기를 실행할 클라이언트 객체 생성
 
@@ -417,7 +464,7 @@ public class MusicController {
 			}).setApplicationName("youtube-cmdline-search-sample").build();
 
 			long startTime = System.currentTimeMillis();
-			// 원하는 수만큼 출력하기 (0~99 , max:100)
+			// 원하는 수만큼 출력하기 (0~99 , max:100),밑에 dto 반복문도 같이 수정해야한다 
 			for (int songCount = 0; songCount < 100; songCount++) {
 				String inputQuery = artistList[songCount] + " " + titleList[songCount];
 				String queryTerm = inputQuery;
@@ -494,23 +541,51 @@ public class MusicController {
 		 */
 
 		ChartDTO cdto = null;
-		for (int i = 0; i < albumList.length; i++) {
-			String chartid=week+Integer.toString(i+1);
-			cdto=new ChartDTO();
-			cdto.setPeriod(Integer.parseInt(week));
-			cdto.setChartid(chartid);
-			cdto.setRank(i+1);
-			cdto.setChRank(rankChList[i]);
-			cdto.setTitle(titleList[i]);
-			cdto.setArtist(artistList[i]);
-			cdto.setAlbum(albumList[i]);
-			cdto.setThumbnail(thumbList[i]);
-			cdto.setUrl(urlList[i]);
-			if (cdao.create(cdto)) {
-				if((i+1)%20==0)
-					System.out.println((i+1)+"%");
-			} else {
-				return "error";
+		if(chartType.equals("kpop")){
+			System.out.println("K-PopChart Creating");
+			for (int i = 0; i < albumList.length; i++) {			
+				String chartid="1"+period+Integer.toString(i+1);
+				cdto=new ChartDTO();
+				cdto.setPeriod(Integer.parseInt(period));
+				cdto.setChartid(chartid);
+				cdto.setRank(i+1);
+				cdto.setChRank(rankChList[i]);
+				cdto.setTitle(titleList[i]);
+				cdto.setArtist(artistList[i]);
+				cdto.setAlbum(albumList[i]);
+				cdto.setThumbnail(thumbList[i]);
+				cdto.setUrl(urlList[i]);
+				cdto.setSeparator("week");
+				cdto.setChartType(chartType);
+				if (cdao.create(cdto)) {
+					if((i+1)%20==0)
+						System.out.println((i+1)+"%");
+				} else {
+					return "error";
+				}
+			}
+		}else if(chartType.equals("pop")){
+			System.out.println("PopChart Creating");
+			for (int i = 0; i < albumList.length; i++) {
+				String chartid="2"+period+Integer.toString(i+1);
+				cdto=new ChartDTO();
+				cdto.setPeriod(Integer.parseInt(period));
+				cdto.setChartid(chartid);
+				cdto.setRank(i+1);
+				cdto.setChRank(rankChList[i]);
+				cdto.setTitle(titleList[i]);
+				cdto.setArtist(artistList[i]);
+				cdto.setAlbum(albumList[i]);
+				cdto.setThumbnail(thumbList[i]);
+				cdto.setUrl(urlList[i]);
+				cdto.setSeparator("week");
+				cdto.setChartType(chartType);
+				if (cdao.create(cdto)) {
+					if((i+1)%20==0)
+						System.out.println((i+1)+"%");
+				} else {
+					return "error";
+				}
 			}
 		}
 		return "redirect:../";
@@ -620,38 +695,6 @@ public class MusicController {
 
 		return "/music/list";
 	}
-	@RequestMapping("/music/mysong")
-	public static String mysong(Model model){
-		String[] mysong={"1Qr3EIejpP4",
-				"bh1rzvW1YxA",
-				"4nqPch3_62M",
-				"DOrnPiJs6k0",
-				"vDMkBa4rKoc",
-				"_nN1J5vUJnM",
-				"3YVmCID0n5s",
-				"RjE-C4oIjqc",
-				"PGOCkUqU1S0",
-				"SzQMQJweu6k",
-				"WCHRzNK87FE",
-				"plMf9_WqN9E",
-				"C9ClNz0rM-Q",
-				"pvWh4vZIpe0",
-				"lLYtF5ZxF1E",
-				"IwllDSzZaoY",
-				"hklcWRJgqVI",
-				"Xm_HCEgfmJI",
-				"9e1jrKtbc2M",
-				"amq30yVWHCM",
-				"fJUqpUl82j8",
-				"JlV15p8d8ns",
-				"OALTv5Hbfd4",
-				"V-QOPAEfUNg",
-				"ZXw1vLjcvVU"};
-		
-		model.addAttribute("mysong", mysong);
-		
-		return "/music/mysong";
-	}
 	public static String getCurrentData() {
 
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
@@ -660,19 +703,19 @@ public class MusicController {
 
 	}
 
-//	private static String getInputQuery() throws IOException {
-//
-//		String inputQuery = "";
-//
-//		System.out.print("Please enter a search term: ");
-//		BufferedReader bReader = new BufferedReader(new InputStreamReader(System.in));
-//		inputQuery = bReader.readLine();
-//
-//		if (inputQuery.length() < 1) {
-//			// If nothing is entered, defaults to "YouTube Developers Live."
-//			inputQuery = "YouTube Developers Live";
-//		}
-//		return inputQuery;
-//	}
+	private static String getInputQuery() throws IOException {
+
+		String inputQuery = "";
+
+		System.out.print("Please enter a search term: ");
+		BufferedReader bReader = new BufferedReader(new InputStreamReader(System.in));
+		inputQuery = bReader.readLine();
+
+		if (inputQuery.length() < 1) {
+			// If nothing is entered, defaults to "YouTube Developers Live."
+			inputQuery = "YouTube Developers Live";
+		}
+		return inputQuery;
+	}
 
 }

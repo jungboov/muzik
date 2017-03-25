@@ -7,7 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 @Repository
-public class ChartDAO implements IMusicDAO {
+public class ChartDAO implements IChartDAO {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	
@@ -52,9 +52,9 @@ public class ChartDAO implements IMusicDAO {
 	}
 
 	@Override
-	public List<ChartDTO> weekList(int period) {
+	public List<ChartDTO> weekList(Map map) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList("chart.weekList",period);
+		return sqlSession.selectList("chart.weekList",map);
 	}
 
 	@Override
@@ -76,9 +76,9 @@ public class ChartDAO implements IMusicDAO {
 	}
 
 	@Override
-	public List<String> urlList(int period) {
+	public List<String> urlList(Map map) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList("chart.urlList",period);
+		return sqlSession.selectList("chart.urlList",map);
 	}
 
 	@Override
@@ -88,9 +88,9 @@ public class ChartDAO implements IMusicDAO {
 	}
 
 	@Override
-	public int latest(String separator) {
+	public int latest(Map map) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectOne("chart.latest",separator);
+		return sqlSession.selectOne("chart.latest",map);
 	}
 
 	@Override
@@ -144,20 +144,20 @@ public class ChartDAO implements IMusicDAO {
 	@Override
 	public ChartDTO read(String chartid) {
 		// TODO Auto-generated method stub
-		System.out.println("read:"+sqlSession.selectOne("chart.read",chartid)+"//chartid:"+chartid);
-		return sqlSession.selectOne("chart.read",chartid);
+		System.out.println("read:"+sqlSession.selectOne("chart.playSong",chartid)+"//chartid:"+chartid);
+		return sqlSession.selectOne("chart.playSong",chartid);
 	}
 
 	@Override
-	public ChartDTO readSong(String weekid) {
+	public ChartDTO readSong(String chartid) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectOne("chart.readSong",weekid);
+		return sqlSession.selectOne("chart.readSong",chartid);
 	}
 
 	@Override
-	public List<Integer> scroll_week(String separaotr) {
+	public List<Integer> scroll_week(String chartType) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList("chart.scroll_week",separaotr);
+		return sqlSession.selectList("chart.scroll_week",chartType);
 	}
 
 	@Override

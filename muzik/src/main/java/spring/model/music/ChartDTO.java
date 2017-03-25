@@ -15,6 +15,7 @@ public class ChartDTO {
 	String cdate;
 	String invenName;//인벤토리네임..
 	int invenId;
+	String chartType;
 	
 	public String getChartid() {
 		return chartid;
@@ -100,6 +101,12 @@ public class ChartDTO {
 	}
 	public void setInvenId(int invenId) {
 		this.invenId = invenId;
+	}
+	public String getChartType() {
+		return chartType;
+	}
+	public void setChartType(String chartType) {
+		this.chartType = chartType;
 	}
 	
 }

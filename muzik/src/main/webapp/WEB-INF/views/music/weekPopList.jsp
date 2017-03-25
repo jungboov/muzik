@@ -128,7 +128,7 @@ $(document).ready(function(){
 	$("#playChart").click(function(){
         var url = "./top100Player";  
         url+="?period=${weekList[0].period}";
-        url+="&chartType=kpop";
+        url+="&chartType=pop";
         window.open(url,"top100", "width=640,height=410"); 
 	});
 });
@@ -507,7 +507,7 @@ $(function(){
 		var selected = $(this).find('option:selected');
 		var url="./weekList";
 		url+="?period="+period;
-		url+="&chartType=kpop";
+		url+="&chartType=pop";
 		if(selected.data("change")=="yes"){		
 			location.href=url;
 		}else{

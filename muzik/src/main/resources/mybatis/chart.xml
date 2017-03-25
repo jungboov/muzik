@@ -11,14 +11,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	<insert id="create" parameterType="ChartDTO">
 		INSERT INTO
-		M_CHART(chartid,rank,chrank,title,artist,album,thumbnail,url,period,mlike)
-		VALUES(#{chartid}, #{rank}, #{chRank}, #{title}, #{artist}, #{album},#{thumbnail},#{url},#{period},
-		(select NVL(max(mlike),0) as mlike from M_CHART where artist=#{artist} and title = #{title}))
+		M_CHART(chartid,rank,chrank,title,artist,album,thumbnail,url,period,separator,mlike,charttype)
+		VALUES(#{chartid}, #{rank}, #{chRank}, #{title}, #{artist}, #{album},#{thumbnail},#{url},#{period},#{separator},
+		(select NVL(max(mlike),0) as mlike from M_CHART where artist=#{artist} and title = #{title}),#{chartType})
 	</insert>
-	<select id="weekList" parameterType="int" resultType="ChartDTO">
+	<select id="weekList" parameterType="Map" resultType="ChartDTO">
 		select chartid, rank, chRank , title, artist, album, thumbnail, url, mlike, period
 		from M_CHART
-		where period=#{period}
+		where period=#{period} and chartType=#{chartType}
 		order by rank
 	</select>
 	<select id="checkedLike" parameterType="Map" resultType="String">
@@ -27,10 +27,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where period = #{period} and id= #{id} and separator=#{separator}
 		order by rank
 	</select>
-	<select id="urlList" parameterType="int" resultType="String">
+	<select id="urlList" parameterType="int" resultType="Map">
 		select url
 		from M_CHART
-		where period=#{period}
+		where period=#{period} and chartType=#{chartType}
 		order by rank
 	</select>
 	<select id="url" parameterType="String" resultType="String">
@@ -38,8 +38,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from M_CHART
 		where chartid=#{chartid}
 	</select>
-	<select id="read" parameterType="String" resultType="ChartDTO">
-		select rank,chRank, title, artist,url
+	<select id="playSong" parameterType="String" resultType="ChartDTO">
+		select rank,chRank, title, artist,url		
 		from M_CHART
 		where chartid=#{chartid}  
 	</select>
@@ -48,10 +48,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from M_CHART
 		where chartid=#{chartid}
 	</select>
-	<select id="latest" resultType="int">
+	<select id="latest" resultType="int" parameterType="Map">
 		select max(period) as period
 		from M_CHART
-		where separator=#{separator}
+		where separator=#{separator} and chartType=#{chartType}
 	</select>
 	<update id="updateMlike" parameterType="Map">
 		update M_CHART 
@@ -97,9 +97,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		set content=#{myList}
 		where id=#{id} and INVENID=#{invenId}
 	</update>
-	<select id="scroll_week" resultType="int">
+	<select id="scroll_week" resultType="String">
 		select distinct period
 		from M_CHART
+		where charttype=#{chartType}
 		order by period desc
 	</select>
 </mapper>
