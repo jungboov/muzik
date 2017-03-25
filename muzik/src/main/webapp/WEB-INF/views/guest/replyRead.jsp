@@ -17,15 +17,9 @@
 	/* 수정버튼을 누르면 수정창이 뜨게 하는 ajax function */
 	$(document).on("click", "#rupdate", function() {
 		var guestrid = $(this).data("rid");
+		$("td#deletePanel" + guestrid).hide();
 		$("td#contentPanel" + guestrid).hide();
 		$("td#updatePanel" + guestrid).show();
-		// 		var content=$(this).data("content");
-		// 		$("input[name='rsubmit']").val("수정");
-		// 		$("input[name='content']").val(content);
-		// 		$("input[name='guestrid']").val(guestrid);
-		// 		$("form").attr("action","./rupdate");
-		// 		$("#textarea").val(content);
-		// 		$("#textarea").focus();
 	});
 
 	/* 수정창에서 수정버튼을 눌러서 수정한 내용을 반영하는 ajax function */
@@ -58,6 +52,7 @@
 			guestrid : guestrid,
 		}, function(data, status) {
 			if (status = "success") {
+				$("td#updatePanel" + guestrid).hide();
 				$("td#contentPanel" + guestrid).hide();
 				$("td#deletePanel" + guestrid).show();
 				$("td#deletePanel" + guestrid).html(data);

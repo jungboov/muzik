@@ -137,9 +137,6 @@
 										</a>
 									</td>
 									<td class="col-sm-2">
-										<c:set var="guestReplyCount" value="${util:guestReplyCount(dto.guestid,rdao)}" />
-										댓글 갯수 :
-										<span style="color: red; size: 15px;"> &nbsp;[${guestReplyCount}] </span>
 									</td>
 								</tr>
 								<tr>
@@ -149,7 +146,11 @@
 									<td>
 										&nbsp;&nbsp;
 										<a id="replyRead" data-guestid="${dto.guestid}">
-											<button type="button" class="btn btn-default">댓글보기</button>
+											<c:set var="guestReplyCount" value="${util:guestReplyCount(dto.guestid,rdao)}" />
+											<button type="button" class="btn btn-default">
+													댓글보기
+													<span class="badge">${guestReplyCount} </span>
+												</button>
 										</a>
 										<a id="replyCreate" data-guestid="${dto.guestid}">
 											<button type="button" class="btn btn-default">댓글달기</button>

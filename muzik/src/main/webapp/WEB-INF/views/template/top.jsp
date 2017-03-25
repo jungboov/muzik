@@ -20,7 +20,7 @@
 	/* 마우스 올라갈때 밑에창 열리면서 글자색 검정->흰색 변환 */
 	$(document).ready(function() {
 		$("#flip").mouseenter(function() {
-			$("#panel").slideToggle(1);
+			$("#panel").slideDown(1);
 			$("#top_a1").css("color", "white");
 			$("#top_a2").css("color", "white");
 			$("#top_a3").css("color", "white");
@@ -33,7 +33,7 @@
 	/* 마우스 나갈때 밑에창 닫히면서 글자색 흰색->검정 변환 */
 	$(document).ready(function() {
 		$("#flip").mouseleave(function() {
-			$("#panel").slideToggle(1);
+			$("#panel").slideUp(1);
 			$("#top_a1").css("color", "black")
 			$("#top_a2").css("color", "black")
 			$("#top_a3").css("color", "black")
@@ -44,17 +44,6 @@
 	});
 </script>
 <style>
-
-/* a링크 기본글씨색 검정, 밑줄 없음 */
-.top_a {
-	color: black;
-	text-decoration: none;
-}
-
-.affix a {
-	color: white !important;
-	text-decoration: none;
-}
 
 /* 밑에창 */
 #panel {
@@ -89,6 +78,17 @@
 	/* border-bottom: solid 1px white; */
 }
 
+/* a링크 기본글씨색 검정, 밑줄 없음 */
+.top_a {
+	color: black;
+	text-decoration: none;
+}
+
+.affix a {
+	color: white !important;
+	text-decoration: none;
+}
+
 .affix {
 	top: 0;
 	width: 100%;
@@ -101,7 +101,7 @@
 	opacity: 0.8;
 }
 
-.affix + .container-fluid {
+.affix+.container-fluid {
 	position: relative;
 	/*    top: 50px; */
 }
@@ -130,9 +130,9 @@
 </script>
 </head>
 <body id="myHeader">
-	<div id="flip" class="w3-center w3-container ">
+	<div id="flip" class="w3-container">
 		<div class="w3-center w3-container">
-			<img src="https://s3.amazonaws.com/lg-vectors/bitmaps/583093/390385.png?logo_version=1">
+			<img src="${pageContext.request.contextPath}/images/muzik.png" width="300px;">
 		</div>
 		<div id="menubar" class="w3-center w3-container" data-spy="affix" data-offset-top="43" style="padding-left: 0px; padding-right: 0px;">
 			<div class="w3-row w3-xlarge" id="row">

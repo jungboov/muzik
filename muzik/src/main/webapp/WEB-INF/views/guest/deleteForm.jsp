@@ -25,13 +25,15 @@
 		<div class="content">
 			<c:choose>
 				<c:when test="${flag}">
-					<div class="well" align="center" id="bbs_well">
-						답변이 있는 글이므로 삭제 불가능
-						<br>
+					<div class="panel panel-default">
+						<div class="panel-heading" align="center">
+							답변이 있는 글이므로 삭제 불가능
+							<br>
+						</div>
+						<DIV class='panel-body bottom' align="center">
+							<input type='button' class="btn btn-default" value='다시시도' onclick='history.go(-1)'>
+						</DIV>
 					</div>
-					<DIV class='bottom' align="center">
-						<input type='button' class="btn btn-default" value='다시시도' onclick='history.go(-1)'>
-					</DIV>
 				</c:when>
 				<c:otherwise>
 					<FORM name='frm' method='POST' action='./delete' onsubmit="return incheck(this)">
@@ -39,11 +41,14 @@
 						<input name="word" value="${param.word}" type="hidden">
 						<input name="nowPage" value="${param.nowPage}" type="hidden">
 						<input type="hidden" name="guestid" value="${param.guestid}">
-						<div class="well" align="center" id="bbs_well">삭제하면 복구할 수 없습니다</div>
-						<DIV class='bottom' align="center">
-							<input type='submit' class="btn btn-default" value='삭제'>
-							<input type='button' class="btn btn-default" value='취소' onclick="history.back()">
-						</DIV>
+
+						<div class="panel panel-default">
+							<div class="panel-heading" align="center">삭제하면 복구할 수 없습니다</div>
+							<DIV class='panel-body bottom' align="center">
+								<input type='submit' class="btn btn-default" value='삭제'>
+								<input type='button' class="btn btn-default" value='취소' onclick="history.back()">
+							</DIV>
+						</div>
 					</FORM>
 				</c:otherwise>
 			</c:choose>

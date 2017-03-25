@@ -42,18 +42,17 @@
 		<div class="w3-quarter">
 			<img src="https://s3.amazonaws.com/lg-vectors/bitmaps/583093/390385.png?logo_version=1">
 		</div>
-
-		<!-- 화면 위로 한번에 올려주는 화살표 -->
+<!-- 
+		화면 위로 한번에 올려주는 화살표
 		<div style="position: relative; bottom: 55px;" class="w3-tooltip w3-right">
 			<span class="w3-text w3-padding w3-white">Go To Top</span>
-			 
 			<a class="w3-text-white" href="#myHeader">
 				<span class="w3-xlarge ">
 					<i class="fa fa-chevron-circle-up"></i>
 				</span>
 			</a>
 		</div>
-
+ -->
 	</div>
 </footer>
 <div class="w3-gray w3-center w3-padding-24">

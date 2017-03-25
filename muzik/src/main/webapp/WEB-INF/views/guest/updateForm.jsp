@@ -58,27 +58,15 @@
 			<input name="col" value="${param.col}" type="hidden">
 			<input name="word" value="${param.word}" type="hidden">
 			<input name="nowPage" value="${param.nowPage}" type="hidden">
-			<TABLE class="table table-hover">
-				<%-- <TR>
-					<TH>성명</TH>
-					<TD>
-						<input type="text" id="id" name="id" value="${dto.id}">
-						<div id="idAlert"></div>
-					</TD>
-				</TR> --%>
-				<TR>
-					<TH>내용</TH>
-					<TD>
-						<textarea rows="10" cols="45" name="content">${dto.content}</textarea>
-					</TD>
-
-				</TR>
-			</TABLE>
-
-			<DIV class='bottom' align="center">
-				<input type='submit' class="btn btn-default" value='수정'>
-				<input type='button' class="btn btn-default" value='취소' onclick="history.back()">
-			</DIV>
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<textarea rows="10" cols="45" name="content">${dto.content}</textarea>
+				</div>
+				<DIV class='panel-footer bottom' align="center">
+					<input type='submit' class="btn btn-default" value='수정'>
+					<input type='button' class="btn btn-default" value='취소' onclick="history.back()">
+				</DIV>
+			</div>
 		</FORM>
 
 		<!-- *********************************************** -->

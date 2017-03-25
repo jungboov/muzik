@@ -66,19 +66,15 @@
 			<FORM name='frm' method='POST' action='./create' enctype="multipart/form-data" onsubmit="return incheck(this)">
 				<!-- 나중에 로그인하면 세션의 아이디 값을 받아온다. -->
 				<input type="hidden" name="id" value="guest" />
-				<table class="table table-hover">
-					<TR>
-						<TH>내용</TH>
-						<TD>
-							<textarea rows="100" cols="145" name="content" placeholder="내용을 쓰세요."></textarea>
-						</TD>
-					</TR>
-				</TABLE>
-
-				<DIV class='bottom' align="center">
-					<input type='submit' class="btn btn-default" value='작성'>
-					<input type='button' class="btn btn-default" value='취소' onclick="history.back()">
-				</DIV>
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<textarea rows="100" cols="145" name="content" placeholder="내용을 쓰세요."></textarea>
+					</div>
+					<DIV class='panel-footer bottom' align="center">
+						<input type='submit' class="btn btn-default" value='작성'>
+						<input type='button' class="btn btn-default" value='취소' onclick="history.back()">
+					</DIV>
+				</div>
 			</FORM>
 		</DIV>
 		<!-- *********************************************** -->
