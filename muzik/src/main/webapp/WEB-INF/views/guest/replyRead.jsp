@@ -45,6 +45,10 @@
 		$("td#updatePanel" + guestrid).hide();
 	}
 
+	function replyClose(guestid) {
+		$("div[data-guest=" + guestid + "]").hide();
+	}
+
 	/* 삭제버튼을 누르면 컨트롤러의 replyCheckRefno로 가서 자식검사를 하고 delete 여부를 결정한다. */
 	$(document).on("click", "#rdelete", function() {
 		var guestrid = $(this).data("rid");
@@ -89,22 +93,19 @@
 		<c:choose>
 			<c:when test="${empty rlist}">
 				<div class="well" style="text-align: center;">등록된 댓글이 없습니다.</div>
+				<div align="right">
+					<button type="button" class="btn btn-default" onclick="replyClose('${dto.guestid}')">
+						<span class="glyphicon glyphicon-remove"></span>
+					</button>
+				</div>
 			</c:when>
 			<c:otherwise>
 				<c:forEach items="${rlist}" var="rdto">
 					<div class="well" id="replyDiv${rdto.guestrid}">
-						<table style="margin-left: ${(rdto.indent+1) * 30}px;">
+						<table style="margin-left: ${(rdto.indent+1) * 35}px;">
 							<tr>
-								<td class="col-sm-1" rowspan="3" align="center">
-									<span class="glyphicon glyphicon-book"></span>
-									<br>
-									<a id="rupdate" data-rid='${rdto.guestrid}'>
-										<span style="size: 10px">수정/</span>
-									</a>
-
-									<a id="rdelete" data-rid='${rdto.guestrid}'>
-										<span style="size: 10px">삭제</span>
-									</a>
+								<td class="col-sm-1" align="center">
+									<h1><span class="badge"> ${rdto.guestrid}</span></h1>
 								</td>
 
 								<td class="col-sm-5" rowspan="3" id="contentPanel${rdto.guestrid}">${rdto.content}</td>
@@ -122,12 +123,24 @@
 								<td class="col-sm-2">${rdto.cdate}</td>
 							</tr>
 							<tr>
+								<td class="col-sm-1" rowspan="2">
 								<td class="col-sm-2">ID : ${rdto.id}</td>
 							</tr>
 							<tr>
 								<td class="col-sm-2">
 									<a id="reReplyCreate" data-guestrid="${rdto.guestrid}">
 										<button type="button" class="btn btn-default">대댓글달기</button>
+									</a>
+									<br>
+									<a id="rupdate" data-rid='${rdto.guestrid}'>
+										<button type="button" class="btn btn-default btn-sm">
+											<span>수정</span>
+										</button>
+									</a>
+									<a id="rdelete" data-rid='${rdto.guestrid}'>
+										<button type="button" class="btn btn-default btn-sm">
+											<span>삭제</span>
+										</button>
 									</a>
 								</td>
 							</tr>
@@ -137,6 +150,11 @@
 						</div>
 					</div>
 				</c:forEach>
+				<div align="right">
+					<button type="button" class="btn btn-default" onclick="replyClose('${dto.guestid}')">
+						<span class="glyphicon glyphicon-remove"></span>
+					</button>
+				</div>
 			</c:otherwise>
 		</c:choose>
 	</div>

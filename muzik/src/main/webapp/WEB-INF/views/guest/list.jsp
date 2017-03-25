@@ -117,7 +117,11 @@
 							<table class="accGuest">
 								<tr>
 									<td class="col-sm-1" rowspan="2" align="center">
-										<a href="javascript:read('${dto.guestid}')"> 글번호 : ${dto.guestid} </a>
+										<h1>
+											<a href="javascript:read('${dto.guestid}')" style="color: black;">
+												<span class="badge">${dto.guestid} </span>
+											</a>
+										</h1>
 									</td>
 									<td class="col-sm-5" rowspan="4">${dto.content}</td>
 									<td class="col-sm-2">작성일 : ${dto.cdate}</td>
@@ -128,16 +132,17 @@
 								<tr>
 									<td class="col-sm-1" align="center">
 										<a href="javascript:gupdate('${dto.guestid}')">
-											<input type='button' class="btn btn-default" value='수정'>
-											<br>
+											<button type="button" class="btn btn-default btn-sm">
+												<span>수정</span>
+											</button>
 										</a>
 										<a href="javascript:gdelete('${dto.guestid}')">
-											<br>
-											<input type='button' class="btn btn-default" value='삭제'>
+											<button type="button" class="btn btn-default btn-sm">
+												<span>삭제</span>
+											</button>
 										</a>
 									</td>
-									<td class="col-sm-2">
-									</td>
+									<td class="col-sm-2"></td>
 								</tr>
 								<tr>
 									<!-- 좌하단 공백을 위해 빈 td 입력 -->
@@ -148,9 +153,9 @@
 										<a id="replyRead" data-guestid="${dto.guestid}">
 											<c:set var="guestReplyCount" value="${util:guestReplyCount(dto.guestid,rdao)}" />
 											<button type="button" class="btn btn-default">
-													댓글보기
-													<span class="badge">${guestReplyCount} </span>
-												</button>
+												댓글보기
+												<span class="badge">${guestReplyCount} </span>
+											</button>
 										</a>
 										<a id="replyCreate" data-guestid="${dto.guestid}">
 											<button type="button" class="btn btn-default">댓글달기</button>
