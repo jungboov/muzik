@@ -164,7 +164,7 @@
 								</tr>
 							</table>
 							<div data-guest="${dto.guestid}" style="margin-top: 15px;" align="center">
-								<!-- 댓글보기, 댓글작성창이 나올 위치 -->
+								<!-- 댓글보기, 댓글작성창이 나올 위치 --> 
 							</div>
 						</div>
 					</c:forEach>
