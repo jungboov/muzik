@@ -35,7 +35,7 @@ $(document).ready(function() {
                         message: '제목을 입력하세요.'
                     },
                     stringLength: {
-                        max: 20,
+                        max: 200,
                         message: '제목은 20자 까지 제한 되어있습니다.'
                     }
                 }
@@ -56,7 +56,7 @@ $(document).ready(function() {
                 }
             },
             
-            content: {
+            content1: {
                 validators: {
                     notEmpty: {
                         message: '내용을 입력하세요.'

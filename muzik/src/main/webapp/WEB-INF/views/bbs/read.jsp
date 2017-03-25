@@ -188,6 +188,10 @@ a{
 .a{
 	color: navy;
 }
+.position1{padding-right: 0px; width: 60px;}
+.position2{padding-right: 20px;width: 120px;}
+.position3{width: 58px;padding-right: 0px;}
+.position4{width: 46px;}
 
 </style>
 
@@ -205,36 +209,32 @@ a{
  
 <div class="container">
 <div class="row">
-<div class="col-sm-3"></div>
-<div class="col-sm-6">
-  <TABLE class="table table-hover">
+<div class="col-sm-2"></div>
+<div class="col-sm-8">
+  <TABLE class="table">
     <TR>
-      <TH>제목</TH>
-      <TD>${dto.title}</TD>
+      <TH style="width: 61px;">제목</TH>
+      <TD colspan="5">${dto.title}</TD>
     </TR>
      
      <TR>
-      <TH>내용</TH>
-      <TD>${dto.content}</TD>
+      <TH>닉네임</TH>
+      <TD>${dto.viewcnt}</TD>
+      <TH class="position1">등록일</TH>
+      <TD class="position2">${fn:substring(dto.cdate,0,10)}</TD>
+      <TH class="position3">조회수</TH>
+      <TD class="position4">${dto.viewcnt}</TD>
      </TR> 
       
      <TR> 
-      <TH>성명</TH>
-      <TD>${dto.id}</TD>
+      <TH>내용</TH>
+      <TD colspan="5">${dto.content}</TD>
      </TR> 
      
-     <TR> 
-      <TH>조회수</TH>
-      <TD>${dto.cdate}</TD>
-     </TR> 
-      
-     <TR> 
-      <TH>등록</TH>
-      <TD>${fn:substring(dto.cdate,0,10)}</TD>
-    </TR>
+    
     
     <TR> 
-      <TH>파일명</TH>
+      <TH>파일</TH>
       <TD>
       <c:choose>
       <c:when test="${empty dto.filename}">파일없음</c:when>
@@ -255,27 +255,43 @@ a{
     <input type='button' class="btn btn-default" value='수정' onclick="bupdate()">
     <input type='button' class="btn btn-default" value='삭제' onclick="bdelete('${dto.bbsid}')">
   </DIV>
-  
-
+  <br>
+<div style="text-align: center;">
 <c:set var="noArr" value="${noArr}"/>
 <c:forEach var="i" begin="0" end="1">
-
 	<c:choose>
 		<c:when test="${noArr[i]>dto.bbsid}">
-			<a style="color: black;margin-left: 450px; position: absolute;" href="javascript:readGo('${noArr[i]}')"> 다음글> </a>
+			<a style="color: black; font-size: 17px; position: static;" href="javascript:readGo('${noArr[i]}')">
+			 다음글<span style="font-size: 17px" class="glyphicon glyphicon-triangle-right"></span> 
+			 </a>
+			 
 		</c:when>
 		<c:otherwise>
 			<c:choose>
 				<c:when test="${noArr[i]==dto.bbsid}"></c:when>
 				<c:otherwise>
-				<a style="color: black; size: 30px;" href="javascript:readGo('${noArr[i]}')"> <이전글 </a>
+				<span style="font-size: 17px" class="glyphicon glyphicon-triangle-left"></span>
+				<a style="color: black; font-size: 17px;" href="javascript:readGo('${noArr[i]}')"> 이전글 |</a>
 				</c:otherwise>
 			</c:choose>
 		</c:otherwise>
 	</c:choose>
-
 </c:forEach>
-
+</div>
+ <hr>
+<div class="rcreate">
+  <form name="rform" action="./rcreate" method="post" onsubmit="return input(this)"><!-- onsubmit="return input(this)" -->
+  <textarea style="vertical-align: bottom;" rows="1" cols="95" name="content" ></textarea> <!-- onclick="rcheck(this)" -->
+  <input class="btn btn-default btn-sm" type="submit" name="rsubmit" value="등록">
+  <input type="hidden" name="bbsid" value="${dto.bbsid}">
+  <input type="hidden" name="id" value="CR7">
+  <input type="hidden" name="nowPage" value="${param.nowPage}">
+  <input type="hidden" name="nPage" value="${nPage}">           
+  <input type="hidden" name="col" value="${param.col}">
+  <input type="hidden" name="word" value="${param.word}">
+  <input type="hidden" name="rbbsid" value="0">
+  </form>
+  </div>
 
  <hr>
  <form action="./rupdate" name="fn" onsubmit="return input(this)" method="POST">
@@ -286,46 +302,26 @@ a{
   <input type="hidden" name="col" value="${param.col}">
   <input type="hidden" name="word" value="${param.word}">
   <input type="hidden" name="rcontent" value="${param.content}">
-  <input type="hidden" name="rbbsid" value="0">
+  <!-- <input type="hidden" name="rbbsid" value="0"> -->
+  
+<c:forEach var="rdto" items="${rlist}">
+  
+  <div id="contentPanel${rdto.rbbsid}">내용: ${rdto.content}</div>
+  <div style="display: none;" id="updatePanel${rdto.rbbsid}" >
+	  <input style="width: 300px;" id="rcontent" type="text" value="${rdto.content}">
+	  <button class="btn btn-default btn-sm" type="submit" id="rupdateSubmit" data-rbbsid='${rdto.rbbsid}'>수정</button>
+	  <button class="btn btn-default btn-sm" type="button" onclick="updateCancel('${rdto.rbbsid}')">취소</button>
+  </div>
+  		<p style="margin-bottom: 0px;">날짜: ${rdto.cdate}</p>
+  		<p style="margin-bottom: 0px;">닉네임: ${rdto.cdate}</p>
+  		
+  		
+  		<a style="color: red; padding-left: 490px;" id="rupdate" data-rbbsid='${rdto.rbbsid}'>수정</a>
+  		<a style="color: red;" href="javascript:rdelete('${rdto.rbbsid}')">삭제</a>
+<hr>  
+</c:forEach>
 </form>
-  <c:forEach var="rdto" items="${rlist}">
   
-  <table>
-  	<tr>
-  		<td><div style="color: blue;" id="contentPanel${rdto.rbbsid}">내용: ${rdto.content}</div>
-  	<div style="color: blue; display: none;" id="updatePanel${rdto.rbbsid}" >
-	  <input id="rcontent" type="text" value="${rdto.content}">
-	  <button type="submit" id="rupdateSubmit" data-rbbsid='${rdto.rbbsid}'>수정</button>
-<%--<button type="submit" onclick="rupdate('${rdto.rbbsid},${rdto.content}')">수정</button> --%>
-	  <button type="button" onclick="updateCancel('${rdto.rbbsid}')">취소</button>
-  </div>
-  		</td>
-  		<td><a style="color: red; padding-left: 170px;" id="rupdate" data-rbbsid='${rdto.rbbsid}'>수정</a></td>
-
-  	</tr>
-  	<tr>
-  		<td><p style="color: red; margin-bottom: 0px;">날짜: ${rdto.cdate}</p></td>
-  		<td><a style="color: red; padding-left: 170px;" href="javascript:rdelete('${rdto.rbbsid}')">삭제</a></td>
-  	</tr>
-  </table><br>
-  </c:forEach>
-  
-<%--<a style="color: red;" href="javascript:rupdate('${rdto.rbbsid}','${rdto.content}')">수정</a> --%>
-<%--<button type="submit" onclick="updateSubmit('${rdto.rbbsid}')">수정</button> --%>
- 
-  <div class="rcreate">
-  <form name="rform" action="./rcreate" method="post" onsubmit="return input(this)"><!-- onsubmit="return input(this)" -->
-  <textarea style="vertical-align: bottom;" rows="1" cols="68" name="content" ></textarea> <!-- onclick="rcheck(this)" -->
-  <input type="submit" name="rsubmit" value="등록">
-  <input type="hidden" name="bbsid" value="${dto.bbsid}">
-  <input type="hidden" name="id" value="CR7">
-  <input type="hidden" name="nowPage" value="${param.nowPage}">
-  <input type="hidden" name="nPage" value="${nPage}">           
-  <input type="hidden" name="col" value="${param.col}">
-  <input type="hidden" name="word" value="${param.word}">
-  <input type="hidden" name="rbbsid" value="0">
-  </form>
-  </div>
   
   <div class="bottom">
   ${paging}

@@ -4,6 +4,12 @@
     "http://tiles.apache.org/dtds/tiles-config_2_0.dtd"> 
 
 <tiles-definitions> 
+
+     <definition name="main" template="/WEB-INF/views/template/template.jsp"> 
+        <put-attribute name="header" value="/WEB-INF/views/template/top.jsp" /> 
+        <put-attribute name="footer" value="/WEB-INF/views/template/bottom.jsp" /> 
+    </definition> 
+
 	<definition name="/bbs/list" extends="main">  <!--definition name이 뷰네임 -->
         <put-attribute name="title" value="게시판 목록" ></put-attribute> 
         <put-attribute name="body" value="/WEB-INF/views/bbs/list.jsp" /> 
@@ -19,5 +25,6 @@
     <definition name="/bbs/read" extends="main"> 
         <put-attribute name="title" value="bbs 조회" ></put-attribute> 
         <put-attribute name="body" value="/WEB-INF/views/bbs/read.jsp" /> 
-    </definition>  
+    </definition>
+      
 </tiles-definitions> 

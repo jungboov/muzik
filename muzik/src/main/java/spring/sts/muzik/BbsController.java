@@ -175,7 +175,7 @@ public class BbsController {
 	
 	@RequestMapping(value="/bbs/update", method=RequestMethod.POST)
 	public String update(BbsDTO dto, Model model, HttpServletRequest request,
-			String col, String word, String nowPage, String oldfile){
+			String col, String word, String nowPage, String oldfile, int bbsid){
 		
 		String basePath = request.getRealPath("/bbs/storage");
 		int filesize = (int)dto.getFileMF().getSize();
@@ -193,10 +193,11 @@ public class BbsController {
 			flag = dao.update(dto);
 			if(flag){
 				Utility.deleteFile(basePath, oldfile);
+				model.addAttribute("bbsid", bbsid);
 				model.addAttribute("col",col);
 				model.addAttribute("word",word);
 				model.addAttribute("nowPage",nowPage);
-				url += "redirect:./list"; 
+				url += "redirect:./read"; 
 			}else{
 				url += "error";
 			}
