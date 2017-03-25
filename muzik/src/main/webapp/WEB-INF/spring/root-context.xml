@@ -15,14 +15,14 @@
     p:password="1234"  
     />
     
-<!--     <bean id="dataSource"  -->
-<!--     destroy-method="close" -->
-<!--     class="org.apache.commons.dbcp.BasicDataSource"  -->
-<!--     p:driverClassName="oracle.jdbc.driver.OracleDriver"  -->
-<!--     p:url="jdbc:oracle:thin:@localhost:1521:XE"  -->
-<!--     p:username="jungboov"   -->
-<!--     p:password="jb861231"   -->
-<!--     /> -->
+<!--     <bean id="dataSource" 
+    destroy-method="close"
+    class="org.apache.commons.dbcp.BasicDataSource" 
+    p:driverClassName="oracle.jdbc.driver.OracleDriver" 
+    p:url="jdbc:oracle:thin:@localhost:1521:XE" 
+    p:username="jungboov"  
+    p:password="jb861231"  
+    /> -->
     
     
     <!-- MyBatis SQL 실행 클래스  --> 
@@ -48,6 +48,8 @@
         <property name="definitions"> 
             <list> 
                 <value>/WEB-INF/spring/tilesMember.xml</value>
+                <value>/WEB-INF/spring/tilesFaq.xml</value>
+                <value>/WEB-INF/spring/tilesQna.xml</value>
             </list> 
         </property> 
     </bean>  

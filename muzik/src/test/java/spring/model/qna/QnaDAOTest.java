@@ -1,4 +1,4 @@
-package spring.model.faq;
+package spring.model.qna;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -20,15 +20,14 @@ import org.springframework.beans.factory.xml.XmlBeanFactory;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 
-public class FaqDAOTest {
+public class QnaDAOTest {
 	
 	private static BeanFactory beans;
-	private static FaqDAO fdao;
+	private static QnaDAO qdao;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		Resource resource = new ClassPathResource("junit/muzik.xml");
-		
 		beans = new XmlBeanFactory(resource);
 	}
 
@@ -38,7 +37,7 @@ public class FaqDAOTest {
 
 	@Before
 	public void setUp() throws Exception {
-		fdao = (FaqDAO) beans.getBean("fdao");
+		qdao = (QnaDAO) beans.getBean("qdao");
 	}
 
 	@After
@@ -47,12 +46,13 @@ public class FaqDAOTest {
 
 	@Test @Ignore
 	public void testCreate() {
-		FaqDTO dto = new FaqDTO();
-		dto.setTitle("JUnit Title Test");
-		dto.setContent("JUnit Content Test");
+		QnaDTO dto = new QnaDTO();
+		dto.setTitle("JUnit Test 제목");
+		dto.setContent("JUnit4 Test 내용");
+		dto.setMemberid("guest");
 		
 		try {
-			assertTrue(fdao.create(dto));
+			assertTrue(qdao.create(dto));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -67,27 +67,27 @@ public class FaqDAOTest {
 		map.put("sno", 1);
 		map.put("eno", 5);
 		
-		List<FaqDTO> list = fdao.list(map);
+		List<QnaDTO> list = qdao.list(map);
 		
-		assertEquals(list.size(), 5);		
+		assertEquals(list.size(), 5);
 	}
 
 	@Test @Ignore
 	public void testRead() throws Exception {
-		Object dto = fdao.read(1);
+		QnaDTO dto = qdao.read(1);
 		
-		assertNotNull(dto);	
+		assertNotNull(dto);
 	}
 
 	@Test @Ignore
 	public void testUpdate() {
-		FaqDTO dto = new FaqDTO();
-		dto.setFaqid(1);
+		QnaDTO dto = new QnaDTO();
+		dto.setQnaid(1);
 		dto.setTitle("JUnit4 제목변경");
 		dto.setContent("JUnit4 내용변경");
 		
 		try {
-			assertTrue(fdao.update(dto));
+			assertTrue(qdao.update(dto));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -96,10 +96,23 @@ public class FaqDAOTest {
 
 	@Test @Ignore
 	public void testDelete() {
-		int faqid = 5;
+		int qnaid = 10;
 		
 		try {
-			assertTrue(fdao.delete(faqid));
+			assertTrue(qdao.delete(qnaid));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	@Test @Ignore
+	public void testTotal() {
+		Map map = new HashMap();
+		map.put("title", "JUnit");
+		
+		try {
+			assertEquals(qdao.total(map), 3);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -107,8 +120,28 @@ public class FaqDAOTest {
 	}
 
 	@Test
-	public void testTotal() {
+	public void testCreateReply() throws Exception {
+		QnaDTO dto = qdao.read(1);
+		dto.setTitle("JUnit4 Reply Test");
+		dto.setContent("JUnit4 Reply Test");
+		dto.setMemberid("CR7");
 		
+		Map map = new HashMap();
+		map.put("grpno", dto.getGrpno());
+		map.put("ansnum", dto.getAnsnum());
+		qdao.upAnsnum(map);
+		
+		assertTrue(qdao.createReply(dto));
+	}
+
+	@Test @Ignore
+	public void testReadReply() throws Exception {
+		QnaDTO dto = (QnaDTO) qdao.readReply(1);
+		
+		assertEquals(dto.getGrpno(), 1);
+		assertEquals(dto.getIndent(), 0);
+		assertEquals(dto.getAnsnum(), 0);
+		assertEquals(dto.getTitle(), 0);
 	}
 
 }

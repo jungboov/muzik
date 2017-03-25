@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: muzik
+Bundle-SymbolicName: muzik
+Bundle-Version: 1.0.0.qualifier
+Bundle-ClassPath: muzik.jar,
+ workspace/spring/spring_autocomplete/WebContent/WEB-INF/lib/json-lib-2.4-jdk13.jar
+Export-Package: junit,
+ mybatis,
+ spring.model.faq,
+ spring.model.muzik,
+ spring.model.qna,
+ spring.sts.muzik,
+ spring.utility.muzik

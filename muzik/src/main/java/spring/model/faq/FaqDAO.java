@@ -35,7 +35,7 @@ public class FaqDAO implements DAOSTDInter {
 			
 		return mybatis.selectList("faq.list", map);
 	}
-
+	
 	@Override
 	public FaqDTO read(Object pk) throws Exception {
 		

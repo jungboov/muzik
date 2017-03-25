@@ -1,10 +1,10 @@
 package spring.model.qna;
 
 public class QnaDTO {
-	private int QnAID;
+	private int qnaid;
 	private String title;
 	private String content;            
-	private String id;
+	private String memberid;
 	private String cdate;
 	private int viewcnt;
 	private int grpno;
@@ -12,11 +12,11 @@ public class QnaDTO {
 	private int ansnum;
 	private int refno;
 	
-	public int getQnAID() {
-		return QnAID;
+	public int getQnaid() {
+		return qnaid;
 	}
-	public void setQnAID(int qnAID) {
-		QnAID = qnAID;
+	public void setQnaid(int qnaid) {
+		this.qnaid = qnaid;
 	}
 	public String getTitle() {
 		return title;
@@ -30,11 +30,11 @@ public class QnaDTO {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public String getId() {
-		return id;
+	public String getMemberid() {
+		return memberid;
 	}
-	public void setId(String id) {
-		this.id = id;
+	public void setMemberid(String memberid) {
+		this.memberid = memberid;
 	}
 	public String getCdate() {
 		return cdate;
@@ -72,6 +72,7 @@ public class QnaDTO {
 	public void setRefno(int refno) {
 		this.refno = refno;
 	}
+	
 	
 	
 }
