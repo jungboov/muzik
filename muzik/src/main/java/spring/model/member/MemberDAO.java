@@ -25,6 +25,8 @@ public class MemberDAO implements IMemberDAO{
 		
 		return sqlSession.selectOne("member.getGrade", id);		
 	}
+	
+	
 	@Override
 	public boolean loginCheck(String id){
 		boolean flag= false;
@@ -122,6 +124,14 @@ public class MemberDAO implements IMemberDAO{
 		if(cnt>0)flag=true;
 		return flag;
 	}
+	
+	public boolean duplicateNickname(String nickname){
+		boolean flag= false;
+		int cnt=sqlSession.selectOne("member.duplicateNickname", nickname);
+		if(cnt>0) flag=true;
+		return flag;
+	}
+	
 	@Override
 	public boolean duplicateEmail(String email){
 		boolean flag= false;

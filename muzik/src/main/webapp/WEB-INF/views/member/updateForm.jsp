@@ -90,9 +90,10 @@
     
       <TR>
       <TH>닉네임</TH>
-      <TD><input type="text" name="nickname" size="25" value="${dto.nickname}">
+      <TD><input type="text" name="nickname" id="nickname" size="25" value="${dto.nickname}">
     <!--   <input type="button" value="Email중복확인"
       onclick="emailCheck(document.frm.email.value)"> -->
+      <div id="nmessage" style="display:none;"></div>
       </TD>
       <td>변경할 닉네임을 적어 주세요.</td>
     </TR>
@@ -107,9 +108,39 @@
 
 
 <script>
+$(document).ready(function(){
+	$("#nickname").keyup(function(){
+		$.ajax({
+			url:"./nickname_proc",
+			data:({
+			nickname: $("input[name=nickname]").val()
+			}),
+			success: function(data){
+				if(jQuery.trim(data)=='YES'){
+					$('#nmessage').html("<font color=green>사용 가능</font>");
+					$('#nmessage').show();
+				}else{
+					$('#nmessage').html("<font color=red>사용 불가능</font>");
+					$('#nmessage').show();
+				}
+			}				
+			});
+		});		
+	});
+</script>
+
+<script>
 function join() { 	
-	  $("#frm").submit();
-	  parent.document.location.reload();      
+	if($('#nmessage').html() !='<font color="green">사용 가능</font>'){
+		 /*  alert("아이디를 다시 확인해주세요."); */
+		 /* alert($('#idmessage').html()) */
+		  alert('3');
+		  frm.nickname.focus(); 
+		  return false;			  
+	 }else{		 
+		  $('#frm').submit();			  
+		  parent.document.location.reload(); 
+	 }	  
 }
 </script>  
   

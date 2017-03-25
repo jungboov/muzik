@@ -3,7 +3,7 @@
 <c:choose>
 	<c:when test="${empty sessionScope.id}">
 		<c:set var="str">
-			Spring MVC Blog 페이지 입니다.	
+			Hello! it's party time ^^;;	
 		</c:set>
 	</c:when>
 	<c:otherwise>
@@ -74,8 +74,8 @@
 	<div id="element_to_pop_up4" class="content4">회원정보 <span class="button b-close"><span>X</span></span></div>
 	<div id="element_to_pop_up5" class="content5">닉네임 수정<span class="button b-close"><span>X</span></span></div>
 	
-	<br><br>
-	<c:choose>
+<%--	<br><br>
+	 <c:choose>
 	<c:when test="${empty sessionScope.id}">
 	<button id="my-button">로그인</button>
 	<button id="my-button1">회원가입</button>		
@@ -84,17 +84,19 @@
 	<button id="my-button3">일반 회원가입</button>	
 	</c:when>
 	<c:otherwise>
-	<%-- 
+	
 	<input type="button" value="회원정보" onclick="location.href='${pageContext.request.contextPath }/member/read'">
 	<input type="button" value="회원목록" onclick="location.href='${pageContext.request.contextPath }/admin/list'">
-	<input type="button" value="회원정보 수정" onclick="location.href='${pageContext.request.contextPath }/member/update'"> --%>
+	<input type="button" value="회원정보 수정" onclick="location.href='${pageContext.request.contextPath }/member/update'">
 	<button id="my-button4">회원정보</button>
 	<button id="my-button5">회원정보 수정</button>	
 	<br><br>
 	<input type="button" value="로그아웃" onclick="location.href='${pageContext.request.contextPath }/member/logout'">
     <input type="button" value="회원탈퇴" onclick="location.href='${pageContext.request.contextPath }/member/delete'">
    	</c:otherwise>
-    </c:choose>
+    </c:choose> --%>
+    <img src="${pageContext.request.contextPath}/resources/image/ibiza.jpg">
+    
   <br><br>
 ${str}
 

@@ -95,22 +95,20 @@ public class MemberController {
 	
 	
 	@RequestMapping(value="/member/update",method=RequestMethod.GET)
-	public String update(HttpServletRequest request,HttpSession session){
+	public String update(HttpServletRequest request,HttpSession session) throws Exception{
 				
 		String id= request.getParameter("id");
 		if(id==null){
 			id=(String)session.getAttribute("id");
 		}		
-			
-		MemberDTO dto;
-		try {
+		
+		
+		    MemberDTO dto;
+	
 			dto = (MemberDTO) dao.read(id);
 			request.setAttribute("dto", dto);
 			request.setAttribute("id", id);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 		
 		
 		
@@ -121,8 +119,11 @@ public class MemberController {
 	public String update(MemberDTO dto,String col,String word,String nowPage,Model model,HttpSession session) throws Exception{
 		String id=(String)session.getAttribute("id");
 		String grade=(String)session.getAttribute("grade");
-		
+		String nickname=(String)session.getAttribute("nickname");
 		if(dao.update(dto)){
+			nickname=dao.getNickname(id);
+			session.setAttribute("nickname", nickname);
+			
 			if(nowPage!=null && !nowPage.equals("")){
 				model.addAttribute("col", col);
 				model.addAttribute("word", word);
@@ -203,11 +204,11 @@ public class MemberController {
 		       
 		    if (c_id != null){  // 처음에는 값이 없음으로 null 체크로 처리
 		      cookie = new Cookie("c_id", "Y");    // 아이디 저장 여부 쿠키 
-		      cookie.setMaxAge(120);               // 2 분 유지 
+		      cookie.setMaxAge(3600);               // 2 분 유지 
 		      response.addCookie(cookie);          // 쿠키 기록 
 		   
 		      cookie = new Cookie("c_id_val", id); // 아이디 값 저장 쿠키  
-		      cookie.setMaxAge(120);               // 2 분 유지 
+		      cookie.setMaxAge(3600);               // 2 분 유지 
 		      response.addCookie(cookie);          // 쿠키 기록  
 		         
 		    }else{ 
@@ -442,7 +443,7 @@ public class MemberController {
 		request.setAttribute("c_id", c_id);
 		request.setAttribute("c_id_val", c_id_val);		
 		
-		return "member/admin_loginForm";
+		return "/member/admin_loginForm";
 	}
 	
 	
@@ -464,6 +465,16 @@ public class MemberController {
 		return "member/idpasswordCheck";
 	}
 	
+	
+	@RequestMapping(value="/member/nickname_proc")
+	public String nickname_proc(String nickname,Model model){
+		boolean flag=dao.duplicateNickname(nickname);
+		
+		model.addAttribute("nickname",nickname);
+		model.addAttribute("flag",flag);
+		
+		return "member/nickname_proc";
+	}
 	
 	
 	@RequestMapping(value="/member/email_proc")
@@ -613,6 +624,6 @@ public class MemberController {
 		request.setAttribute("list", list);
 		
 		
-		return "member/list";
+		return "/member/list";
 	}
 }

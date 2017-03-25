@@ -205,7 +205,7 @@ function signOut() {
  	<!-- <input type='submit' class="btn btn-default"  value='로그인'>   -->
  	
  	<input type='button'  class=”close-button”  value='로그인' onclick="login()"> 
-    <input type='button' class="btn btn-default" value='회원가입' onclick="location.href='google.jsp'">
+    <input type='button' class="btn btn-default" value='회원가입' onclick="location.href='${pageContext.request.contextPath}/member/create'">
   </DIV>
   
   
@@ -222,11 +222,6 @@ function login() {
 	  
 /*       window.parent.$('#element_to_pop_up').bPopup().close(); 	 */      
 }
-
-
-
-
-
 
 </script>
 

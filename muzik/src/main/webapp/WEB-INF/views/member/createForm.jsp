@@ -152,19 +152,51 @@ function onSignIn(googleUser) {
 <input type="text" name="image" value="" />
 <input type="text" name="email" value="" />
 <input type="text" name="grade" value="" />
-<input type="text" name="nickname" value="" />
+<input type="text" name="nickname" id="nickname" value="" /><div id="nmessage" style="display:none;"></div>
 <input type='button'  class=”close-button”  value='회원가입' onclick="join()"> 
 <!-- <input type="submit" value="submit"> -->
 </form>  
 
 <script>
 
+$(document).ready(function(){
+	$("#nickname").keyup(function(){
+		$.ajax({
+			url:"./nickname_proc",
+			data:({
+			nickname: $("input[name=nickname]").val()
+			}),
+			success: function(data){
+				if(jQuery.trim(data)=='YES'){
+					$('#nmessage').html("<font color=green>사용 가능</font>");
+					$('#nmessage').show();
+				}else{
+					$('#nmessage').html("<font color=red>사용 불가능</font>");
+					$('#nmessage').show();
+				}
+			}				
+			});
+		});		
+	});
 
-function join() { 	 
+
+</script>
+
+<script>
+function join() {	
 	
+	if($('#nmessage').html() !='<font color="green">사용 가능</font>'){
+		 /*  alert("아이디를 다시 확인해주세요."); */
+		 /* alert($('#idmessage').html()) */
+		  alert('3');
+		  frm.nickname.focus(); 
+		  return false;			  
+	 }else{		 
+		  $('#frm').submit();			  
+		  parent.document.location.reload(); 
+	 }	 
 	
-	  $("#frm").submit();
-	  parent.document.location.reload();      
+	      
 }
 </script>  
   

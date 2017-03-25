@@ -86,6 +86,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		 FROM m_member 
 		 WHERE id=#{id}	
 	</select> 
+	
+	<select id="duplicateNickname" parameterType="String" resultType="int">
+	SELECT COUNT(nickname) 
+		 FROM m_member 
+		 WHERE nickname=#{nickname}	
+	</select> 
 
 	<insert id="create" parameterType="MemberDTO">
 		INSERT INTO m_member(id, name, image, email, reg_date, grade, nickname)  
@@ -109,6 +115,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="loginCheck" parameterType="Map" resultType="int">
 		select count(*) from m_member where id=#{id} 
 	</select>
+	
+
 	
 	
    <select id="general_loginCheck" parameterType="Map" resultType="int">

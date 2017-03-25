@@ -67,6 +67,26 @@ String root = request.getContextPath();
 				});
 			});		
 		});
+	
+	$(document).ready(function(){
+		$("#nickname").blur(function(){
+			$.ajax({
+				url:"./nickname_proc",
+				data:({
+				nickname: $("input[name=nickname]").val()
+				}),
+				success: function(data){
+					if(jQuery.trim(data)=='YES'){
+						$('#nmessage').html("<font color=green>사용 가능</font>");
+						$('#nmessage').show();
+					}else{
+						$('#nmessage').html("<font color=red>사용 불가능</font>");
+						$('#nmessage').show();
+					}
+				}				
+				});
+			});		
+		});
  
  
  
@@ -181,8 +201,12 @@ $(document).ready(function(){
     
     <TR>
       <TH>닉네임</TH>
-      <TD><input type="text" name="nickname" size="15"></TD>
+      <TD>
+      <input type="text" name="nickname" id="nickname" size="15">
+      <div id="nmessage" style="display:none;"></div>
+      </TD>     
       <td>고객실명를 적어주세요.</td>
+       
     </TR>    
     
   <!--   <TR>
@@ -248,7 +272,14 @@ function join(){
 		  frm.id.focus(); 
 		  return false;	
 		  
-	  }else{		 
+	   }else if($('#nmessage').html() !='<font color="green">사용 가능</font>'){
+			 /*  alert("아이디를 다시 확인해주세요."); */
+			 /* alert($('#idmessage').html()) */
+			  alert('3');
+			  frm.id.focus(); 
+			  return false;	
+			  
+      }else{		 
 		  $('#frm').submit();			  
 		  parent.document.location.reload(); 
 	  }	      
