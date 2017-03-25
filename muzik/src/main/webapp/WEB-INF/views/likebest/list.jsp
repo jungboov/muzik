@@ -8,26 +8,6 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
  <script type="text/javascript">
-// $(document).ready(function(){
-// 		$.ajax({
-// 		url:"${pageContext.request.contextPath}/likebest/iframe",
-// 		success:function(data){
-// 		$("#treeData").html(data);
-// 		}
-// 		});
-// });
-
-$(".flip").click(function() {
-		 var allData = { "thumbnail": thumbnail};
-		$.ajax({
-	 		url:"${pageContext.request.contextPath}/likebest/iframe",
-	 		data: allData,
-	 		success:function(data){
-	 		$(".panel").html(data);
-	 		}
-	 		});
-	});
-
 
 </script>
 <link href="${pageContext.request.contextPath}/css/style.css" rel="Stylesheet" type="text/css">
@@ -47,7 +27,7 @@ $(".flip").click(function() {
 ${dto.mlike}
 </td>
 <td  width="100">
-${dto.week}
+${dto.period}
 </td>
 </tr>
 </table>

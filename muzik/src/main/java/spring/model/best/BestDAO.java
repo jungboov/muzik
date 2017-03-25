@@ -1,5 +1,6 @@
 package spring.model.best;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -30,5 +31,20 @@ public class BestDAO {
 		int cnt = sqlSession.insert("likebest.create", map);
 		if(cnt > 0) flag = true;
 		return flag;
+	}
+
+	public List<BestDTO> list() {
+
+		return sqlSession.selectList("likebest.bestList");
+	}
+	public String read(int bestid){
+		
+		return sqlSession.selectOne("likebest.readBest", bestid);
+	}
+	public BestDTO readSong(String chartid){
+		return sqlSession.selectOne("likebest.readSong",chartid);
+	}
+	public BestDTO readPopSong(String popchartid){
+		return sqlSession.selectOne("likebest.readPopSong", popchartid);
 	}
 }

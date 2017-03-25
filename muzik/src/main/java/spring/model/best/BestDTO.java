@@ -1,17 +1,41 @@
 package spring.model.best;
 
 public class BestDTO {
-	 private String bestid; 
+	 private int bestid; 
 	 private String chartid;
 	 private String title;
 	 private int mlike;
-	 private String week;
+	 private int period;
 	 private String url;
+	 private String id_list;
+	 private String chartType;
+	 private String thumbnail;
+	 private String artist;
 	 
-	 public String getBestid() {
+	 
+	 
+	 public String getArtist() {
+		return artist;
+	}
+	public void setArtist(String artist) {
+		this.artist = artist;
+	}
+	public String getThumbnail() {
+		return thumbnail;
+	}
+	public void setThumbnail(String thumbnail) {
+		this.thumbnail = thumbnail;
+	}
+	public String getChartType() {
+		return chartType;
+	}
+	public void setChartType(String chartType) {
+		this.chartType = chartType;
+	}
+	public int getBestid() {
 		return bestid;
 	}
-	public void setBestid(String bestid) {
+	public void setBestid(int bestid) {
 		this.bestid = bestid;
 	}
 	public String getChartid() {
@@ -19,6 +43,12 @@ public class BestDTO {
 	}
 	public void setChartid(String chartid) {
 		this.chartid = chartid;
+	}
+	public String getId_list() {
+		return id_list;
+	}
+	public void setId_list(String id_list) {
+		this.id_list = id_list;
 	}
 	public String getTitle() {
 		return title;
@@ -33,11 +63,11 @@ public class BestDTO {
 	public void setMlike(int mlike) {
 		this.mlike = mlike;
 	}
-	public String getWeek() {
-		return week;
+	public int getPeriod() {
+		return period;
 	}
-	public void setWeek(String week) {
-		this.week = week;
+	public void setPeriod(int period) {
+		this.period = period;
 	}
 	public String getUrl() {
 		return url;

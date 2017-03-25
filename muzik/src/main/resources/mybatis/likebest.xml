@@ -9,63 +9,52 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   <select id="list" resultType="LikebestDTO" >
   
   SELECT * from m_chart
-  
-  
-<!--     SELECT chartid, title, mlike, week, thumbnail, r -->
-<!-- FROM ( -->
-<!-- SELECT chartid, title, mlike, week, thumbnail, rownum as r -->
-<!-- FROM ( -->
-<!--   SELECT chartid, title, mlike, week, thumbnail -->
-<!--   FROM m_chart -->
-<!--              order by week DESC, mlike DESC -->
-<!--         ) -->
-<!--     )                                                                             -->
-<!--    <![CDATA[ -->
-<!--    where r>=#{sno} and r<=#{eno} -->
-<!--    ]]> -->
+
    </select>
     <select id="llist" parameterType="int"  resultType="BestDTO">
      	SELECT *
-		from m_chart   
+		from m_chart
 		<![CDATA[                                                                        
   		where ROWNUM < #{rownum} 
    		]]>   
-		order by week DESC, mlike DESC
+		order by period DESC, mlike DESC
     </select>
     
-    <insert id="create1" parameterType="BestDTO">
-	INSERT INTO m_best(bestid, title, mlike, week, url, chartid)
-	VALUES((SELECT NVL(MAX(bestid), 0) + 1 FROM m_best),                                  
-	#{title},#{mlike}, #{week},#{url}, #{chartid})                                     
-	</insert>
+<!--     <insert id="create1" parameterType="BestDTO"> -->
+<!-- 	INSERT INTO m_best(bestid, title, mlike, period, url, chartid) -->
+<!-- 	VALUES((SELECT NVL(MAX(bestid), 0) + 1 FROM m_best),                                   -->
+<!-- 	#{title},#{mlike}, #{period}, #{url}, #{chartid})                                      -->
+<!-- 	</insert> -->
     <insert id="create" parameterType="Map">
-	INSERT INTO m_best(bestid, id_list, week)
-	VALUES((SELECT NVL(MAX(bestid), 0) + 1 FROM m_best),#{id_list},#{week})                                  
+		INSERT INTO m_best(bestid, id_list, period, chartType)
+		VALUES((SELECT NVL(MAX(bestid), 0) + 1 FROM m_best),#{id_list},#{period},#{chartType})                                  
 	</insert>
-    
-   
-   
-  
-<!--   베스트 순위 끝 -->  
-
-<!-- <select id="total" parameterType="Map" resultType="int"> -->
-<!-- 	select count(*) from m_chart -->
-<!-- 	<where> -->
-<!-- 	<choose> -->
-<!-- 	<when test="col=='grade'"> -->
-<!-- 	grade like '%'||#{word}||'%' -->
-<!-- 	</when> -->
-<!-- 	<when test="col=='title'"> -->
-<!-- 	title like '%'||#{word}||'%' -->
-<!-- 	</when> -->
-<!-- 	<when test="col=='content'"> -->
-<!-- 	content like '%'||#{word}||'%' -->
-<!-- 	</when> -->
 	
-<!-- 	</choose>	 -->
-<!-- 	</where> -->
-	
-<!-- 	</select> -->
+	<select id="bestList" parameterType="String" resultType="BestDTO">
+		select bestid,id_list,period,chartType
+		from m_best
+<!-- 		국내/해외 차트 나눌 경우  -->
+<!-- 		where chartType=#{chartType}     -->
+	</select>
+<!-- 	금주 추천곡 읽어옴 -->
+	<select id="readBest" parameterType="int" resultType="String">
+		select id_list
+		from m_best
+		where bestid=#{bestid}
+	</select>
+<!-- 	노래정보읽어옴 -->
+	<select id="readSong" parameterType="String" resultType="BestDTO">
+		select title, artist, thumbnail, url, period, mlike, chartType
+		from m_chart
+		where chartid=#{chartid}
+	</select>
 
+	<select id="readPopSong" parameterType="String" resultType="BestDTO">
+		select title, artist, thumbnail, url, period,mlike, chartType 
+		from m_popchart
+		where popchartid=#{popchartid}
+	</select>
+	
+	
       
 </mapper>
