@@ -29,6 +29,8 @@
 			$("#top_a6").css("color", "white");
 		});
 	});
+
+	
 	/* 마우스 나갈때 밑에창 닫히면서 글자색 흰색->검정 변환 */
 	$(document).ready(function() {
 		$("#flip").mouseleave(function() {
@@ -50,14 +52,14 @@
 	display: none;
 	background-color: black !important;
 	color: white !important;
-	opacity: 0.8 !important;
+	/* opacity: 0.8; */
 	width: 100%;
 }
 /* 마우스 올라갈때 화면색 검정으로 바뀌는 부분 */
 #menubar:hover, #flip:hover {
 	background-color: black;
 	color: white !important;
-	opacity: 0.8;
+	
 }
 /* 큰 제목 부분에 마우스 올라갈때 */
 #top_menu li:hover {
@@ -86,7 +88,7 @@
 	width: 100%;
 	left: 0;
 	right: 0;
-	z-index: 9999 !important;
+	z-index: 999 !important;
 	right: 0;
 	background-color: black;
 	color: white;

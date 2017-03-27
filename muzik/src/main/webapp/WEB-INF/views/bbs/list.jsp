@@ -21,6 +21,7 @@ function read(bbsid) {
 	url += "&col=${col}";
 	url += "&word=${word}";
 	url += "&nowPage=${nowPage}";
+	url += "&rbbsid=${rbbsid}";
 	location.href = url
 }
 

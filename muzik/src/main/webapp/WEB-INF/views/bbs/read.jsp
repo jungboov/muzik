@@ -42,9 +42,10 @@ $(document).on("click", "#rupdate", function() {
 	$("#updatePanel" + rbbsid).show();
 });
 
-$(function(){
+/* $(function(){
 	$("#rupdateSubmit").click(function(){
 		var rbbsid=$(this).data("rbbsid");
+		alert(rbbsid);					
 		var content=$("#rcontent").val();
 		
 		$.post("./rupdate",
@@ -65,7 +66,24 @@ $(function(){
 
 	});
 });
-
+ */
+ 
+ function updateSubmit(rbbsid) {
+		var content = $("#rcontent" + rbbsid).val();
+		$.post("./rupdate", {
+			rbbsid : rbbsid,
+			content : content,
+		}, function(data, status) {
+			if (status = "success") {
+				$("#contentPanel" + rbbsid).show();
+				$("#contentPanel" + rbbsid).html(data);
+				$("#updatePanel" + rbbsid).hide();
+			} else {
+				alert("오류");
+			}
+		});
+	}
+ 
 function updateCancel(rbbsid) {
 	$("#contentPanel" + rbbsid).show();
 	$("#updatePanel" + rbbsid).hide();
@@ -284,9 +302,9 @@ a{
   <textarea style="vertical-align: bottom;" rows="1" cols="95" name="content" ></textarea> <!-- onclick="rcheck(this)" -->
   <input class="btn btn-default btn-sm" type="submit" name="rsubmit" value="등록">
   <input type="hidden" name="bbsid" value="${dto.bbsid}">
-  <input type="hidden" name="id" value="CR7">
-  <input type="hidden" name="nowPage" value="${param.nowPage}">
+  <input type="hidden" name="id" value="갓성구">
   <input type="hidden" name="nPage" value="${nPage}">           
+  <input type="hidden" name="nowPage" value="${param.nowPage}">
   <input type="hidden" name="col" value="${param.col}">
   <input type="hidden" name="word" value="${param.word}">
   <input type="hidden" name="rbbsid" value="0">
@@ -298,29 +316,28 @@ a{
   <input type="hidden" name="nowPage" value="${param.nowPage}">
   <input type="hidden" name="nPage" value="${nPage}">           
   <input type="hidden" name="bbsid" value="${dto.bbsid}">
-  <input type="hidden" name="id" value="CR7">
+  <input type="hidden" name="id" value="갓성구">
   <input type="hidden" name="col" value="${param.col}">
   <input type="hidden" name="word" value="${param.word}">
   <input type="hidden" name="rcontent" value="${param.content}">
-  <!-- <input type="hidden" name="rbbsid" value="0"> -->
+  <input type="hidden" name="rbbsid" value="0">
+</form>
   
 <c:forEach var="rdto" items="${rlist}">
   
-  <div id="contentPanel${rdto.rbbsid}">내용: ${rdto.content}</div>
+  <h4><div id="contentPanel${rdto.rbbsid}" style="word-break: break-all;">${rdto.content}</div></h4>
   <div style="display: none;" id="updatePanel${rdto.rbbsid}" >
-	  <input style="width: 300px;" id="rcontent" type="text" value="${rdto.content}">
-	  <button class="btn btn-default btn-sm" type="submit" id="rupdateSubmit" data-rbbsid='${rdto.rbbsid}'>수정</button>
+	  <input style="width: 300px;" id="rcontent${rdto.rbbsid}" type="text" value="${rdto.content}">
+	  <button class="btn btn-default btn-sm" type="submit" onclick="updateSubmit('${rdto.rbbsid}')">수정</button>
 	  <button class="btn btn-default btn-sm" type="button" onclick="updateCancel('${rdto.rbbsid}')">취소</button>
   </div>
-  		<p style="margin-bottom: 0px;">날짜: ${rdto.cdate}</p>
-  		<p style="margin-bottom: 0px;">닉네임: ${rdto.cdate}</p>
+  		<h4><p style="margin-bottom: 0px;">날짜: ${rdto.cdate}</p></h4>
+  		<h4><p style="margin-bottom: 0px;">닉네임: ${rdto.cdate}</p></h4>
   		
-  		
-  		<a style="color: red; padding-left: 490px;" id="rupdate" data-rbbsid='${rdto.rbbsid}'>수정</a>
+  		<a style="color: red; padding-left: 660px;" id="rupdate" data-rbbsid='${rdto.rbbsid}'>수정</a>
   		<a style="color: red;" href="javascript:rdelete('${rdto.rbbsid}')">삭제</a>
 <hr>  
 </c:forEach>
-</form>
   
   
   <div class="bottom">

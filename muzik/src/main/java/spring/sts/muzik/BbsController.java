@@ -53,12 +53,11 @@ public class BbsController {
 	
 	
 	@RequestMapping("/bbs/rupdate")
-	public String rupdate(BbsReplyDTO dto, Model model ){
+	public String rupdate(BbsReplyDTO dto, Model model){
 //		public String rupdate(BbsReplyDTO dto, Model model, String col, String word, int nowPage, int nPage){
 		rdao.update(dto);
 		
 		model.addAttribute("readReply", rdao.read(dto.getRbbsid()).getContent());
-		
 		return "/bbs/replyUpdate";
 	}
 	
@@ -105,8 +104,9 @@ public class BbsController {
 		map.put("sno", sno);
 		map.put("eno", eno);
 		map.put("bbsid", bbsid);
-		
+
 		List<BbsReplyDTO> list = rdao.list(map);
+	
 		int total = rdao.total(bbsid);
 		
 		String paging = Utility.paging(total, nPage, recordPerPage, url, no, bbsid, nowPage, col, word);
