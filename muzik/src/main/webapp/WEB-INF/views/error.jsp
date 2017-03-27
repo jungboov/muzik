@@ -12,6 +12,9 @@
 } 
 </style> 
 <link href="${pageContext.request.contextPath}/css/style.css" rel="Stylesheet" type="text/css">
+
+
+
 </head>
 
 <body>
