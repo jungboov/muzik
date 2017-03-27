@@ -104,33 +104,13 @@
 					<div class="well" id="replyDiv${rdto.guestrid}">
 						<table style="margin-left: ${(rdto.indent+1) * 35}px;">
 							<tr>
-								<td class="col-sm-1" align="center">
-									<h1><span class="badge"> ${rdto.guestrid}</span></h1>
-								</td>
+								<td class="col-sm-1" align="left" rowspan="2">
+									<h1>
+										<span class="badge"> ${rdto.guestrid}</span>
+									</h1>
 
-								<td class="col-sm-5" rowspan="3" id="contentPanel${rdto.guestrid}">${rdto.content}</td>
-
-								<td class="col-sm-5" rowspan="3" id="updatePanel${rdto.guestrid}" style="display: none;">
-									<div class="row">
-										<input type="text" value="${rdto.content}" id="updateContent${rdto.guestrid}" class="col-sm-8" size="18">
-										<button type="button" class="btn btn-default" onclick="updateSubmit('${rdto.guestrid}')">수정</button>
-										<button type="button" class="btn btn-default" onclick="updateCancel('${rdto.guestrid}')">취소</button>
-									</div>
-								</td>
-
-								<td class="col-sm-5" rowspan="3" id="deletePanel${rdto.guestrid}" style="display: none;"></td>
-
-								<td class="col-sm-2">${rdto.cdate}</td>
-							</tr>
-							<tr>
-								<td class="col-sm-1" rowspan="2">
-								<td class="col-sm-2">ID : ${rdto.id}</td>
-							</tr>
-							<tr>
-								<td class="col-sm-2">
-									<a id="reReplyCreate" data-guestrid="${rdto.guestrid}">
-										<button type="button" class="btn btn-default">대댓글달기</button>
-									</a>
+									<!-- 세션의 아이디 확인해서 동일할때만 나오게끔 바꿔줘야 한다. -->
+									<%-- 
 									<br>
 									<a id="rupdate" data-rid='${rdto.guestrid}'>
 										<button type="button" class="btn btn-default btn-sm">
@@ -141,6 +121,32 @@
 										<button type="button" class="btn btn-default btn-sm">
 											<span>삭제</span>
 										</button>
+									</a>
+									 --%>
+									<!-- 세션의 아이디 확인해서 동일할때만 나오게끔 바꿔줘야 한다. -->
+
+								</td>
+
+								<td class="col-sm-5" rowspan="2" id="contentPanel${rdto.guestrid}" style="word-break: break-all;">${rdto.content}</td>
+
+								<td class="col-sm-5" rowspan="2" id="updatePanel${rdto.guestrid}" style="display: none;">
+									<div class="row">
+										<input type="text" value="${rdto.content}" id="updateContent${rdto.guestrid}" class="col-sm-8" size="18">
+										<button type="button" class="btn btn-default" onclick="updateSubmit('${rdto.guestrid}')">수정</button>
+										<button type="button" class="btn btn-default" onclick="updateCancel('${rdto.guestrid}')">취소</button>
+									</div>
+								</td>
+
+								<td class="col-sm-5" rowspan="2" id="deletePanel${rdto.guestrid}" style="display: none;"></td>
+
+								<td class="col-sm-2">${rdto.cdate}<br>
+									닉네임 : ${rdto.id}
+								</td>
+							</tr>
+							<tr>
+								<td class="col-sm-2">
+									<a id="reReplyCreate" data-guestrid="${rdto.guestrid}">
+										<button type="button" class="btn btn-default">대댓글달기</button>
 									</a>
 								</td>
 							</tr>

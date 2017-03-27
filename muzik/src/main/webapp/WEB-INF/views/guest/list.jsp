@@ -113,7 +113,7 @@
 				<c:otherwise>
 					<c:forEach items="${list}" var="dto">
 
-						<div class="well">
+						<div class="well row">
 							<table class="accGuest">
 								<tr>
 									<td class="col-sm-1" rowspan="2" align="center">
@@ -123,11 +123,11 @@
 											</a>
 										</h1>
 									</td>
-									<td class="col-sm-5" rowspan="4">${dto.content}</td>
+									<td class="col-sm-5" rowspan="3" style="word-break: break-all;">${dto.content}</td>
 									<td class="col-sm-2">작성일 : ${dto.cdate}</td>
 								</tr>
 								<tr>
-									<td class="col-sm-2">ID : ${dto.id}</td>
+									<td class="col-sm-2">닉네임 : ${dto.id}</td>
 								</tr>
 								<tr>
 									<td class="col-sm-1" align="center">
@@ -142,29 +142,22 @@
 											</button>
 										</a>
 									</td>
-									<td class="col-sm-2"></td>
-								</tr>
-								<tr>
-									<!-- 좌하단 공백을 위해 빈 td 입력 -->
-									<td class="col-sm-1" align="center" />
-
-									<td>
-										&nbsp;&nbsp;
+									<td class="col-sm-2">
 										<a id="replyRead" data-guestid="${dto.guestid}">
 											<c:set var="guestReplyCount" value="${util:guestReplyCount(dto.guestid,rdao)}" />
-											<button type="button" class="btn btn-default">
-												댓글보기
+											<button type="button" class="btn btn-default btn-sm">
+												댓글
 												<span class="badge">${guestReplyCount} </span>
 											</button>
 										</a>
 										<a id="replyCreate" data-guestid="${dto.guestid}">
-											<button type="button" class="btn btn-default">댓글달기</button>
+											<button type="button" class="btn btn-default btn-sm">댓글달기</button>
 										</a>
 									</td>
 								</tr>
 							</table>
 							<div data-guest="${dto.guestid}" style="margin-top: 15px;" align="center">
-								<!-- 댓글보기, 댓글작성창이 나올 위치 --> 
+								<!-- 댓글보기, 댓글작성창이 나올 위치 -->
 							</div>
 						</div>
 					</c:forEach>

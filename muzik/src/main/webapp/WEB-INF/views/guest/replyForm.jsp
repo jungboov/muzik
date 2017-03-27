@@ -41,7 +41,7 @@
 		<FORM name='frm' method='POST' action='./reply' enctype="multipart/form-data">
 
 			<!-- 답변을 등록하기 위해서 -->
-			<input type="hidden" name="id" value="guest" />
+			<input type="hidden" name="id" value="게스트" />
 			<input type="hidden" name="guestid" value="${dto.guestid}">
 			<input type="hidden" name="indent" value="0">
 			<input type="hidden" name="ansnum" value="0">

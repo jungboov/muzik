@@ -65,7 +65,7 @@
 
 			<FORM name='frm' method='POST' action='./create' enctype="multipart/form-data" onsubmit="return incheck(this)">
 				<!-- 나중에 로그인하면 세션의 아이디 값을 받아온다. -->
-				<input type="hidden" name="id" value="guest" />
+				<input type="hidden" name="id" value="게스트" />
 				<div class="panel panel-default">
 					<div class="panel-body">
 						<textarea rows="100" cols="145" name="content" placeholder="내용을 쓰세요."></textarea>

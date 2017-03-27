@@ -41,7 +41,7 @@
 	<div class="well" class="col-sm-8" align="center" id="reReplyCreate${guestrid}">
 		<FORM name='frm' method='POST' onsubmit="return createReReSubmit('${guestrid}')">
 			<!-- 답변을 등록하기 위해서 -->
-			<input type="hidden" name="id" value="guest" id="reReplyCreateId${guestrid}" />
+			<input type="hidden" name="id" value="게스트" id="reReplyCreateId${guestrid}" />
 			<!-- 페이지와 검색 유지를 위해서 -->
 			<input name="col" value="${col}" type="hidden" id="reReplyCreateCol${guestrid}">
 			<input name="word" value="${word}" type="hidden" id="reReplyCreateWord${guestrid}">

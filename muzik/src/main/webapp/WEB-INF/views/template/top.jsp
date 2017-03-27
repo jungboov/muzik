@@ -52,7 +52,7 @@
 	display: none;
 	background-color: black !important;
 	color: white !important;
-	opacity: 0.8 !important;
+/* 	opacity: 0.8 !important; */
 	width: 100%;
 }
 
@@ -60,7 +60,7 @@
 #menubar:hover, #flip:hover {
 	background-color: black;
 	color: white !important;
-	opacity: 0.8;
+/* 	opacity: 0.8; */
 }
 
 /* 큰 제목 부분에 마우스 올라갈때 */
@@ -97,7 +97,7 @@
 	z-index: 9999 !important;
 	background-color: black;
 	color: white;
-	opacity: 0.8;
+/* 	opacity: 0.8; */
 }
 
 .affix+.container-fluid {
@@ -105,12 +105,15 @@
 	/*    top: 50px; */
 }
 
+.navbar {
+	margin-bottom: 0px;
+}
+
 #fix {
 	position: fixed;
 	overflow: hidden;
 	width: 100%;
 	top: 0;
-	width: 100%;
 }
 
 /* 내용부분 여백 설정 */

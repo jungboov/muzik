@@ -34,7 +34,7 @@
 <body>
 	<div class="well" class="col-sm-8" align="center" id="replyCreate${guestid}">
 		<FORM name='frm' method='POST' onsubmit="return createSubmit('${guestid}')">
-			<input type="hidden" name="id" value="guest" id="replyCreateId${guestid}" />
+			<input type="hidden" name="id" value="게스트" id="replyCreateId${guestid}" />
 			<!-- 페이지와 검색 유지를 위해서 -->
 			<input name="col" value="${col}" type="hidden" id="replyCreateCol${guestid}">
 			<input name="word" value="${word}" type="hidden" id="replyCreateWord${guestid}">
