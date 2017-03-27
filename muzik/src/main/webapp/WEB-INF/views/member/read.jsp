@@ -109,13 +109,15 @@
     <input type='button' value='회원목록' onclick="mlist()">
 <%--     <%}else{ %> --%>
 		</c:when>
-		<c:otherwise>
+		<c:when test="${not empty id && grade=='Y' }">
     <input type='button' value='사진수정' onclick="updateFile()">
     <input type='button' value='패스워드 변경' onclick="updatePw()">
+    	</c:when>
 <%--     <input type='button' value='다운로드'  
            onclick="location.href='<%=root %>${pageContext.request.contextPath}/download?dir=/member/storage&filename=${dto.fname}<%=dto.getFname()%>'">  --%>
 <%--   	<%} %> --%>
-		</c:otherwise>
+		<%-- <c:otherwise>
+		</c:otherwise> --%>
 	</c:choose>
   </DIV> 
  

@@ -256,8 +256,11 @@ function join(){
 	  } else if(frm.email.value == ""){
 		  alert("값을 입력해 주세요.");
 		  frm.email.focus(); 
-		  return false;
-	
+		  return false;	
+	  }else if(frm.nickname.value == "") {
+		    alert("값을 입력해 주세요.");
+		     frm.nickname.focus(); 
+		    return false;	    
 	  }else if($('#emessage').html() !='<font color="green">사용 가능</font>'){		  
 		   /* alert($('#emessage').html()); */
 		  /* alert("이메일을 다시 확인해주세요."); */

@@ -184,8 +184,11 @@ $(document).ready(function(){
 
 <script>
 function join() {	
-	
-	if($('#nmessage').html() !='<font color="green">사용 가능</font>'){
+	if(frm.nickname.value == "") {
+	    alert("값을 입력해 주세요.");
+	     frm.nickname.focus(); 
+	    return false;	    
+	  }else	if($('#nmessage').html() !='<font color="green">사용 가능</font>'){
 		 /*  alert("아이디를 다시 확인해주세요."); */
 		 /* alert($('#idmessage').html()) */
 		  alert('3');
