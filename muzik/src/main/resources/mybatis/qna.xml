@@ -13,10 +13,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	
 	<insert id="createReply" parameterType="QnaDTO">
-        INSERT INTO m_QnA(qnaid, title, content, memberid, cdate, grpno, indent, ansnum, refno)  
+        INSERT INTO m_qna
+        (qnaid, title, content, memberid, cdate, grpno, indent, ansnum, refno)  
         VALUES((SELECT NVL(MAX(qnaid), 0) + 1 as qnaid FROM m_QnA), 
-        #{title}, #{content}, #{memberid}, sysdate, #{grpno}, #{indent}+1, #{ansnum}+1, #{qnaid});
-
+        #{title}, #{content}, #{memberid}, sysdate, #{grpno}, #{indent}+1, #{ansnum}+1, #{qnaid})
     </insert>
 	
 	<select id="read" resultType="QnaDTO" parameterType="int">

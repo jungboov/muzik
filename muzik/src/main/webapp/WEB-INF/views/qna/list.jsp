@@ -1,5 +1,4 @@
 <%@ page contentType="text/html; charset=UTF-8" %> 
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="util" uri="/ELFunctions" %>
@@ -102,7 +101,7 @@ function qread(qnaid){
         <button type="submit" class="btn btn-default btn-sm">
         <span class="glyphicon glyphicon-search"></span> 검색 </button>
 	    <button type="submit" class="btn btn-default btn-sm" onclick="location.href='./create'">
-	    <span class="glyphicon glyphicon-ok"></span> 등록 </button>
+    <span class="glyphicon glyphicon-ok"></span> 등록 </button>
       </div>
     </div>
 </div>

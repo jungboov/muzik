@@ -74,19 +74,24 @@ public class FaqController {
 
 		List<FaqDTO> list = dao.list(map);
 		int total = dao.total(map);
+		
+		FaqDTO dto = new FaqDTO();
+		String content = dto.getContent().replaceAll("\r\n", "<br>");
+		dto.setContent(content);
 
 		String paging = Utility.paging3(total, nowPage, recordPerPage, col, word);
-
+		
 		request.setAttribute("list", list);
 		request.setAttribute("nowPage", nowPage);
 		request.setAttribute("col", col);
 		request.setAttribute("word", word);
 		request.setAttribute("paging", paging);
+		request.setAttribute("content", content);
 
 		return "/faq/list";
 	}
 
-	@RequestMapping("/faq/read")
+/*	@RequestMapping("/faq/read")
 	public String read(int faqid, Model model, HttpServletRequest request, int nowPage, String col, String word)
 			throws Exception {
 		FaqDTO dto = dao.read(faqid);
@@ -95,7 +100,7 @@ public class FaqController {
 		model.addAttribute("dto", dto);
 
 		return "/faq/read";
-	}
+	}*/
 
 	@RequestMapping(value = "/faq/update", method = RequestMethod.GET)
 	public String update(int faqid, Model model) throws Exception {

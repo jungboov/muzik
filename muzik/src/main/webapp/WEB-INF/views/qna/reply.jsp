@@ -49,8 +49,8 @@
  	
 <div class="container">
   <div class="form-group">
-    <label for="id">작성자</label>
-    <input type="text" class="form-control" name="id" value="guest">
+    <label for="memberid">작성자</label>
+    <input type="text" class="form-control" name="memberid" value="guest">
     
     <label for="title">제목</label>
     <input type="text" class="form-control" name="title" value="${dto.title}">
@@ -64,7 +64,7 @@
       <button type="submit" class="btn btn-default btn-sm">
       <span class="glyphicon glyphicon-pencil"></span> 등록 </button>
       
-      <button type="submit" class="btn btn-default btn-sm" onclick="history.back()">
+      <button type="button" class="btn btn-default btn-sm" onclick="history.back()">
       <span class="glyphicon glyphicon-pencil"></span> 취소 </button>
     </div>
   </div>
