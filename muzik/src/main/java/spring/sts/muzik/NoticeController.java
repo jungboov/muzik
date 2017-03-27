@@ -21,9 +21,8 @@ import spring.utility.muzik.Utility;
 public class NoticeController {
 	@Autowired
 	private NoticeDAO ndao;
-	
-//	@RequestMapping("/admin/delete")
-	@RequestMapping("/notice/delete")
+	@RequestMapping("/admin/delete")
+//	@RequestMapping("/notice/delete")
 	public String delete(int noticeid, String col, String word, String nowPage, Model model, HttpServletRequest request){
 		
 		
@@ -151,8 +150,8 @@ public class NoticeController {
 		}
 	}
 	
-//	@RequestMapping(value="/admin/update", method= RequestMethod.GET)
-	@RequestMapping(value="/notice/update", method= RequestMethod.GET)
+	@RequestMapping(value="/admin/update", method= RequestMethod.GET)
+//	@RequestMapping(value="/notice/update", method= RequestMethod.GET)
 	public String update(int noticeid, Model model){
 		
 		try {
@@ -186,8 +185,8 @@ public class NoticeController {
 	}
 	
 	
-//	@RequestMapping(value="/admin/create", method= RequestMethod.POST)
-	@RequestMapping(value="/notice/create", method= RequestMethod.POST)
+	@RequestMapping(value="/admin/create", method= RequestMethod.POST)
+//	@RequestMapping(value="/notice/create", method= RequestMethod.POST)
 	public String create(NoticeDTO dto, HttpServletRequest request){
 		
 		boolean flag=false;
@@ -228,7 +227,7 @@ public class NoticeController {
 				if(request.getParameter("nowPage")!=null){
 					nowPage = Integer.parseInt(request.getParameter("nowPage"));
 				}
-				int recordPerPage = 5; //한페이지당 보여줄 레코드 갯수
+				int recordPerPage = 10; //한페이지당 보여줄 레코드 갯수
 				
 				//-------------DB에서 가져올 순번-------------------------
 				int sno = ((nowPage-1)*recordPerPage) +1;
@@ -256,7 +255,7 @@ public class NoticeController {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			String paging = Utility.paging3(total, nowPage, recordPerPage, col, word);
+			String paging = Utility.paging4(total, nowPage, recordPerPage, col, word);
 			
 			
 			request.setAttribute("col", col);

@@ -20,17 +20,17 @@
 <body>
 	<DIV class="title">국내차트</DIV>
 
-	<c:forEach items="${list}" var="dto" begin="0" end="4">
+	<c:forEach items="${kpopList}" var="dto" begin="0" end="4">
 
 		<table class="table table-hover" id="treeData">
 			<tr>
 				<td width="300">
 					<div class="flip">
-						<a href="${pageContext.request.contextPath}/best/read?bestid=${dto.bestid}" class="flip">${dto.bestid }</a>
+						<a href="${pageContext.request.contextPath}/best/read?bestid=${dto.bestid}" class="flip">${dto.period}</a>
 					</div>
 				</td>
 				<td width="100">${dto.id_list}</td>
-				<td width="100">${dto.period}</td>
+<%-- 				<td width="100">${dto.period}</td> --%>
 				<td width="100">${dto.chartType}</td>
 			</tr>
 		</table>
@@ -39,17 +39,17 @@
 	
 	<DIV class="title">해외차트</DIV>
 
-	<c:forEach items="${list}" var="dto" begin="0" end="4">
+	<c:forEach items="${popList}" var="dto" begin="0" end="4">
 
 		<table class="table table-hover" id="treeData">
 			<tr>
 				<td width="300">
 					<div class="flip">
-						<a href="${pageContext.request.contextPath}/best/read?bestid=${dto.bestid}" class="flip">${dto.bestid }</a>
+						<a href="${pageContext.request.contextPath}/best/read?bestid=${dto.bestid}" class="flip">${dto.period}</a>
 					</div>
 				</td>
 				<td width="100">${dto.id_list}</td>
-				<td width="100">${dto.period}</td>
+<%-- 				<td width="100">${dto.period}</td> --%>
 				<td width="100">${dto.chartType}</td>
 			</tr>
 		</table>

@@ -65,7 +65,7 @@ public class NoticeDAO implements INoticeDAO {
 	@Override
 	public int total(Map map) throws Exception {
 		
-		return 0;
+		return mybatis.selectOne("notice.total", map);
 	}
 
 	@Override

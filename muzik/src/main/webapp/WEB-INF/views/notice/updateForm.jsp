@@ -79,6 +79,7 @@ action='./update'
 onsubmit="return incheck(this)"
 enctype="multipart/form-data">
 <input name="noticeid" value="${dto.noticeid}" type="hidden">
+<input name="nowPage" value="${param.nowPage}" type="hidden">
   <TABLE width="800" class="table1">
      <TR>
       <TD class="td1">

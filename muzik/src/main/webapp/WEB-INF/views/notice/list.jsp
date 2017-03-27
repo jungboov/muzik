@@ -7,10 +7,10 @@
 <head> 
 <meta charset="UTF-8"> 
 <title></title> 
-<!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
-<!--   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<!--   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 <script type="text/javascript" src="${pageContext.request.contextPath}/ckeditor/ckeditor.js"></script>
 
@@ -40,15 +40,16 @@ $(document).ready(function() {
 // }
 
 
-function bupdate(noticeid){
+function bupdate(noticeid, nowPage){
 
-	 var allData = { "noticeid": noticeid };
+	 var allData = { "noticeid": noticeid, "nowPage": nowPage };
 	 $.ajax({
 	       	url:"${pageContext.request.contextPath}/admin/update",
 	        type:'GET',
 	        data: allData,
 	        success:function(data){
 	        	$(".panel").html(data);
+	        	$(".panel").hide();
 	        } 
 	    });
 }
@@ -130,66 +131,83 @@ word-break:break-all;
 </head> 
 <!-- *********************************************** -->
 <body>
-
-<DIV class="title">공지사항</DIV>
-<c:forEach items="${list}" var="dto">
-
-
-<div class="flip" id="t1">
-<table width="800" class="table1" id="table">
-<tr>
-<td style="text-align: left;">
-		${dto.title}
-	    <c:if test="${util:newImg(fn:substring(dto.cdate,0,10)) }">
-	    <img src="${pageContext.request.contextPath}/images/new.gif">
-	    </c:if>
-</td>
-<td style="text-align: right;  width: 70px;">관리자</td>
-<td style="text-align: right;  width: 100px;">${fn:substring(dto.cdate,0, 10)}</td>
-</tr>
-</table>
-	</div>
-	
-	
-<div class="panel">
-    <TABLE width="800" class="table1">
-    <TR>
-      	<TD colspan="3">    	
-      ${dto.content}
-  	
- 	<DIV class='bottom'>
-  
-    	<c:if test="${not empty sessionScope.id && sessionScope.grade == 'A' }">
-   			<input type='button' value='수정' onclick="bupdate('${dto.noticeid}')" />
-   			
-   			
-    		<input type='button' value='삭제' onclick="bdelete('${dto.noticeid}')">
-    	
-    	</c:if>
-	</DIV>
-      </TD>
-    </TR>
-</TABLE>
-</div>
-</c:forEach>
-<div class="panel1">
-<input type='button' value='더보기' onclick="paging()" />
-</div>
+<br><br>
+<div class="container">
+<div class="row">
+<div class="col-sm-8 col-sm-offset-2">
 
 
-	<div class="text-center">
+	<DIV>공지사항</DIV>
+	<c:forEach items="${list}" var="dto">
+		<div class="flip" id="t1">
+			<table width="600" class="table table-hover" id="table">
+				<tr>
+					<td style="text-align: left;">${dto.title} <c:if
+							test="${util:newImg(fn:substring(dto.cdate,0,10)) }">
+							<img src="${pageContext.request.contextPath}/images/new.gif">
+						</c:if>
+					</td>
+					<td style="text-align: right; width: 70px;">관리자</td>
+					<td style="text-align: right; width: 100px;">${fn:substring(dto.cdate,0, 10)}</td>
+				</tr>
+			</table>
+		</div>
+
+
+		<div class="panel">
+			<TABLE width="600" class="table table-hover">
+				<TR>
+					<TD colspan="3">${dto.content}
+
+						<DIV class='bottom'>
+
+							<c:if
+								test="${not empty sessionScope.id && sessionScope.grade == 'A' }">
+								<input type='button' value='수정'
+									onclick="bupdate('${dto.noticeid}','${param.nowPage}')" />
+
+
+								<input type='button' value='삭제'
+									onclick="bdelete('${dto.noticeid}')">
+
+							</c:if>
+						</DIV>
+					</TD>
+				</TR>
+			</TABLE>
+		</div>
+	</c:forEach>
+<br>
+<div style="text-align: center" class="flip">
+<form method="post" action="./list">
+ 	<select name="col"><!-- 검색할 컬럼명 -->
+ 		<option value="title"
+ 		<c:if test="${col=='title'}">selected='selected'</c:if>
+		>제목</option>
+ 		<option value="content"
+ 		<c:if test="${col=='content'}">selected='selected'</c:if>
+ 		>내용</option>
+ 		<option value="total">전체출력</option>
+ 	</select>
+ 	<input type="text" name="word" value="${word}"><!-- 검색어 -->
+ 	<input type="submit" value="검색">
  	<c:if test="${not empty sessionScope.id && sessionScope.grade=='A' }">
- 	<input  type='button' value='등록' onclick="location.href='${pageContext.request.contextPath}/admin/create'">
- 	</c:if>
-	</div>
-
-<!--   <DIV class='bottom'> -->
-<%--     ${paging } --%>
-<!--   </DIV> -->
+			<input type='button' value='등록'
+				onclick="location.href='${pageContext.request.contextPath}/admin/create'">
+		</c:if>
+ 	</form>
+<div class="text-center">
+	${paging }
+</div>
+</div>
 
 
  
+</div>
+</div>
+</div>
  
+<br><br>
 
 </body>
 <!-- *********************************************** -->

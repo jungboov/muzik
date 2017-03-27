@@ -3,6 +3,7 @@ package spring.model.best;
 public class BestDTO {
 	 private int bestid; 
 	 private String chartid;
+	 private String popchartid;
 	 private String title;
 	 private int mlike;
 	 private int period;
@@ -14,7 +15,13 @@ public class BestDTO {
 	 
 	 
 	 
-	 public String getArtist() {
+	 public String getPopchartid() {
+		return popchartid;
+	}
+	public void setPopchartid(String popchartid) {
+		this.popchartid = popchartid;
+	}
+	public String getArtist() {
 		return artist;
 	}
 	public void setArtist(String artist) {

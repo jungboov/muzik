@@ -38,7 +38,14 @@ public class LikebestController {
 	
 	@RequestMapping("/best/list")
 	public String llist(Model model){
-		model.addAttribute("list", bdao.list());						
+		Map kpop=new HashMap();
+		Map pop=new HashMap();
+		kpop.put("chartType", "kpop");
+		kpop.put("rownum", 5);
+		pop.put("chartType", "pop");
+		pop.put("rownum", 5);
+		model.addAttribute("kpopList", bdao.kpopList(kpop));						
+		model.addAttribute("popList", bdao.popList(pop));						
 		return "/best/list";
 	}
 	@RequestMapping("/best/read")
@@ -67,7 +74,6 @@ public class LikebestController {
 		List<BestDTO> llist = bdao.llist();
 		String id_list="";
 		for(int i=0; i<llist.size(); i++){
-			
 			id_list+=llist.get(i).getChartid();
 			if(i!=(llist.size()-1))
 				id_list+=",";
@@ -77,9 +83,12 @@ public class LikebestController {
 			
 		}
 		Map map=new HashMap();
-		map.put("id_list", id_list);
+		map.put("id_list",id_list );
+		System.out.println(map.get("id_list"));
 		map.put("period", llist.get(0).getPeriod());
+		System.out.println(map.get("period"));
 		map.put("chartType", llist.get(0).getChartType());
+		System.out.println(map.get("chartType"));
 		bdao.create(map);
 	
 		return "redirect:../";

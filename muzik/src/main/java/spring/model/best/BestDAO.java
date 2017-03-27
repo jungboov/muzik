@@ -33,9 +33,13 @@ public class BestDAO {
 		return flag;
 	}
 
-	public List<BestDTO> list() {
+	public List<BestDTO> kpopList(Map map) {
 
-		return sqlSession.selectList("likebest.bestList");
+		return sqlSession.selectList("likebest.kpopList",map);
+	}
+	public List<BestDTO> popList(Map map) {
+		
+		return sqlSession.selectList("likebest.kpopList",map);
 	}
 	public String read(int bestid){
 		
