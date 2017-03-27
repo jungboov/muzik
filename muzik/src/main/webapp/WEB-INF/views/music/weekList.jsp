@@ -59,18 +59,36 @@ button{
 .menuList{
 	padding-top:10px;
 	border-top: 2px solid black;
-
+}
+.menulist div span{
+	margin:10px;
+}
+.menuList div span:before {
+  content: "";
+  position: absolute;
+  width: 80%;
+  height: 2px;
+  bottom: 0;
+  left: 10%;
+  background-color: #6633ff;
+  visibility: hidden;
+  -webkit-transform: scaleX(0);
+  transform: scaleX(0);
+  -webkit-transition: all 0.3s ease-in-out 0s;
+  transition: all 0.3s ease-in-out 0s;
 }
 .menuList div{
-	border:2px solid gray;
+	border:1px solid black;	
 }
 .menuList div:first-child{
 	border:none;
 }
-.menuList div:hover{
-	border-bottom:2px solid blue;
+.menuList div span:hover:before{
+/* /border-bottom:2px solid blue; */
+	visibility: visible;
+    -webkit-transform: scaleX(1);
+    transform: scaleX(1);
 }
-
 </style>
 <!-- js파일 추가 -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -87,9 +105,12 @@ button{
  $(document).ready(function(){	
  	$("span.up").before("&#8593;");
  	$("span.up").css("color", "#ff471a");
+ 	$("span.up").css("font-weight", "bold");
  	$("span.down").before("&#8595;");
  	$("span.down").css("color", "#0066ff");
- 	$("span.new").css("color", "#ffd633");
+ 	$("span.down").css("font-weight", "bold");
+ 	$("span.new").css("color", "#d2d22d");
+ 	$("span.new").css("font-weight", "bold");
  });
  //버튼 이미지 처리
  $(document).ready(function(){	
@@ -98,6 +119,7 @@ button{
 	 	$("span#btn_add").prepend('<img style="width:16px;height:16px;margin-bottom:0px; margin-right:3px;" src="${pageContext.request.contextPath}/music/storage/plus.png" />');
 	 	$("span#btn_inven").prepend('<img style="width:16px;height:16px;margin-bottom:0px; margin-right:3px;" src="${pageContext.request.contextPath}/music/storage/inven.png" />');	 	
 	 	$("span#btn_close").prepend('<img style="width:16px;height:16px;margin-bottom:0px; margin-right:3px;" src="${pageContext.request.contextPath}/music/storage/close.png" />');
+	 	$("#chart1 span:first-child").prepend('<img style="width:16px;height:auto;margin-bottom:0px; margin-right:3px; margin-top:-5px;" src="${pageContext.request.contextPath}/music/storage/this.png" />');
  });
 //  //리스트안에 뮤비hover할 때 버튼 이미지 처리
 //  $(document).ready(function(){	
@@ -507,7 +529,6 @@ $(function(){
 		var selected = $(this).find('option:selected');
 		var url="./weekList";
 		url+="?period="+period;
-		url+="&chartType=kpop";
 		if(selected.data("change")=="yes"){		
 			location.href=url;
 		}else{
@@ -558,8 +579,8 @@ $(function(){
 <div class="container ">
 <div class="w3-center row menuList w3-xlarge w3-center">
 	<div class="col-sm-3"></div>
-	<div id="chart1" class="col-sm-3">국내 주간차트</div>
-	<div id="chart2" class="col-sm-3">해외 주간차트</div>
+	<div id="chart1" class="col-sm-3"><span><b>국내 주간</b></span></div>
+	<div id="chart2" class="col-sm-3"><span><b>해외 주간</b></span></div>
 	
 </div>
 <br>
