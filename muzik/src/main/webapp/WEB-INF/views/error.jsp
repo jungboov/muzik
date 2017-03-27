@@ -12,12 +12,12 @@
 } 
 </style> 
 <link href="${pageContext.request.contextPath}/css/style.css" rel="Stylesheet" type="text/css">
-</head> 
-<!-- *********************************************** -->
-<body>
 
-<!-- *********************************************** -->
- 
+
+
+</head>
+
+<body>
 
 <DIV class="content">
 	데이터 베이스 처리 중 오류 발생.<br>
@@ -29,10 +29,5 @@
     <input type='button' value='다시시도' onclick="history.back()">
   </DIV>
 
- 
- 
-<!-- *********************************************** -->
-
 </body>
-<!-- *********************************************** -->
 </html> 

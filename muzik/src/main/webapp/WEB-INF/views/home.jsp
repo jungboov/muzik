@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=utf-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <c:choose>
+
 	<c:when test="${empty sessionScope.id}">
 		<c:set var="str">
 			Hello! it's party time ^^;;	
@@ -14,6 +15,7 @@
 		</c:set>	
 	</c:otherwise>
 </c:choose>
+
 <html>
 
 <script	src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
@@ -22,6 +24,11 @@
 
 
 <head>
+
+
+    <title>Home</title>
+<style type="text/css"> 
+
 </head>
 <style>
     #element_to_pop_up, #element_to_pop_up1, #element_to_pop_up2, #element_to_pop_up3, #element_to_pop_up4, #element_to_pop_up5 {
@@ -55,6 +62,7 @@
 </style>
 
 <body>
+
   <%--  <input type="button" value="로그인" onclick="location.href='${pageContext.request.contextPath }/member/login'">
    <input type="button" value="회원가입" onclick="location.href='${pageContext.request.contextPath }/member/create'">
     <input type="button" value="로그아웃" onclick="location.href='${pageContext.request.contextPath }/member/logout'">
@@ -99,6 +107,7 @@
     
   <br><br>
 ${str}
+
 
 </body>
 </html>

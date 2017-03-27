@@ -2,8 +2,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="root" value="${pageContext.request.contextPath}" />
 <%
+
 	String id = (String) session.getAttribute("id");
 	String grade = (String) session.getAttribute("grade");
+
 %>
 <!DOCTYPE html>
 <html>
@@ -17,6 +19,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script>
+
 	/* 마우스 올라갈때 밑에창 열리면서 글자색 검정->흰색 변환 */
 	$(document).ready(function() {
 		$("#flip").mouseenter(function() {
@@ -363,3 +366,4 @@
 	</div>
 
 	<div class="main1 container-fluid">
+
