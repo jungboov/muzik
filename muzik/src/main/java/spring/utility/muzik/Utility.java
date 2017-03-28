@@ -13,6 +13,8 @@ import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import spring.model.guestbook.GuestReplyDAO;
+
 //import spring.model.IReplyDAO;
 
 public class Utility {
@@ -396,9 +398,9 @@ public class Utility {
 			return str.toString();
 		}
 	 
-//	    public static int rcount(int bbsno,IReplyDAO rdao){
-//	          return rdao.rcount(bbsno);
-//	     }
+		public static int rcount(int guestid, GuestReplyDAO rdao) {
+			return rdao.rcount(guestid);
+		}
 	    
 
 }
