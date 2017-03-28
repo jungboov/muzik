@@ -55,7 +55,7 @@
 	<div class="container">
 		<!-- *********************************************** -->
 		<h2>
-			<a href="./list?col=&word=&nowPage=1">
+			<a href="./list?col=&word=&nowPage=1" style="color: black;">
 				<span class="glyphicon glyphicon-list-alt h2_span"></span>
 				방명록
 			</a>
