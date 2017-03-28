@@ -8,16 +8,10 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.web.multipart.MultipartFile;
-
-import spring.model.guestbook.GuestDAO;
-import spring.model.guestbook.GuestReplyDAO;
-import spring.model.guestbook.GuestReplyDTO;
 
 //import spring.model.IReplyDAO;
 
@@ -402,9 +396,9 @@ public class Utility {
 			return str.toString();
 		}
 	 
-		public static int rcount(int guestid, GuestReplyDAO rdao) {
-			return rdao.rcount(guestid);
-		}
+//	    public static int rcount(int bbsno,IReplyDAO rdao){
+//	          return rdao.rcount(bbsno);
+//	     }
 	    
 
 }

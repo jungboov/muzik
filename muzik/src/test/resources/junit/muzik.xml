@@ -12,7 +12,17 @@
     p:url="jdbc:oracle:thin:@172.16.3.7:1521:XE" 
     p:username="muzik"  
     p:password="1234"  
-    /> 
+    />
+    
+<!--     <bean id="dataSource"  -->
+<!--     destroy-method="close" -->
+<!--     class="org.apache.commons.dbcp.BasicDataSource"  -->
+<!--     p:driverClassName="oracle.jdbc.driver.OracleDriver"  -->
+<!--     p:url="jdbc:oracle:thin:@localhost:1521:XE"  -->
+<!--     p:username="jungboov"   -->
+<!--     p:password="jb861231"   -->
+<!--     /> -->
+    
     <!-- MyBatis SQL 실행 클래스  --> 
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource" />
@@ -25,14 +35,9 @@
         <constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory" />
     </bean>
     
-
-    <bean id="gdao" class="spring.model.guestbook.GuestDAO" p:sqlSession-ref="sqlSession" />
-	<bean id="grdao" class="spring.model.guestbook.GuestReplyDAO" p:sqlSession-ref="sqlSession" />
-
     <!-- TEST를 위한 DAO 경로추가 -->
     <bean id="fdao" class="spring.model.faq.FaqDAO" p:mybatis-ref="sqlSession"/>
     <bean id="qdao" class="spring.model.qna.QnaDAO" p:mybatis-ref="sqlSession"/>
-
     
     
 </beans>
