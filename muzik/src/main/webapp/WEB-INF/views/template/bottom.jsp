@@ -3,7 +3,7 @@
 <c:set var="root" value="${pageContext.request.contextPath}" />
 
 </div>
-
+ 
 <style type="text/css">
  a:link {text-decoration: none; color: #FFFFFF;}
  a:visited {text-decoration: none; color: #FFFFFF;}
@@ -159,7 +159,7 @@
       </a>
     </div>
         
-</footer>
+</footer> 
 
 <!-- End page content -->
 </html>

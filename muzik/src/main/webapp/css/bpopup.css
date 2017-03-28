@@ -1,0 +1,27 @@
+#element_to_pop_up, #element_to_pop_up1, #element_to_pop_up2, #element_to_pop_up3, #element_to_pop_up4, #element_to_pop_up5 {
+        background-color: #fff;
+        border-radius: 15px;
+        color: #000;
+        display: none;
+        padding: 20px;
+        min-width: 400px;
+        min-height: 400px;
+    }
+
+    .b-close {
+        cursor: pointer;
+        position: absolute;
+        right: 10px;
+        top: 5px;
+    }
+    iframe{ 
+    min-width: 600px;
+    min-height: 400px;
+    } 
+      
+    span.button.b-close {
+    position: absolute;
+    top: 5px;
+    right: 8px;
+    cursor:pointer;
+    }
