@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="guest">
+
+	<select id="read" resultType="GuestDTO" parameterType="int">
+		SELECT
+		guestid, id, content, cdate FROM m_guest WHERE guestid = #{guestid}
+	</select>
+
+	<!-- M_guestreply 에서 guestid를 외래키로 가져간 댓글의 갯수 카운트. 이걸보고 글에 댓글이 있는지 확인해서 댓글이
+	있는 글 삭제를 방지할수 있다 -->
+	<select id="checkRefno" parameterType="int" resultType="int">
+		select
+		count(guestid) from M_guestreply where guestid = #{guestid}
+	</select>
+
+	<delete id="delete" parameterType="int">
+		delete from m_guest where
+		guestid = #{guestid}
+	</delete>
+
+	<update id="update" parameterType="GuestDTO">
+		UPDATE m_guest SET
+		content=#{content} WHERE guestid = #{guestid}
+	</update>
+
+	<update id="create" parameterType="GuestDTO">
+		INSERT INTO m_guest(guestid,
+		id, content, cdate)
+		VALUES((SELECT NVL(MAX(guestid), 0) + 1 as guestid
+		FROM m_guest), #{id}, #{content}, sysdate)
+	</update>
+
+	<select id="total" parameterType="Map" resultType="int">
+		select count(*) from m_guest
+		<where>
+			<choose>
+				<when test="col =='id'">
+					id like '%'||#{word}||'%'
+				</when>
+				<when test="col =='content'">
+					and content like '%'||#{word}||'%'
+				</when>
+			</choose>
+		</where>
+	</select>
+
+	<select id="list" resultType="GuestDTO" parameterType="Map">
+		SELECT guestid, id, content, to_char(cdate, 'yy-mm-dd HH24:MI')
+		cdate,
+		r
+		FROM (
+		SELECT guestid, id, content, cdate, rownum as r
+		FROM (
+		SELECT
+		guestid, id, content, cdate FROM m_guest
+		<where>
+			<choose>
+				<when test="col=='id'">
+					and id like '%'||#{word}||'%'
+				</when>
+				<when test="col=='content'">
+					and content like '%'||#{word}||'%'
+				</when>
+			</choose>
+		</where>
+		ORDER BY guestid DESC
+		)
+		)                                                                            
+   <![CDATA[                                                                        
+   where r>=#{sno} and r<=${eno}  
+   ]]>
+	</select>
+
+</mapper>
+
+<!-- 쓸지 안쓸지 몰라서 일단은 놔둔것들. -->
+
+<!-- <select id="mgbookreplylist" resultType="GuestDTO" parameterType="Map"> 
+	SELECT no, id, content, to_char(wdate, 'yy-mm-dd HH24:MI') wdate, grpno, 
+	indent, ansnum, r FROM ( SELECT no, id, content, wdate, grpno, indent, ansnum, 
+	rownum as r FROM ( SELECT no, id, content, wdate, grpno, indent, ansnum FROM 
+	mgbook ORDER BY ansnum ASC ) ) <![CDATA[ where grpno=#{grpno} and indent!=0 
+	]]> </select> -->
+
+<!-- <select id="mgbookreplycount" resultType="int" parameterType="int"> 
+	select count(*) from mgbook where grpno=#{grpno} and indent!=0 </select> -->
+
+
+<!-- <select id="readReply" resultType="GuestDTO" parameterType="int"> select 
+	no, grpno, indent, ansnum from mgbook where no = #{no} </select> -->
+
+<!-- <update id="upAnsnum" parameterType="Map"> update mgbook set ansnum 
+	= ansnum + 1 where grpno = #{grpno} and ansnum > #{ansnum} </update> -->
+
+<!-- <insert id="createReply" parameterType="GuestDTO"> INSERT INTO mgbook(no, 
+	id, content, wdate, grpno, indent, ansnum, refno) VALUES((SELECT NVL(MAX(no), 
+	0)+ 1 as no FROM mgbook), #{id}, #{content}, sysdate, #{grpno}, #{indent}+1, 
+	#{ansnum}+1, #{no}) </insert> -->
+
+<!-- 나중에 아이디 체크로 바꿔서 쓸수있을거 같다. <select id="passCheck" parameterType="Map" 
+	resultType="int"> SELECT COUNT(no) as cnt FROM mgbook WHERE no=#{no} AND 
+	passwd=#{passwd} </select> -->
