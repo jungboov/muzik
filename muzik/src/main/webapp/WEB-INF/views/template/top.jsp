@@ -77,7 +77,6 @@
 	display: none;
 	background-color: black !important;
 	color: white !important;
-	opacity: 0.8 !important;
 	width: 100%;
 }
 
@@ -85,7 +84,6 @@
 #menubar:hover, #flip:hover {
 	background-color: black;
 	color: white !important;
-	opacity: 0.8;
 }
 
 /* 큰 제목 부분에 마우스 올라갈때 */
@@ -153,27 +151,27 @@
 				<ul style="list-style-type: none" id="top_menu">
 					<li class="w3-col m2">
 						<a id="top_a1" class="top_a" href="#">
-							<span class="w3-border-0">item1</span>
+							<span class="w3-border-0">국내차트</span>
 						</a>
 					</li>
 					<li class="w3-col m2">
 						<a id="top_a2" class="top_a" href="#">
-							<span class="w3-border-0">item2</span>
+							<span class="w3-border-0">해외차트</span>
 						</a>
 					</li>
 					<li class="w3-col m2">
 						<a id="top_a3" class="top_a" href="#">
-							<span class="w3-border-0">item3</span>
+							<span class="w3-border-0">자유게시판</span>
 						</a>
 					</li>
 					<li class="w3-col m2">
 						<a id="top_a4" class="top_a" href="#">
-							<span class="w3-border-0">item4</span>
+							<span class="w3-border-0">방명록</span>
 						</a>
 					</li>
 					<li class="w3-col m2">
 						<a id="top_a5" class="top_a" href="${root}/guest/list?col=&word=&nowPage=1">
-							<span class="w3-border-0">방명록</span>
+							<span class="w3-border-0">고객지원센터</span>
 						</a>
 					</li>
 					<li class="w3-col m2">
@@ -316,7 +314,7 @@
 										<span class="w3-border-0">F&G 회원가입</span>
 									</a>
 								</li>
-								<li>
+								<li>    
 									<a class="w3-text-white" href="#" id="my-button2">
 										<span class="w3-border-0">일반회원 로그인</span>
 									</a>
