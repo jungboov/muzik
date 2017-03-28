@@ -14,6 +14,7 @@ import java.util.List;
 import org.springframework.web.multipart.MultipartFile;
 
 import spring.model.iReplyDAO;
+import spring.model.bbsReply.BbsReplyDAO;
 import spring.model.guestbook.GuestReplyDAO;
 
 //import spring.model.IReplyDAO;
