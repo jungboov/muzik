@@ -25,8 +25,14 @@
         <constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory" />
     </bean>
     
+
     <bean id="gdao" class="spring.model.guestbook.GuestDAO" p:sqlSession-ref="sqlSession" />
 	<bean id="grdao" class="spring.model.guestbook.GuestReplyDAO" p:sqlSession-ref="sqlSession" />
+
+    <!-- TEST를 위한 DAO 경로추가 -->
+    <bean id="fdao" class="spring.model.faq.FaqDAO" p:mybatis-ref="sqlSession"/>
+    <bean id="qdao" class="spring.model.qna.QnaDAO" p:mybatis-ref="sqlSession"/>
+
     
     
 </beans>

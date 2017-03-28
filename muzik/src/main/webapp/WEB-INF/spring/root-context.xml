@@ -13,7 +13,8 @@
     p:url="jdbc:oracle:thin:@172.16.3.7:1521:XE" 
     p:username="muzik"  
     p:password="1234"  
-    /> 
+    />
+    
     <!-- MyBatis SQL 실행 클래스  --> 
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource" />
@@ -38,6 +39,8 @@
             <list> 
                 <value>/WEB-INF/spring/tilesMember.xml</value>
                 <value>/WEB-INF/spring/tilesGuest.xml</value>
+                <value>/WEB-INF/spring/tilesFaq.xml</value>
+                <value>/WEB-INF/spring/tilesQna.xml</value>
             </list> 
         </property> 
     </bean>  
