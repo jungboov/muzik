@@ -44,7 +44,7 @@ public class AdminLoginCheckFilter implements Filter {
         } else {
             // �α����� �ȵǾ��ٸ� �α��� �������� �̵�
             RequestDispatcher dispatcher = 
-                request.getRequestDispatcher("/member/login");
+                request.getRequestDispatcher("/member/admin_login");
             dispatcher.forward(request, response);
         }
     }

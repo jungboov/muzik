@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE  tiles-definitions PUBLIC 
+    "-//Aapche Software Foundation//DTD Tiles Configuration 2.0//EN" 
+    "http://tiles.apache.org/dtds/tiles-config_2_0.dtd"> 
+
+<tiles-definitions> 
+
+	<definition name="/qna/list" extends="main"> 
+        <put-attribute name="title" value="QnA 목록" ></put-attribute> 
+        <put-attribute name="body" value="/WEB-INF/views/qna/list.jsp" /> 
+    </definition>   
+     
+    <definition name="/qna/create" extends="main"> 
+        <put-attribute name="title" value="QnA 등록" ></put-attribute> 
+        <put-attribute name="body" value="/WEB-INF/views/qna/create.jsp" /> 
+    </definition>
+    
+    <definition name="/qna/reply" extends="main"> 
+        <put-attribute name="title" value="QnA 답변" ></put-attribute> 
+        <put-attribute name="body" value="/WEB-INF/views/qna/reply.jsp" /> 
+    </definition>
+    
+    <definition name="/qna/read" extends="main"> 
+        <put-attribute name="title" value="QnA 조회" ></put-attribute> 
+        <put-attribute name="body" value="/WEB-INF/views/qna/read.jsp" /> 
+    </definition> 
+     
+    <definition name="/qna/update" extends="main"> 
+        <put-attribute name="title" value="QnA 수정" ></put-attribute> 
+        <put-attribute name="body" value="/WEB-INF/views/qna/update.jsp" /> 
+    </definition>  
+   
+</tiles-definitions> 
