@@ -28,6 +28,7 @@
 
     <title>Home</title>
 <style type="text/css"> 
+
 </head>
 <style>
     #element_to_pop_up, #element_to_pop_up1, #element_to_pop_up2, #element_to_pop_up3, #element_to_pop_up4, #element_to_pop_up5 {
@@ -39,6 +40,7 @@
         min-width: 400px;
         min-height: 400px;
     }
+
     .b-close {
         cursor: pointer;
         position: absolute;
