@@ -7,9 +7,12 @@
 <head>
 <!-- 다운로드 버튼을 위한 부분 -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <!-- 다운로드 버튼을 위한 부분 끝 -->
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>list</title>
@@ -84,25 +87,26 @@
 	<div class="container" id="container">
 		<!-- *********************************************** -->
 		<h2>
-			<a href="./list?col=&word=&nowPage=1">
-				<span class="glyphicon glyphicon-list-alt h2_span"></span>
-				방명록
+			<a href="./list?col=&word=&nowPage=1"> <span
+				class="glyphicon glyphicon-list-alt h2_span"></span> 방명록
 			</a>
 		</h2>
 		<div class="search" align="center">
 			<form method="get" action="./list">
 				<select name="col">
 					<!-- 검색할 컬럼 -->
-					<option value="id" <c:if test="${col=='id'}">selected='selected'</c:if>>작성자</option>
-					<option value="content" <c:if test="${col=='content'}">selected='selected'</c:if>>내용</option>
+					<option value="id"
+						<c:if test="${col=='id'}">selected='selected'</c:if>>작성자</option>
+					<option value="content"
+						<c:if test="${col=='content'}">selected='selected'</c:if>>내용</option>
 					<option value="total">전체</option>
-				</select>
-				<input type="text" name="word" value="${word}">
-				<input type="hidden" name="nowPage" value="${param.nowPage}">
+				</select> <input type="text" name="word" value="${word}"> <input
+					type="hidden" name="nowPage" value="${param.nowPage}">
 				<!-- 검색어 -->
 				<!-- 				<input type="submit" value="검색"> -->
 				<button type="submit" class="btn btn-default">Search</button>
-				<input type='button' value='새글 작성' class="btn btn-default" onclick="location.href='./create'">
+				<input type='button' value='새글 작성' class="btn btn-default"
+					onclick="location.href='./create'">
 			</form>
 		</div>
 		<div id="guestList">
@@ -117,7 +121,11 @@
 							<table class="accGuest">
 								<tr>
 									<td class="col-sm-1" rowspan="2" align="center">
-										<a href="javascript:read('${dto.guestid}')"> 글번호 : ${dto.guestid} </a>
+									<a href="javascript:read('${dto.guestid}')">
+											<button type="button" class="btn btn-default btn-sm">
+												<span>글번호 : ${dto.guestid}</span>
+											</button>
+									</a>
 									</td>
 									<td class="col-sm-5" rowspan="4">${dto.content}</td>
 									<td class="col-sm-2">작성일 : ${dto.cdate}</td>
@@ -126,39 +134,33 @@
 									<td class="col-sm-2">ID : ${dto.id}</td>
 								</tr>
 								<tr>
-									<td class="col-sm-1" align="center">
-										<a href="javascript:gupdate('${dto.guestid}')">
-											<input type='button' class="btn btn-default" value='수정'>
-											<br>
-										</a>
-										<a href="javascript:gdelete('${dto.guestid}')">
-											<br>
+									<td class="col-sm-1" align="center"><a
+										href="javascript:gupdate('${dto.guestid}')"> <input
+											type='button' class="btn btn-default" value='수정'> <br>
+									</a> <a href="javascript:gdelete('${dto.guestid}')"> <br>
 											<input type='button' class="btn btn-default" value='삭제'>
-										</a>
-									</td>
-									<td class="col-sm-2">
-										<c:set var="guestReplyCount" value="${util:guestReplyCount(dto.guestid,rdao)}" />
-										댓글 갯수 :
-										<span style="color: red; size: 15px;"> &nbsp;[${guestReplyCount}] </span>
-									</td>
+									</a></td>
+									<td class="col-sm-2"><c:set var="guestReplyCount"
+											value="${util:guestReplyCount(dto.guestid,rdao)}" /> 댓글 갯수 :
+										<span style="color: red; size: 15px;">
+											&nbsp;[${guestReplyCount}] </span></td>
 								</tr>
 								<tr>
 									<!-- 좌하단 공백을 위해 빈 td 입력 -->
 									<td class="col-sm-1" align="center" />
 
-									<td>
-										&nbsp;&nbsp;
-										<a id="replyRead" data-guestid="${dto.guestid}">
-											<input type='button' class="btn btn-default" value='댓글 보기'>
-										</a>
-										<a id="replyCreate" data-guestid="${dto.guestid}">
+									<td>&nbsp;&nbsp; <a id="replyRead"
+										data-guestid="${dto.guestid}"> <input type='button'
+											class="btn btn-default" value='댓글 보기'>
+									</a> <a id="replyCreate" data-guestid="${dto.guestid}">
 											<button type="button" class="btn btn-default">댓글달기</button>
-										</a>
+									</a>
 									</td>
 								</tr>
 							</table>
-							<div data-guest="${dto.guestid}" style="margin-top: 15px;" align="center">
-								<!-- 댓글보기, 댓글작성창이 나올 위치 --> 
+							<div data-guest="${dto.guestid}" style="margin-top: 15px;"
+								align="center">
+								<!-- 댓글보기, 댓글작성창이 나올 위치 -->
 							</div>
 						</div>
 					</c:forEach>
