@@ -75,9 +75,9 @@ public class FaqController {
 		List<FaqDTO> list = dao.list(map);
 		int total = dao.total(map);
 		
-		FaqDTO dto = new FaqDTO();
+		/*FaqDTO dto = new FaqDTO();
 		String content = dto.getContent().replaceAll("\r\n", "<br>");
-		dto.setContent(content);
+		dto.setContent(content);*/
 
 		String paging = Utility.paging3(total, nowPage, recordPerPage, col, word);
 		
@@ -86,7 +86,7 @@ public class FaqController {
 		request.setAttribute("col", col);
 		request.setAttribute("word", word);
 		request.setAttribute("paging", paging);
-		request.setAttribute("content", content);
+		/*request.setAttribute("content", content);*/
 
 		return "/faq/list";
 	}

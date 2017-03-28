@@ -33,8 +33,9 @@ function qread(qnaid){
 
 <body>
 
-<DIV class="title">QnA</DIV>
-
+<div class="container-fluid bg-1 text-center">
+  <h3 class="margin">고객센터</h3>
+</div>
 
 <div class="container">           
   <table class="table">
@@ -65,7 +66,7 @@ function qread(qnaid){
           <c:if test="${dto.indent>0 }">
             <img src="../images/re.jpg">
           </c:if>
-	        <a href="javascript:qread('${dto.qnaid}')">${dto.title}</a>
+	        <a href="javascript:qread('${dto.qnaid}')" style="color: black;">${dto.title}</a>
 	      <c:if test="${util:newImg(fn:substring(dto.cdate,0,10)) }">
 	        <img src="${pageContext.request.contextPath}/images/new.gif">
 	      </c:if>

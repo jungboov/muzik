@@ -96,7 +96,7 @@ function fdelete(faqid){
 <body>
 
 <div class="container-fluid bg-1 text-center">
-  <h3 class="margin">고객센터</h3>
+  <h3 class="margin">자주묻는질문</h3>
 </div>
 
 <div class="container">

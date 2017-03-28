@@ -165,12 +165,12 @@
 						</a>
 					</li>
 					<li class="w3-col m2">
-						<a id="top_a4" class="top_a" href="#">
+						<a id="top_a4" class="top_a" href="${root}/guest/list?col=&word=&nowPage=1">
 							<span class="w3-border-0">방명록</span>
 						</a>
 					</li>
 					<li class="w3-col m2">
-						<a id="top_a5" class="top_a" href="${root}/guest/list?col=&word=&nowPage=1">
+						<a id="top_a5" class="top_a" href="">
 							<span class="w3-border-0">고객지원센터</span>
 						</a>
 					</li>
@@ -255,8 +255,8 @@
 					</ul>
 					<ul class="w3-col m2" style="list-style-type: none">
 						<li>
-							<a class="w3-text-white" href="#">
-								<span class="w3-border-0">item222</span>
+							<a class="w3-text-white" href="${root}/guest/list?col=&word=&nowPage=1">
+								<span class="w3-border-0">방명록</span>
 							</a>
 						</li>
 						<li>
@@ -278,13 +278,13 @@
 					</ul>
 					<ul class="w3-col m2" style="list-style-type: none">
 						<li>
-							<a class="w3-text-white" href="${root}/guest/list?col=&word=&nowPage=1">
-								<span class="w3-border-0">방명록</span>
+							<a class="w3-text-white" href="${root}/faq/list">
+								<span class="w3-border-0">F a Q</span>
 							</a>
 						</li>
 						<li>
-							<a class="w3-text-white" href="#">
-								<span class="w3-border-0">item333</span>
+							<a class="w3-text-white" href="${root}/qna/list">
+								<span class="w3-border-0">Q n A</span>
 							</a>
 						</li>
 						<li>
