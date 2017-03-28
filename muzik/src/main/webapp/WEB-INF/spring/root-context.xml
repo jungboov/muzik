@@ -50,6 +50,7 @@
                 <value>/WEB-INF/spring/tilesMember.xml</value>
                 <value>/WEB-INF/spring/tilesFaq.xml</value>
                 <value>/WEB-INF/spring/tilesQna.xml</value>
+                <value>/WEB-INF/spring/tilesGuest.xml</value>
             </list> 
         </property> 
     </bean>  
