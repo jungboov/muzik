@@ -170,7 +170,7 @@ public class BbsController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return "/bbs/updateForm";
+		return "/bbs/update";
 	}
 	
 	@RequestMapping(value="/bbs/update", method=RequestMethod.POST)
@@ -226,7 +226,7 @@ public class BbsController {
 	
 	@RequestMapping(value="/bbs/create", method=RequestMethod.GET)
 	public String create(){
-		return "/bbs/createForm";
+		return "/bbs/create";
 	}
 	
 	
