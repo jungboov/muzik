@@ -12,7 +12,10 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/3/w3.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link href="${pageContext.request.contextPath}/css/style.css" type="text/css" rel="Stylesheet">
-
+<script	src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script type="text/javascript" src="<c:url value="/resources/js/jquery.bpopup.min.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/resources/js/other.bpopup.js"/>"></script>
+<link href="<c:url value='/css/bpopup.css'/>" rel="stylesheet">
 <script type="text/javascript">
 //댓글관련 javascript 시작//
 // no  -> bbsid의 값
@@ -217,6 +220,12 @@ a{
 
 <body>
 
+<div id="element_to_pop_up" class="content"><span class="button b-close"><span>X</span></span></div>
+<div id="element_to_pop_up1" class="content1">회원가입 창<span class="button b-close"><span>X</span></span></div>
+<div id="element_to_pop_up2" class="content2">일반 로그인 창<span class="button b-close"><span>X</span></span></div>
+<div id="element_to_pop_up3" class="content3">일반 회원가입 창<span class="button b-close"><span>X</span></span></div>
+<div id="element_to_pop_up4" class="content4">회원정보 <span class="button b-close"><span>X</span></span></div>
+<div id="element_to_pop_up5" class="content5">닉네임 수정<span class="button b-close"><span>X</span></span></div>
 
 <div class="w3-container mainPosition" id="services">
 <h2 class="iconPosition"><span class="glyphicon glyphicon-th-list"></span>_게시판</h2>
@@ -299,7 +308,7 @@ a{
  <hr>
 <div class="rcreate">
   <form name="rform" action="./rcreate" method="post" onsubmit="return input(this)"><!-- onsubmit="return input(this)" -->
-  <textarea style="vertical-align: bottom;" rows="1" cols="95" name="content" ></textarea> <!-- onclick="rcheck(this)" -->
+  <textarea style="vertical-align: bottom;" rows="1" cols="90" name="content" ></textarea> <!-- onclick="rcheck(this)" -->
   <input class="btn btn-default btn-sm" type="submit" name="rsubmit" value="등록">
   <input type="hidden" name="bbsid" value="${dto.bbsid}">
   <input type="hidden" name="id" value="갓성구">
