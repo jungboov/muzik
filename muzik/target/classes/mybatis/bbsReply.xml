@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="bbsReply">
+
+  <select id="rcount" parameterType="int" resultType="int">
+     SELECT count(*) FROM m_bbsReply
+     WHERE bbsid = #{bbsid}
+  </select>
+
+<insert id="create" parameterType="BbsReplyDTO">
+
+<selectKey keyProperty="rbbsid" resultType="int" order="BEFORE">
+	select nvl(max(rbbsid),0)+1 from m_bbsReply 
+</selectKey>
+	insert into m_bbsReply(rbbsid, content, cdate, id, bbsid)
+	values(#{rbbsid}, #{content}, sysdate, #{id}, #{bbsid}) 
+</insert>
+ 
+<select id="read" parameterType="int" resultType="BbsReplyDTO">
+	select * from m_bbsReply
+	where rbbsid = #{rbbsid}
+</select>
+ 
+<update id="update" parameterType="BbsReplyDTO">
+	update m_bbsReply
+	set content = #{content}
+	where rbbsid = #{rbbsid}
+</update>
+ 
+<delete id="delete" parameterType="int">
+	delete from m_bbsReply
+	where rbbsid = #{rbbsid}
+</delete>
+
+<delete id="bdelete" parameterType="int">
+	delete from m_bbsReply
+	where bbsid = #{bbsid}
+</delete>
+
+<select id="list" parameterType="Map" resultType="BbsReplyDTO">
+select rbbsid, content, to_char(cdate,'yyyy-mm-dd') cdate, id, bbsid, r
+FROM(
+	select rbbsid, content, cdate, id, bbsid, rownum r
+	FROM(
+		select rbbsid, content, cdate, id, bbsid
+		from m_bbsReply
+		where bbsid = #{bbsid}
+		order by rbbsid DESC
+  		 )
+	<![CDATA[
+	)WHERE r >= #{sno} and r <= #{eno}
+	]]>
+</select>
+ 
+<select id="total" resultType="int" parameterType="int">
+	select count(*) from m_bbsReply
+	where bbsid=#{bbsid}
+</select>
+ 
+</mapper>

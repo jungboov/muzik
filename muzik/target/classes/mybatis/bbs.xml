@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="bbs">
+
+
+	<select id="pageRead" parameterType="int" resultType="Map">
+		SELECT * FROM
+		(
+		select
+		lag(bbsid,1,bbsid) over (order by bbsid) pre_bbsid1,
+		bbsid,
+		lead(bbsid,1,bbsid) over (order by bbsid) nex_bbsid1
+		from(
+			select bbsid
+			from m_bbs
+			order by bbsid DESC
+			)
+		)
+		WHERE bbsid = #{bbsid}
+	</select>
+
+
+	<update id="upViewcnt" parameterType="int">
+		update m_bbs
+		set viewcnt = viewcnt + 1
+		where bbsid = #{bbsid}
+	</update>
+	
+	<delete id="delete" parameterType="int">
+		delete from m_bbs 
+		where bbsid = #{bbsid}
+	</delete>
+	
+	<update id="update" parameterType="BbsDTO">
+		update m_bbs 
+		set title=#{title}, content=#{content}
+		<if test="filesize > 0">
+			,filename = #{filename},
+			filesize = #{filesize}
+		</if>	
+		where bbsid = #{bbsid}
+	</update>
+
+	<select id="total" parameterType="Map" resultType="int">
+		select count(*) from m_bbs
+		<where>
+			<choose>
+			<when test="col=='id'">
+			 id like '%'||#{word}||'%'
+			</when>				
+			<when test="col=='title'">
+			 title like '%'||#{word}||'%'
+			</when>				
+			<when test="col=='content'">
+			 content like '%'||#{word}||'%'
+			</when>				
+			</choose>
+		</where>
+	</select>
+	
+	
+	<insert id="create" parameterType="BbsDTO" >
+		insert into m_bbs(bbsid, title, content, id, cdate, filename, filesize)
+		VALUES((SELECT NVL(MAX(bbsid), 0) + 1 as bbsid FROM m_bbs),
+		 #{title}, #{content}, #{id}, sysdate, #{filename}, #{filesize})                                    
+	</insert>
+	
+	<select id="list" resultType="BbsDTO" parameterType="Map">
+		SELECT bbsid, title, content, id, viewcnt, cdate, filename, r
+		FROM (
+			SELECT bbsid, title, content, id, viewcnt, cdate, filename, rownum r
+			FROM (
+				SELECT bbsid, title, content, id, viewcnt, cdate, filename
+				FROM m_bbs
+		<where>
+			<choose>
+				<when test="col=='id'">
+					id like '%'||#{word}||'%'
+				</when>
+				<when test="col=='title'">
+					title like '%'||#{word}||'%'
+				</when>
+				<when test="col=='content'">
+					content like '%'||#{word}||'%'
+				</when>
+			</choose>
+		</where>
+		ORDER BY bbsid DESC
+			)
+		)                                                                            
+   <![CDATA[                                                                        
+   where r>=#{sno} and r<=${eno}  
+   ]]>
+	</select>
+
+	<select id="read" resultType="BbsDTO" parameterType="int">
+		SELECT bbsid, title, content, id, cdate,  viewcnt, filename
+		FROM m_bbs
+		WHERE bbsid = #{bbsid}
+	</select>
+
+</mapper>
