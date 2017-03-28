@@ -160,7 +160,7 @@
 						</a>
 					</li>
 					<li class="w3-col m2">
-						<a id="top_a3" class="top_a" href="#">
+						<a id="top_a3" class="top_a" href="${root}/bbs/list?col=&word=&nowPage=1">
 							<span class="w3-border-0">자유게시판</span>
 						</a>
 					</li>
