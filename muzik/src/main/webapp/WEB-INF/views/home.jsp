@@ -21,13 +21,13 @@
 <script	src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/jquery.bpopup.min.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/home.bpopup.js"/>"></script>
-
+<link href="<c:url value='/css/bpopup.css'/>" rel="stylesheet"> 
 
 <head>
 
 
     <title>Home</title>
-<style type="text/css"> 
+<!-- <style type="text/css"> 
     #element_to_pop_up, #element_to_pop_up1, #element_to_pop_up2, #element_to_pop_up3, #element_to_pop_up4, #element_to_pop_up5 {
         background-color: #fff;
         border-radius: 15px;
@@ -56,7 +56,7 @@
     cursor:pointer;
     }
      
-</style>
+</style> -->
 </head>
 
 <body>

@@ -29,6 +29,13 @@
 	}
 </script>
 
+<script	src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script type="text/javascript" src="<c:url value="/resources/js/jquery.bpopup.min.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/resources/js/other.bpopup.js"/>"></script>
+
+<link href="<c:url value='/css/bpopup.css'/>" rel="stylesheet">
+
+
 
 </head> 
 <!-- *********************************************** -->
@@ -37,6 +44,16 @@
 <!-- *********************************************** -->
  
 <DIV class="title">회원목록</DIV>
+
+<div id="element_to_pop_up" class="content"><span class="button b-close"><span>X</span></span></div>
+<div id="element_to_pop_up1" class="content1">회원가입 창<span class="button b-close"><span>X</span></span></div>
+<div id="element_to_pop_up2" class="content2">일반 로그인 창<span class="button b-close"><span>X</span></span></div>
+<div id="element_to_pop_up3" class="content3">일반 회원가입 창<span class="button b-close"><span>X</span></span></div>
+		
+	
+<div id="element_to_pop_up4" class="content4">회원정보 <span class="button b-close"><span>X</span></span></div>
+<div id="element_to_pop_up5" class="content5">닉네임 수정<span class="button b-close"><span>X</span></span></div>
+
 
 <div class="search"> 
 	<FORM name='frm' method='POST' action='./list'>
