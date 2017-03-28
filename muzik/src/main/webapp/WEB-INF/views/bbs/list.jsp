@@ -124,7 +124,7 @@ color: navy;
       <c:choose>
       <c:when test="${empty dto.filename}">파일없음</c:when>
       <c:otherwise>
-      <a class="a" href="javascript:down('${dto.filename}')">
+      <a class="a" href="javascript:down('${dto.filename}')" style="color: black;">
       <span class='glyphicon glyphicon-save-file'></span>	
       </a>
       </c:otherwise>
