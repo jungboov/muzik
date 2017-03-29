@@ -63,21 +63,26 @@
 	});
 	/* 댓글달기 버튼을 눌렀을때 쓰임 */
 	$(document).ready(function() {
-		$("a#replyCreate").click(function() {
-			var guestid = $(this).data("guestid");
-			$.post("./replyCreate", {
-				guestid : guestid,
-				col : '${param.col}',
-				word : '${param.word}',
-				nowPage : '${param.nowPage}'
-			}, function(data, status) {
-				if (status = "success") {
-					$("div[data-guest=" + guestid + "]").show();
-					$("div[data-guest=" + guestid + "]").html(data);
+			$("a#replyCreate").click(function() {
+				if (${sessionScope.nickname == null}) {
+					alert("로그인을 하셔야 글을 쓰실수 있습니다.\n상단 메뉴바에서 로그인을 해 주세요.");
+					return false;
 				} else {
-					alert("오류");
-				}
-			});
+				var guestid = $(this).data("guestid");
+				$.post("./replyCreate", {
+					guestid : guestid,
+					col : '${param.col}',
+					word : '${param.word}',
+					nowPage : '${param.nowPage}'
+				}, function(data, status) {
+					if (status = "success") {
+						$("div[data-guest=" + guestid + "]").show();
+						$("div[data-guest=" + guestid + "]").html(data);
+					} else {
+						alert("오류");
+					}
+				});
+			}
 		});
 	});
 </script>
@@ -141,7 +146,9 @@
 				<!-- 검색어 -->
 				<!-- 				<input type="submit" value="검색"> -->
 				<button type="submit" class="btn btn-default">Search</button>
-				<input type='button' value='새글 작성' class="btn btn-default" onclick="location.href='./create'">
+				<c:if test="${sessionScope.nickname!=null }">
+					<input type='button' value='새글 작성' class="btn btn-default" onclick="location.href='./create'">
+				</c:if>
 			</form>
 		</div>
 		<div id="guestList">
@@ -155,7 +162,7 @@
 						<div class="well row">
 							<table class="accGuest">
 								<tr>
-									<td class="col-sm-1" rowspan="2" align="center">
+									<td class="col-sm-1" rowspan="2" align="left">
 										<h1>
 											<a href="javascript:read('${dto.guestid}')" style="color: black;">
 												<button type="button" class="btn btn-default btn-sm">
@@ -171,7 +178,7 @@
 									<td class="col-sm-2">닉네임 : ${dto.id}</td>
 								</tr>
 								<tr>
-									<td class="col-sm-1" align="center">
+									<td class="col-sm-1" align="left">
 										<c:if test="${sessionScope.nickname==dto.id }">
 											<a href="javascript:gupdate('${dto.guestid}')">
 												<button type="button" class="btn btn-default btn-sm">

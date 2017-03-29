@@ -69,6 +69,10 @@
 	/* 대댓글 달기 버튼을 누르면 대댓글 작성창이 나오게 하는기능 */
 	$(document).ready(function() {
 		$("a#reReplyCreate").click(function() {
+			if (${sessionScope.nickname == null}) {
+				alert("로그인을 하셔야 글을 쓰실수 있습니다.\n상단 메뉴바에서 로그인을 해 주세요.");
+				return false;
+			} else {
 			var guestrid = $(this).data("guestrid");
 			$.post("./reReplyCreate", {
 				guestrid : guestrid,
@@ -83,6 +87,7 @@
 					alert("오류");
 				}
 			});
+			}
 		});
 	});
 </script>

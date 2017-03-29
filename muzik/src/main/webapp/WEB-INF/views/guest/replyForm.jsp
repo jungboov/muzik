@@ -16,7 +16,7 @@
 <script type="text/javascript">
 	function incheck(f) {
 		if (f.id.value == "") {
-			alert("로그인을 하셔야 글을 쓰실수 있습니다.\n상단 메뉴바에서 로그인을 해 주세요.");
+			alert("로그인을 하셔야 댓글을 쓰실수 있습니다.\n상단 메뉴바에서 로그인을 해 주세요.");
 			f.id.focus();
 			return false;
 		}

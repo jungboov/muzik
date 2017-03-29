@@ -39,14 +39,6 @@
 		url += "&nowPage=${param.nowPage}";
 		location.href = url;
 	}
-	function breply() {
-		var url = "reply";
-		url += "?guestid=${dto.guestid}";
-		url += "&col=${param.col}";
-		url += "&word=${param.word}";
-		url += "&nowPage=${param.nowPage}";
-		location.href = url;
-	}
 </script>
 <link href="${pageContext.request.contextPath}/css/style.css" rel="Stylesheet" type="text/css">
 </head>
@@ -117,9 +109,11 @@
 			</TR>
 		</TABLE>
 		<DIV class='bottom' align="center">
-			<input type='button' value='새글 작성' class="btn btn-default" onclick="location.href='./create'">
 			<input type='button' value='목록 보기' class="btn btn-default" onclick="blist()">
-			<input type='button' value='댓글 작성' class="btn btn-default" onclick="breply()">
+			<c:if test="${sessionScope.nickname!=null }">
+				<input type='button' value='새글 작성' class="btn btn-default" onclick="bcreate()">
+				<input type='button' value='댓글 작성' class="btn btn-default" onclick="breply()">
+			</c:if>
 			<c:if test="${sessionScope.nickname==dto.id }">
 				<input type='button' value='수정' class="btn btn-default" onclick="bupdate()">
 				<input type='button' value='삭제' class="btn btn-default" onclick="bdelete()">

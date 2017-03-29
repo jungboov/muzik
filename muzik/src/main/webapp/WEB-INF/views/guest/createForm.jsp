@@ -35,7 +35,7 @@
 	}
 </script>
 <link href="${pageContext.request.contextPath}/css/style.css" rel="Stylesheet" type="text/css">
-<script type="text/javascript" src="${pageContext.request.contextPath}/ckeditor/ckeditor.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/ckeditor/ckeditor.js"></script> 
 <script type="text/JavaScript">
 	window.onload = function() {
 		CKEDITOR.replace('content'); // <TEXTAREA>태그 id 값
@@ -60,8 +60,7 @@
 			</a>
 			글 작성
 		</h2>
-		<DIV class="content">
-
+		<DIV>
 			<FORM name='frm' method='POST' action='./create' enctype="multipart/form-data" onsubmit="return incheck(this)">
 				<input type="hidden" name="id" value="${sessionScope.nickname}" />
 				<div class="panel panel-default">
