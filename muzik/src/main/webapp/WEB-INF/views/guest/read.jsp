@@ -11,7 +11,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>read</title>
-<script	src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/jquery.bpopup.min.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/other.bpopup.js"/>"></script>
 <link href="<c:url value='/css/bpopup.css'/>" rel="stylesheet">
@@ -52,12 +52,41 @@
 </head>
 <!-- *********************************************** -->
 <body class="board_body">
-<div id="element_to_pop_up" class="content"><span class="button b-close"><span>X</span></span></div>
-<div id="element_to_pop_up1" class="content1">회원가입 창<span class="button b-close"><span>X</span></span></div>
-<div id="element_to_pop_up2" class="content2">일반 로그인 창<span class="button b-close"><span>X</span></span></div>
-<div id="element_to_pop_up3" class="content3">일반 회원가입 창<span class="button b-close"><span>X</span></span></div>
-<div id="element_to_pop_up4" class="content4">회원정보 <span class="button b-close"><span>X</span></span></div>
-<div id="element_to_pop_up5" class="content5">닉네임 수정<span class="button b-close"><span>X</span></span></div>
+	<div id="element_to_pop_up" class="content">
+		<span class="button b-close">
+			<span>X</span>
+		</span>
+	</div>
+	<div id="element_to_pop_up1" class="content1">
+		회원가입 창
+		<span class="button b-close">
+			<span>X</span>
+		</span>
+	</div>
+	<div id="element_to_pop_up2" class="content2">
+		일반 로그인 창
+		<span class="button b-close">
+			<span>X</span>
+		</span>
+	</div>
+	<div id="element_to_pop_up3" class="content3">
+		일반 회원가입 창
+		<span class="button b-close">
+			<span>X</span>
+		</span>
+	</div>
+	<div id="element_to_pop_up4" class="content4">
+		회원정보
+		<span class="button b-close">
+			<span>X</span>
+		</span>
+	</div>
+	<div id="element_to_pop_up5" class="content5">
+		닉네임 수정
+		<span class="button b-close">
+			<span>X</span>
+		</span>
+	</div>
 	<div class="container">
 		<!-- *********************************************** -->
 
@@ -90,9 +119,11 @@
 		<DIV class='bottom' align="center">
 			<input type='button' value='새글 작성' class="btn btn-default" onclick="location.href='./create'">
 			<input type='button' value='목록 보기' class="btn btn-default" onclick="blist()">
-			<input type='button' value='답글 작성' class="btn btn-default" onclick="breply()">
-			<input type='button' value='수정' class="btn btn-default" onclick="bupdate()">
-			<input type='button' value='삭제' class="btn btn-default" onclick="bdelete()">
+			<input type='button' value='댓글 작성' class="btn btn-default" onclick="breply()">
+			<c:if test="${sessionScope.nickname==dto.id }">
+				<input type='button' value='수정' class="btn btn-default" onclick="bupdate()">
+				<input type='button' value='삭제' class="btn btn-default" onclick="bdelete()">
+			</c:if>
 		</DIV>
 		<!-- *********************************************** -->
 	</div>

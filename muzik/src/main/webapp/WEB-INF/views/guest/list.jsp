@@ -13,7 +13,7 @@
 <!-- 다운로드 버튼을 위한 부분 끝 -->
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>list</title>
-<script	src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/jquery.bpopup.min.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/other.bpopup.js"/>"></script>
 <link href="<c:url value='/css/bpopup.css'/>" rel="stylesheet">
@@ -81,16 +81,45 @@
 		});
 	});
 </script>
-<%-- <link href="${pageContext.request.contextPath}/css/style.css" rel="Stylesheet" type="text/css"> --%>
+<link href="${pageContext.request.contextPath}/css/style.css" rel="Stylesheet" type="text/css">
 </head>
 <!-- *********************************************** -->
 <body class="board_body">
-<div id="element_to_pop_up" class="content"><span class="button b-close"><span>X</span></span></div>
-<div id="element_to_pop_up1" class="content1">회원가입 창<span class="button b-close"><span>X</span></span></div>
-<div id="element_to_pop_up2" class="content2">일반 로그인 창<span class="button b-close"><span>X</span></span></div>
-<div id="element_to_pop_up3" class="content3">일반 회원가입 창<span class="button b-close"><span>X</span></span></div>
-<div id="element_to_pop_up4" class="content4">회원정보 <span class="button b-close"><span>X</span></span></div>
-<div id="element_to_pop_up5" class="content5">닉네임 수정<span class="button b-close"><span>X</span></span></div>
+	<div id="element_to_pop_up" class="content">
+		<span class="button b-close">
+			<span>X</span>
+		</span>
+	</div>
+	<div id="element_to_pop_up1" class="content1">
+		회원가입 창
+		<span class="button b-close">
+			<span>X</span>
+		</span>
+	</div>
+	<div id="element_to_pop_up2" class="content2">
+		일반 로그인 창
+		<span class="button b-close">
+			<span>X</span>
+		</span>
+	</div>
+	<div id="element_to_pop_up3" class="content3">
+		일반 회원가입 창
+		<span class="button b-close">
+			<span>X</span>
+		</span>
+	</div>
+	<div id="element_to_pop_up4" class="content4">
+		회원정보
+		<span class="button b-close">
+			<span>X</span>
+		</span>
+	</div>
+	<div id="element_to_pop_up5" class="content5">
+		닉네임 수정
+		<span class="button b-close">
+			<span>X</span>
+		</span>
+	</div>
 	<div class="container" id="container">
 		<!-- *********************************************** -->
 		<h2>
@@ -129,7 +158,9 @@
 									<td class="col-sm-1" rowspan="2" align="center">
 										<h1>
 											<a href="javascript:read('${dto.guestid}')" style="color: black;">
-												<button type="button" class="btn btn-default btn-sm"><span class="badge">${dto.guestid}</span></button>
+												<button type="button" class="btn btn-default btn-sm">
+													<span class="badge">${dto.guestid}</span>
+												</button>
 											</a>
 										</h1>
 									</td>
@@ -141,16 +172,18 @@
 								</tr>
 								<tr>
 									<td class="col-sm-1" align="center">
-										<a href="javascript:gupdate('${dto.guestid}')">
-											<button type="button" class="btn btn-default btn-sm">
-												<span>수정</span>
-											</button>
-										</a>
-										<a href="javascript:gdelete('${dto.guestid}')">
-											<button type="button" class="btn btn-default btn-sm">
-												<span>삭제</span>
-											</button>
-										</a>
+										<c:if test="${sessionScope.nickname==dto.id }">
+											<a href="javascript:gupdate('${dto.guestid}')">
+												<button type="button" class="btn btn-default btn-sm">
+													<span>수정</span>
+												</button>
+											</a>
+											<a href="javascript:gdelete('${dto.guestid}')">
+												<button type="button" class="btn btn-default btn-sm">
+													<span>삭제</span>
+												</button>
+											</a>
+										</c:if>
 									</td>
 									<td class="col-sm-2">
 										<a id="replyRead" data-guestid="${dto.guestid}">

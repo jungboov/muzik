@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,8 +15,13 @@
 <link href="<c:url value='/css/bpopup.css'/>" rel="stylesheet">
 <script type="text/javascript">
 	function incheck(f) {
+		if (f.id.value == "") {
+			alert("로그인을 하셔야 글을 쓰실수 있습니다.\n상단 메뉴바에서 로그인을 해 주세요.");
+			f.id.focus();
+			return false;
+		}
 		if (CKEDITOR.instances['content'].getData() == '') {
-			window.alert('내용이 없음');
+			window.alert('내용을 입력 해 주세요.');
 			CKEDITOR.instances['content'].focus();
 			return false;
 		}
@@ -48,10 +54,10 @@
 			답글 작성
 		</h2>
 
-		<FORM name='frm' method='POST' action='./reply' enctype="multipart/form-data">
+		<FORM name='frm' method='POST' action='./reply' enctype="multipart/form-data" onsubmit="return incheck(this)">
 
 			<!-- 답변을 등록하기 위해서 -->
-			<input type="hidden" name="id" value="게스트" />
+			<input type="hidden" name="id" value="${sessionScope.nickname}" />
 			<input type="hidden" name="guestid" value="${dto.guestid}">
 			<input type="hidden" name="indent" value="0">
 			<input type="hidden" name="ansnum" value="0">
@@ -65,7 +71,7 @@
 				<TR>
 					<TH>내용</TH>
 					<TD>
-						<textarea rows="10" cols="45" name="content" placeholder="내용을 쓰세요."></textarea>
+						<textarea rows="10" cols="45" name="content"></textarea>
 					</TD>
 				</TR>
 			</TABLE>
