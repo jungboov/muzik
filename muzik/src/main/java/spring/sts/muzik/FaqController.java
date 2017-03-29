@@ -22,7 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.sun.istack.internal.logging.Logger;
 
-import net.sf.json.JSONArray;
+
 import spring.model.faq.FaqDAO;
 import spring.model.faq.FaqDTO;
 import spring.utility.muzik.Utility;

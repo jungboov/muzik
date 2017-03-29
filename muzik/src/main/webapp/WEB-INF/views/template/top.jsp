@@ -18,45 +18,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script>
 
-	/* 마우스 올라갈때 밑에창 열리면서 글자색 검정->흰색 변환 */
-	$(document).ready(function() {
-		$("#flip").mouseenter(function() {
-			$("#panel").slideDown(1);
-			$("#top_a1").css("color", "white");
-			$("#top_a2").css("color", "white");
-			$("#top_a3").css("color", "white");
-			$("#top_a4").css("color", "white");
-			$("#top_a5").css("color", "white");
-			$("#top_a6").css("color", "white");
-		});
-	});
-
-	/* 마우스 나갈때 밑에창 닫히면서 글자색 흰색->검정 변환 */
-	$(document).ready(function() {
-		$("#flip").mouseleave(function() {
-			$("#panel").slideUp(1);
-			$("#top_a1").css("color", "black")
-			$("#top_a2").css("color", "black")
-			$("#top_a3").css("color", "black")
-			$("#top_a4").css("color", "black")
-			$("#top_a5").css("color", "black")
-			$("#top_a6").css("color", "black")
-		});
-	});
-	
-	$(document).ready(function(){
-	  if('${sessionScope.id}'!='' && '${sessionScope.grade}'=='A'){
-				
-			$("#memberlist").show();
-		} else{
-			$("#memberlist").hide();
-		}
-	});
-
-	
-</script>
 <style>
 
 /* a링크 기본글씨색 검정, 밑줄 없음 */
@@ -72,18 +34,31 @@
 
 /* 밑에창 */
 #panel {
-	margin-top: 1px;
-	padding: 20px;
+	margin-left: -20px;
+ 	padding-right:20px; 
+ 	padding-top:25px; 
+	padding-bottom: 20px;
 	display: none;
 	background-color: black !important;
 	color: white !important;
 	width: 100%;
+	z-index: 3;
+	position: absolute;
+	opacity: 0.8;
 }
-
+#panel li{
+	padding-top:4px;
+}
+#menubar{
+	font-color:black;
+	padding-top:10px;
+	padding-bottom:20px;
+}
 /* 마우스 올라갈때 화면색 검정으로 바뀌는 부분 */
-#menubar:hover, #flip:hover {
+#flip:hover {
 	background-color: black;
-	color: white !important;
+	color: white ;
+		
 }
 
 /* 큰 제목 부분에 마우스 올라갈때 */
@@ -94,11 +69,11 @@
 
 /* 큰 제목 부분 */
 #top_menu {
-	height: 70px;
+	height: 50px;
 	padding-bottom: 15px;
 	padding-top: 50px;
-	color: white !important;
-	/* border-bottom: solid 1px white; */
+/* 	 !important; */
+/* 	border-bottom: solid 1px white; */
 }
 
 .affix {
@@ -123,7 +98,6 @@
 	overflow: hidden;
 	width: 100%;
 	top: 0;
-	width: 100%;
 }
 
 /* 내용부분 여백 설정 */
@@ -131,152 +105,197 @@
 	margin-top: 10px;
 }
 </style>
-<script type="text/javascript">
-	$(document).ready(function() {
-		$('#rows').affix({
-			offset : {
-				top : 2000
-			}
-		});
+<script>
+
+/* 마우스 올라갈때 밑에창 열리면서 글자색 검정->흰색 변환 */
+$(document).ready(function() {
+	$("#flip").mouseenter(function() {
+		$("#panel").slideDown(1);
+		$("#top_a1").css("color", "white");
+		$("#top_a2").css("color", "white");
+		$("#top_a3").css("color", "white");
+		$("#top_a4").css("color", "white");
+		$("#top_a5").css("color", "white");
+		$("#top_a6").css("color", "white");
 	});
+});
+
+/* 마우스 나갈때 밑에창 닫히면서 글자색 흰색->검정 변환 */
+$(document).ready(function() {
+	$("#flip").mouseleave(function() {
+		$("#panel").slideUp(1);
+		$("#top_a1").css("color", "black")
+		$("#top_a2").css("color", "black")
+		$("#top_a3").css("color", "black")
+		$("#top_a4").css("color", "black")
+		$("#top_a5").css("color", "black")
+		$("#top_a6").css("color", "black")
+	});
+});
+
+$(document).ready(function(){
+  if('${sessionScope.id}'!='' && '${sessionScope.grade}'=='A'){
+			
+		$("#memberlist").show();
+	} else{
+		$("#memberlist").hide();
+	}
+});
+
+	
+$(document).ready(function() {
+	$('#rows').affix({
+		offset : {
+			top : 2000
+		}
+	});
+});
+$(document).ready(function() {
+	$('#menubar').hover(function(){
+		$('#top_menubar').css("backgroud-color","black");
+		$('#panel ').css("color","#d9d9d9");
+		$('#panel ').css("margin-left",0);
+
+	});
+	$('#top_menu ul li').hover(function(){
+		$(this).css("border-bottom","1px solid white");
+		
+
+	});
+	$("#menubar:hover").hover(function(){
+			$("#menubar ").css("background-color","black");
+			$("#menubar a").css("color","white");
+		},function(){
+			$("#menubar span").css("background-color","white");
+			$("#menubar a").css("color","black");
+		}
+	);
+});
 </script>
 </head>
 <body id="myHeader">
-	<div id="flip" class="w3-center w3-container ">
+	<div id="flip" class="w3-center">
 		<div class="w3-center w3-container">
-			<img src="https://s3.amazonaws.com/lg-vectors/bitmaps/583093/390385.png?logo_version=1">
+			<a  href="${pageContext.request.contextPath}"><img src="https://s3.amazonaws.com/lg-vectors/bitmaps/583093/390385.png?logo_version=1"></a>
 		</div>
-		<div id="menubar" class="w3-center w3-container" data-spy="affix" data-offset-top="43" style="padding-left: 0px; padding-right: 0px;">
+		<div id="menubar" class="w3-center " data-spy="affix" data-offset-top="43" style="list-style: none;">
 			<div class="w3-row w3-xlarge" id="row">
-				<ul style="list-style-type: none" id="top_menu">
+				<ul style="list-style-type: none;" id="top_menu">
 					<li class="w3-col m2">
-						<a id="top_a1" class="top_a" href="#">
-							<span class="w3-border-0">국내차트</span>
+						<a id="top_a1" class="top_a" style="color:black;" href="#" >
+							<span class="w3-border-0" >공지사항</span>
 						</a>
 					</li>
 					<li class="w3-col m2">
-						<a id="top_a2" class="top_a" href="#">
-							<span class="w3-border-0">해외차트</span>
+						<a id="top_a2" class="top_a" style="color:black;" href="${pageContext.request.contextPath}/music/weekList">
+							<span class="w3-border-0">차 트</span>
 						</a>
 					</li>
 					<li class="w3-col m2">
-						<a id="top_a3" class="top_a" href="${root}/bbs/list?col=&word=&nowPage=1">
+						<a id="top_a3" class="top_a" style="color:black;" href="${pageContext.request.contextPath}/bbs/list?col=&word=&nowPage=1">
 							<span class="w3-border-0">자유게시판</span>
 						</a>
 					</li>
 					<li class="w3-col m2">
-						<a id="top_a4" class="top_a" href="${root}/guest/list?col=&word=&nowPage=1">
+						<a id="top_a4" class="top_a" style="color:black;" href="${pageContext.request.contextPath}/guest/list?col=&word=&nowPage=1">
 							<span class="w3-border-0">방명록</span>
 						</a>
 					</li>
 					<li class="w3-col m2">
-						<a id="top_a5" class="top_a" href="">
+						<a id="top_a5" class="top_a" style="color:black;" href="">
 							<span class="w3-border-0">고객지원센터</span>
 						</a>
 					</li>
 					<li class="w3-col m2">
-						<a id="top_a6" class="top_a" href="#">
+						<a id="top_a6" class="top_a" style="color:black;" href="#">
 							<span class="w3-border-0">로그인</span>
 						</a>
 					</li>
 				</ul>
 			</div>
 
-			<div class="w3-center" id="panel">
-				<div class="w3-row m2">
-					<ul class="w3-col m2" style="list-style-type: none">
-						<li>
-							<a class="w3-text-white" href="#">
-								<span class="w3-border-0">item222</span>
-							</a>
-						</li>
-						<li>
-							<a class="w3-text-white" href="#">
-								<span class="w3-border-0">item333</span>
-							</a>
-						</li>
-						<li>
-							<a class="w3-text-white" href="#">
-								<span class="w3-border-0">item4444</span>
-							</a>
-						</li>
-						<li>
-							<a class="w3-text-white" href="#">
-								<span class="w3-border-0">item4444</span>
-							</a>
-						</li>
-
-					</ul>
-					<ul class="w3-col m2" style="list-style-type: none">
-						<li>
-							<a class="w3-text-white" href="#">
-								<span class="w3-border-0">item222</span>
-							</a>
-						</li>
-						<li>
-							<a class="w3-text-white" href="#">
-								<span class="w3-border-0">item333</span>
-							</a>
-						</li>
-						<li>
-							<a class="w3-text-white" href="#">
-								<span class="w3-border-0">item4444</span>
-							</a>
-						</li>
-						<li>
-							<a class="w3-text-white" href="#">
-								<span class="w3-border-0">item4444</span>
-							</a>
-						</li>
-
-					</ul>
-					<ul class="w3-col m2" style="list-style-type: none">
-						<li>
-							<a class="w3-text-white" href="#">
-								<span class="w3-border-0">item222</span>
-							</a>
-						</li>
-						<li>
-							<a class="w3-text-white" href="#">
-								<span class="w3-border-0">item333</span>
-							</a>
-						</li>
-						<li>
-							<a class="w3-text-white" href="#">
-								<span class="w3-border-0">item4444</span>
-							</a>
-						</li>
-						<li>
-							<a class="w3-text-white" href="#">
-								<span class="w3-border-0">item4444</span>
-							</a>
-						</li>
-
-					</ul>
-					<ul class="w3-col m2" style="list-style-type: none">
-						<li>
-							<a class="w3-text-white" href="${root}/guest/list?col=&word=&nowPage=1">
-								<span class="w3-border-0">방명록</span>
-							</a>
-						</li>
-						<li>
-							<a class="w3-text-white" href="#">
-								<span class="w3-border-0">item333</span>
-							</a>
-						</li>
-						<li>
-							<a class="w3-text-white" href="#">
-								<span class="w3-border-0">item4444</span>
-							</a>
-						</li>
-						<li>
-							<a class="w3-text-white" href="#">
-								<span class="w3-border-0">item4444</span>
-							</a>
-						</li>
-
-					</ul>
-					<ul class="w3-col m2" style="list-style-type: none">
+			<div class="w3-center " id="panel">
+			<ul style="list-style-type: none" id="list_menu">
+					<li class="w3-col m2">
+						<a id="top_a1" class="top_a" href="#">
+							<span class="w3-border-0">공지사항</span>
+						</a>
+					</li>
+					<li class="w3-col m2">
+						<ul  style="list-style-type: none;margin-left:-18px" >
+							<li>
+								<a class="w3-text-white" href="${pageContext.request.contextPath}/music/weekList">
+									<span class="w3-border-0">국내차트</span>
+								</a>
+							</li>
+							<li>
+								<a class="w3-text-white" href="${pageContext.request.contextPath}/music/weekPopList">
+									<span class="w3-border-0">해외차트</span>
+								</a>
+							</li>
+							<li>
+								<a class="w3-text-white" href="#">
+									<span class="w3-border-0">인기주간</span>
+								</a>
+							</li>
+							<li>
+								<a class="w3-text-white" href="#">
+									<span class="w3-border-0">item4444</span>
+								</a>
+							</li>	
+						</ul>					
+					</li>
+					<li class="w3-col m2">
+						<ul  style="list-style-type: none;margin-left:-18px">
+							<li>
+								<a class="w3-text-white" href="${pageContext.request.contextPath}/music/weekList">
+									<span class="w3-border-0">국내차트</span>
+								</a>
+							</li>
+							<li>
+								<a class="w3-text-white" href="${pageContext.request.contextPath}/music/weekPopList">
+									<span class="w3-border-0">해외차트</span>
+								</a>
+							</li>
+							<li>
+								<a class="w3-text-white" href="#">
+									<span class="w3-border-0">인기주간</span>
+								</a>
+							</li>
+							<li>
+								<a class="w3-text-white" href="#">
+									<span class="w3-border-0">item4444</span>
+								</a>
+							</li>	
+						</ul>
+					</li>
+					
+					<li class="w3-col m2">
+						<ul  style="list-style-type: none">
+							<li>
+								<a class="w3-text-white" href="${root}/guest/list?col=&word=&nowPage=1">
+									<span class="w3-border-0">방명록</span>
+								</a>
+							</li>
+							<li>
+								<a class="w3-text-white" href="#">
+									<span class="w3-border-0">item333</span>
+								</a>
+							</li>
+							<li>
+								<a class="w3-text-white" href="#">
+									<span class="w3-border-0">item4444</span>
+								</a>
+							</li>
+							<li>
+								<a class="w3-text-white" href="#">
+									<span class="w3-border-0">item4444</span>
+								</a>
+							</li>
+						</ul>
+					</li>
+					<li class="w3-col m2">
+						<ul style="list-style-type: none">
 						<li>
 							<a class="w3-text-white" href="${root}/faq/list">
 								<span class="w3-border-0">F a Q</span>
@@ -299,8 +318,9 @@
 						</li>
 
 					</ul>
-
-					<ul class="w3-col m2" style="list-style-type: none">
+					</li>
+					<li class="w3-col m2">
+						<ul  style="list-style-type: none">
 						
 						<c:choose>
 							<c:when test="${empty sessionScope.id}">
@@ -358,6 +378,12 @@
 									
 
 						</ul>
+					</li>
+				</ul>			
+					
+					
+					
+					
 				</div>
 			</div>
 		</div>

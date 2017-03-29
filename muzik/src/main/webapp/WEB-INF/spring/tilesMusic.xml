@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE  tiles-definitions PUBLIC 
+    "-//Aapche Software Foundation//DTD Tiles Configuration 2.0//EN" 
+    "http://tiles.apache.org/dtds/tiles-config_2_0.dtd"> 
+
+<tiles-definitions> 
+	<definition name="/music/weekList" extends="main"> 
+        <put-attribute name="title" value="musicList" ></put-attribute> 
+        <put-attribute name="body" value="/WEB-INF/views/music/weekList.jsp" /> 
+    </definition>   
+	<definition name="/music/weekPopList" extends="main"> 
+        <put-attribute name="title" value="musicList" ></put-attribute> 
+        <put-attribute name="body" value="/WEB-INF/views/music/weekPopList.jsp" /> 
+    </definition>   
+<!-- 	<definition name="/music/weekPlaylist" extends="main">  -->
+<!--         <put-attribute name="title" value="weekPlaylist" ></put-attribute>  -->
+<!--         <put-attribute name="body" value="/WEB-INF/views/music/weekPlaylist.jsp" />  -->
+<!--     </definition>    -->
+    <definition name="/music/wcreate" extends="main"> 
+        <put-attribute name="title" value="musicWCreate" ></put-attribute> 
+        <put-attribute name="body" value="/WEB-INF/views/music/weekCreateForm.jsp" /> 
+    </definition>   
+<!--     <definition name="/music/iframePlayer" extends="main">  -->
+<!--         <put-attribute name="title" value="musicUpdate" ></put-attribute>  -->
+<!--         <put-attribute name="body" value="/WEB-INF/views/music/iframePlayer.jsp" />  -->
+<!--     </definition>   -->
+    <definition name="/music/mysong" extends="main"> 
+        <put-attribute name="title" value="musicUpdate" ></put-attribute> 
+        <put-attribute name="body" value="/WEB-INF/views/music/mysong.jsp" /> 
+    </definition>  
+</tiles-definitions> 
+    
