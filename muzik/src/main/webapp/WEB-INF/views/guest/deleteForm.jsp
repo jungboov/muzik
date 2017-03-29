@@ -41,7 +41,7 @@
 							<br>
 						</div>
 						<DIV class='panel-body bottom' align="center">
-							<input type='button' class="btn btn-default" value='목록 보기' onclick='history.go(-1)'>
+							<input type='button' class="btn btn-default" value='뒤로 가기' onclick='history.go(-1)'>
 						</DIV>
 					</div>
 				</c:when>

@@ -13,7 +13,7 @@
 <!-- 다운로드 버튼을 위한 부분 끝 -->
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>list</title>
-<script	src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/jquery.bpopup.min.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/other.bpopup.js"/>"></script>
 <link href="<c:url value='/css/bpopup.css'/>" rel="stylesheet">
@@ -63,34 +63,68 @@
 	});
 	/* 댓글달기 버튼을 눌렀을때 쓰임 */
 	$(document).ready(function() {
-		$("a#replyCreate").click(function() {
-			var guestid = $(this).data("guestid");
-			$.post("./replyCreate", {
-				guestid : guestid,
-				col : '${param.col}',
-				word : '${param.word}',
-				nowPage : '${param.nowPage}'
-			}, function(data, status) {
-				if (status = "success") {
-					$("div[data-guest=" + guestid + "]").show();
-					$("div[data-guest=" + guestid + "]").html(data);
+			$("a#replyCreate").click(function() {
+				if (${sessionScope.nickname == null}) {
+					alert("로그인을 하셔야 글을 쓰실수 있습니다.\n상단 메뉴바에서 로그인을 해 주세요.");
+					return false;
 				} else {
-					alert("오류");
-				}
-			});
+				var guestid = $(this).data("guestid");
+				$.post("./replyCreate", {
+					guestid : guestid,
+					col : '${param.col}',
+					word : '${param.word}',
+					nowPage : '${param.nowPage}'
+				}, function(data, status) {
+					if (status = "success") {
+						$("div[data-guest=" + guestid + "]").show();
+						$("div[data-guest=" + guestid + "]").html(data);
+					} else {
+						alert("오류");
+					}
+				});
+			}
 		});
 	});
 </script>
-<%-- <link href="${pageContext.request.contextPath}/css/style.css" rel="Stylesheet" type="text/css"> --%>
+<link href="${pageContext.request.contextPath}/css/style.css" rel="Stylesheet" type="text/css">
 </head>
 <!-- *********************************************** -->
 <body class="board_body">
-<div id="element_to_pop_up" class="content"><span class="button b-close"><span>X</span></span></div>
-<div id="element_to_pop_up1" class="content1">회원가입 창<span class="button b-close"><span>X</span></span></div>
-<div id="element_to_pop_up2" class="content2">일반 로그인 창<span class="button b-close"><span>X</span></span></div>
-<div id="element_to_pop_up3" class="content3">일반 회원가입 창<span class="button b-close"><span>X</span></span></div>
-<div id="element_to_pop_up4" class="content4">회원정보 <span class="button b-close"><span>X</span></span></div>
-<div id="element_to_pop_up5" class="content5">닉네임 수정<span class="button b-close"><span>X</span></span></div>
+	<div id="element_to_pop_up" class="content">
+		<span class="button b-close">
+			<span>X</span>
+		</span>
+	</div>
+	<div id="element_to_pop_up1" class="content1">
+		회원가입 창
+		<span class="button b-close">
+			<span>X</span>
+		</span>
+	</div>
+	<div id="element_to_pop_up2" class="content2">
+		일반 로그인 창
+		<span class="button b-close">
+			<span>X</span>
+		</span>
+	</div>
+	<div id="element_to_pop_up3" class="content3">
+		일반 회원가입 창
+		<span class="button b-close">
+			<span>X</span>
+		</span>
+	</div>
+	<div id="element_to_pop_up4" class="content4">
+		회원정보
+		<span class="button b-close">
+			<span>X</span>
+		</span>
+	</div>
+	<div id="element_to_pop_up5" class="content5">
+		닉네임 수정
+		<span class="button b-close">
+			<span>X</span>
+		</span>
+	</div>
 	<div class="container" id="container">
 		<!-- *********************************************** -->
 		<h2>
@@ -112,7 +146,9 @@
 				<!-- 검색어 -->
 				<!-- 				<input type="submit" value="검색"> -->
 				<button type="submit" class="btn btn-default">Search</button>
-				<input type='button' value='새글 작성' class="btn btn-default" onclick="location.href='./create'">
+				<c:if test="${sessionScope.nickname!=null }">
+					<input type='button' value='새글 작성' class="btn btn-default" onclick="location.href='./create'">
+				</c:if>
 			</form>
 		</div>
 		<div id="guestList">
@@ -126,10 +162,12 @@
 						<div class="well row">
 							<table class="accGuest">
 								<tr>
-									<td class="col-sm-1" rowspan="2" align="center">
+									<td class="col-sm-1" rowspan="2" align="left">
 										<h1>
 											<a href="javascript:read('${dto.guestid}')" style="color: black;">
-												<button type="button" class="btn btn-default btn-sm"><span class="badge">${dto.guestid}</span></button>
+												<button type="button" class="btn btn-default btn-sm">
+													<span class="badge">${dto.guestid}</span>
+												</button>
 											</a>
 										</h1>
 									</td>
@@ -140,17 +178,19 @@
 									<td class="col-sm-2">닉네임 : ${dto.id}</td>
 								</tr>
 								<tr>
-									<td class="col-sm-1" align="center">
-										<a href="javascript:gupdate('${dto.guestid}')">
-											<button type="button" class="btn btn-default btn-sm">
-												<span>수정</span>
-											</button>
-										</a>
-										<a href="javascript:gdelete('${dto.guestid}')">
-											<button type="button" class="btn btn-default btn-sm">
-												<span>삭제</span>
-											</button>
-										</a>
+									<td class="col-sm-1" align="left">
+										<c:if test="${sessionScope.nickname==dto.id }">
+											<a href="javascript:gupdate('${dto.guestid}')">
+												<button type="button" class="btn btn-default btn-sm">
+													<span>수정</span>
+												</button>
+											</a>
+											<a href="javascript:gdelete('${dto.guestid}')">
+												<button type="button" class="btn btn-default btn-sm">
+													<span>삭제</span>
+												</button>
+											</a>
+										</c:if>
 									</td>
 									<td class="col-sm-2">
 										<a id="replyRead" data-guestid="${dto.guestid}">

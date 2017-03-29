@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 	request.setCharacterEncoding("utf-8");
 	String root = request.getContextPath();
@@ -21,35 +22,20 @@
 <title>createForm</title>
 <script type="text/javascript">
 	function incheck(f) {
-		if (f.title.value == "") {
-			alert("제목이 없음");
-			f.title.focus();
-			return false;
-		}
 		if (f.id.value == "") {
-			alert("이름이 없음");
+			alert("로그인을 하셔야 글을 쓰실수 있습니다.\n상단 메뉴바에서 로그인을 해 주세요.");
 			f.id.focus();
 			return false;
 		}
-		// 		if (f.content.value == "") {
-		// 			alert("내용이 없음");
-		// 			f.content.focus();
-		// 			return false;
-		// 		}
 		if (CKEDITOR.instances['content'].getData() == '') {
-			window.alert('내용이 없음');
+			window.alert('내용을 입력 해 주세요.');
 			CKEDITOR.instances['content'].focus();
-			return false;
-		}
-		if (f.passwd.value == "") {
-			alert("암호가 없음");
-			f.passwd.focus();
 			return false;
 		}
 	}
 </script>
 <link href="${pageContext.request.contextPath}/css/style.css" rel="Stylesheet" type="text/css">
-<script type="text/javascript" src="${pageContext.request.contextPath}/ckeditor/ckeditor.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/ckeditor/ckeditor.js"></script> 
 <script type="text/JavaScript">
 	window.onload = function() {
 		CKEDITOR.replace('content'); // <TEXTAREA>태그 id 값
@@ -74,11 +60,9 @@
 			</a>
 			글 작성
 		</h2>
-		<DIV class="content">
-
+		<DIV>
 			<FORM name='frm' method='POST' action='./create' enctype="multipart/form-data" onsubmit="return incheck(this)">
-				<!-- 나중에 로그인하면 세션의 아이디 값을 받아온다. -->
-				<input type="hidden" name="id" value="게스트" />
+				<input type="hidden" name="id" value="${sessionScope.nickname}" />
 				<div class="panel panel-default">
 					<div class="panel-body">
 						<textarea rows="100" cols="145" name="content" placeholder="내용을 쓰세요."></textarea>

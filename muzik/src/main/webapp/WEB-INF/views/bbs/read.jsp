@@ -17,33 +17,26 @@
 <script type="text/javascript" src="<c:url value="/resources/js/other.bpopup.js"/>"></script>
 <link href="<c:url value='/css/bpopup.css'/>" rel="stylesheet">
 <script type="text/javascript">
-// 댓글관련 javascript 시작//
+//댓글관련 javascript 시작//
 // no  -> bbsid의 값
 // ino -> bbsid의 식별자
-function rcheck(tarea) {
-	if ('${sessionScope.nickname}' == "") { 
-		 if (confirm("로그인후 댓글를 쓰세요")) { 
-			return false;
-		 } 
-	 } 
-} 
-/* function rcheck(tarea) {
-	if ('${sessionScope.nickname}' == "") { 
-		 if (confirm("로그인후 댓글를 쓰세요")) { 
-			var url = "../member/login";
-			url = url + "?no=${dto.bbsid}";
-			url = url + "&ino=bbsid";
-			url = url + "&nowPage=${param.nowPage}";
-			url = url + "&col=${param.col}";
-			url = url + "&word=${param.word}";
-			url = url + "&nPage=${nPage}"; 
-			url = url + "&bflag=../bbs/read";//로그인 하여 read로 이동 
-			location.href = url;
-		 } else {
-			tarea.blur();// 포커스 제거
-		} 
-	 } 
-}  */
+// function rcheck(tarea) {
+// 	if ('${sessionScope.id}' == "") { 
+// 		 if (confirm("로그인후 댓글를 쓰세요")) { 
+// 			var url = "read";
+// 			url = url + "?no=${dto.bbsid}";
+// 			url = url + "&ino=bbsid";
+// 			url = url + "&nowPage=${param.nowPage}";
+// 			url = url + "&col=${param.col}";
+// 			url = url + "&word=${param.word}";
+// 			url = url + "&nPage=${nPage}"; 
+// 			url = url + "&bflag=../bbs/read";//로그인 하여 read로 이동 
+// 			location.href = url;
+// 		 } else {
+// 			tarea.blur();// 포커스 제거
+// 		} 
+// 	 } 
+// } 
 
 ///////////////////////////////////////////////////////////////////////////
 $(document).on("click", "#rupdate", function() {
@@ -253,7 +246,7 @@ a{
      
      <TR>
       <TH>닉네임</TH>
-      <TD>${dto.id}</TD>
+      <TD>${dto.viewcnt}</TD>
       <TH class="position1">등록일</TH>
       <TD class="position2">${fn:substring(dto.cdate,0,10)}</TD>
       <TH class="position3">조회수</TH>
@@ -284,14 +277,10 @@ a{
   </TABLE>
   
   <DIV class='bottom'>
-    <input type='button' class="btn btn-default" value='목록' onclick="blist()">
-  <c:if test="${sessionScope.nickname!=null}">
     <input type='button' class="btn btn-default" value='등록' onclick="location.href='./create'">
-</c:if>
-  <c:if test="${sessionScope.nickname==dto.id}">
+    <input type='button' class="btn btn-default" value='목록' onclick="blist()">
     <input type='button' class="btn btn-default" value='수정' onclick="bupdate()">
     <input type='button' class="btn btn-default" value='삭제' onclick="bdelete('${dto.bbsid}')">
-  </c:if>
   </DIV>
   <br>
 <div style="text-align: center;">
@@ -319,10 +308,10 @@ a{
  <hr>
 <div class="rcreate">
   <form name="rform" action="./rcreate" method="post" onsubmit="return input(this)"><!-- onsubmit="return input(this)" -->
-  <textarea style="vertical-align: bottom;" rows="1" cols="90" name="content" onclick="rcheck(this)"></textarea> <!-- onclick="rcheck(this)" -->
+  <textarea style="vertical-align: bottom;" rows="1" cols="90" name="content" ></textarea> <!-- onclick="rcheck(this)" -->
   <input class="btn btn-default btn-sm" type="submit" name="rsubmit" value="등록">
   <input type="hidden" name="bbsid" value="${dto.bbsid}">
-  <input type="hidden" name="id" value="${sessionScope.nickname}">
+  <input type="hidden" name="id" value="갓성구">
   <input type="hidden" name="nPage" value="${nPage}">           
   <input type="hidden" name="nowPage" value="${param.nowPage}">
   <input type="hidden" name="col" value="${param.col}">
@@ -336,7 +325,7 @@ a{
   <input type="hidden" name="nowPage" value="${param.nowPage}">
   <input type="hidden" name="nPage" value="${nPage}">           
   <input type="hidden" name="bbsid" value="${dto.bbsid}">
-  <input type="hidden" name="id" value="${sessionScope.nickname}">
+  <input type="hidden" name="id" value="갓성구">
   <input type="hidden" name="col" value="${param.col}">
   <input type="hidden" name="word" value="${param.word}">
   <input type="hidden" name="rcontent" value="${param.content}">
@@ -345,19 +334,17 @@ a{
   
 <c:forEach var="rdto" items="${rlist}">
   
-  <div id="contentPanel${rdto.rbbsid}" style="word-break: break-all;"><h4>${rdto.content}</h4></div>
+  <h4><div id="contentPanel${rdto.rbbsid}" style="word-break: break-all;">${rdto.content}</div></h4>
   <div style="display: none;" id="updatePanel${rdto.rbbsid}" >
 	  <input style="width: 300px;" id="rcontent${rdto.rbbsid}" type="text" value="${rdto.content}">
 	  <button class="btn btn-default btn-sm" type="submit" onclick="updateSubmit('${rdto.rbbsid}')">수정</button>
 	  <button class="btn btn-default btn-sm" type="button" onclick="updateCancel('${rdto.rbbsid}')">취소</button>
   </div>
   		<h4><p style="margin-bottom: 0px;">날짜: ${rdto.cdate}</p></h4>
-  		<h4><p style="margin-bottom: 0px;">닉네임: ${rdto.id}</p></h4>
+  		<h4><p style="margin-bottom: 0px;">닉네임: ${rdto.cdate}</p></h4>
   		
-  		<c:if test="${sessionScope.nickname==rdto.id}">
   		<a style="color: red; padding-left: 660px;" id="rupdate" data-rbbsid='${rdto.rbbsid}'>수정</a>
   		<a style="color: red;" href="javascript:rdelete('${rdto.rbbsid}')">삭제</a>
-		</c:if>
 <hr>  
 </c:forEach>
   

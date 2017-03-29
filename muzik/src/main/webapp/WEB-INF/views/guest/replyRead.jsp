@@ -69,6 +69,10 @@
 	/* 대댓글 달기 버튼을 누르면 대댓글 작성창이 나오게 하는기능 */
 	$(document).ready(function() {
 		$("a#reReplyCreate").click(function() {
+			if (${sessionScope.nickname == null}) {
+				alert("로그인을 하셔야 글을 쓰실수 있습니다.\n상단 메뉴바에서 로그인을 해 주세요.");
+				return false;
+			} else {
 			var guestrid = $(this).data("guestrid");
 			$.post("./reReplyCreate", {
 				guestrid : guestrid,
@@ -83,10 +87,11 @@
 					alert("오류");
 				}
 			});
+			}
 		});
 	});
 </script>
-<%-- <link href="${pageContext.request.contextPath}/css/style.css" rel="Stylesheet" type="text/css"> --%>
+<link href="${pageContext.request.contextPath}/css/style.css" rel="Stylesheet" type="text/css">
 </head>
 <body class="board_body">
 	<div id="replyContent${dto.guestid}">
@@ -109,21 +114,19 @@
 										<span class="badge"> ${rdto.guestrid}</span>
 									</h1>
 
-									<!-- 세션의 아이디 확인해서 동일할때만 나오게끔 바꿔줘야 한다. -->
-									<%-- 
-									<br>
-									<a id="rupdate" data-rid='${rdto.guestrid}'>
-										<button type="button" class="btn btn-default btn-sm">
-											<span>수정</span>
-										</button>
-									</a>
-									<a id="rdelete" data-rid='${rdto.guestrid}'>
-										<button type="button" class="btn btn-default btn-sm">
-											<span>삭제</span>
-										</button>
-									</a>
-									 --%>
-									<!-- 세션의 아이디 확인해서 동일할때만 나오게끔 바꿔줘야 한다. -->
+									<c:if test="${sessionScope.nickname==rdto.id }">
+										<br>
+										<a id="rupdate" data-rid='${rdto.guestrid}'>
+											<button type="button" class="btn btn-default btn-sm">
+												<span>수정</span>
+											</button>
+										</a>
+										<a id="rdelete" data-rid='${rdto.guestrid}'>
+											<button type="button" class="btn btn-default btn-sm">
+												<span>삭제</span>
+											</button>
+										</a>
+									</c:if>
 
 								</td>
 

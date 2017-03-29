@@ -35,13 +35,6 @@ function down(filename) {
 	location.href = url;
 }
 
-/* function create(create) {
-	if("${sessionScope.nickname}" == ""){
-		if(confirm("로그인해주세요."))
-	}
-	return false;
-}
- */
 </script>
 <style type="text/css">
 a{
@@ -69,7 +62,7 @@ color: navy;
   
 <div class="container">
 <div class="search serchPosition">
-<form action="./list" method="post">
+<form action="./list"  method="post">
 
 <select name="col"><%-- 검색할 컬럼 --%>
 
@@ -87,17 +80,10 @@ color: navy;
 	
 	<option value="tot">전체출력</option>
 </select>
-<c:choose>
-<c:when test="${empty sessionScope.id}">
+<!-- <input type="text" name="serch" id="tag"> -->
 <input type="text" name="word" value="${word}"><%-- 검색어 --%>
-<input type="submit" class="btn btn-default" value="검색"> <h4>로그인 하셔야 글 등록이 가능합니다.</h4>
-</c:when>
-<c:otherwise>
-<input type="text" name="word" value="${word}">
 <input type="submit" class="btn btn-default" value="검색">
 <input type='button' class="btn btn-default" value='등록' onclick="location.href='./create'">
-</c:otherwise>
-</c:choose>
 </form>
 </div>
 
