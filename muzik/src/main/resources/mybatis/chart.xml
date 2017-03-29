@@ -27,7 +27,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where period = #{period} and id= #{id} and separator=#{separator}
 		order by rank
 	</select>
-	<select id="urlList" parameterType="int" resultType="Map">
+	<select id="urlList" parameterType="Map" resultType="String">
 		select url
 		from M_CHART
 		where period=#{period} and chartType=#{chartType}

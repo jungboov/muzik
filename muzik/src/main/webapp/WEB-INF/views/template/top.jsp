@@ -163,10 +163,10 @@ $(document).ready(function() {
 
 	});
 	$("#menubar:hover").hover(function(){
-			$("#menubar ").css("background-color","black");
+// 			$("#menubar ").css("background-color","black");
 			$("#menubar a").css("color","white");
 		},function(){
-			$("#menubar span").css("background-color","white");
+// 			$("#menubar span").css("background-color","white");
 			$("#menubar a").css("color","black");
 		}
 	);

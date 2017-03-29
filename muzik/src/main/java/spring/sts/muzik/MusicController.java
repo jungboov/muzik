@@ -260,6 +260,8 @@ public class MusicController {
 		map.put("chartType", chartType);
 		map.put("period", period);
 		model.addAttribute("urlList", cdao.urlList(map));
+		System.out.println("map>"+map);
+		System.out.println("list"+cdao.urlList(map));
 			
 		return "/music/iframePlayer";
 	}
@@ -282,7 +284,6 @@ public class MusicController {
 	@RequestMapping("/music/weekList")
 	public String weekList(Model model, HttpSession session,Integer period){
 		long startTime = System.currentTimeMillis();
-		session.setAttribute("id", "KingSung9");
 		String chartType="kpop";
 		
 		Map lastestMap=new HashMap();
