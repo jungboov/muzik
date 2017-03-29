@@ -28,7 +28,8 @@
 //       alert("@"+$("#url").text().replace(/(^\s*)|(\s*$)/gi, ""));
       
 //       var size=${fn:length(urlList)};
-      var urlStr="8pdsQyMm2_4";
+      var urlStr="XkPzYk6wKIU";
+//       var urlStr="8pdsQyMm2_4";
 //       for(var index=0; index<size; index++){
 //     	   urlStr+=",";
 //     	   urlStr+=${urlList.get(index)};
