@@ -163,10 +163,10 @@ $(document).ready(function() {
 
 	});
 	$("#menubar:hover").hover(function(){
-// 			$("#menubar ").css("background-color","black");
+			$("#menubar ").css("background-color","black");
 			$("#menubar a").css("color","white");
 		},function(){
-// 			$("#menubar span").css("background-color","white");
+			$("#menubar span").css("background-color","white");
 			$("#menubar a").css("color","black");
 		}
 	);
@@ -178,37 +178,37 @@ $(document).ready(function() {
 		<div class="w3-center w3-container">
 			<a  href="${pageContext.request.contextPath}"><img src="https://s3.amazonaws.com/lg-vectors/bitmaps/583093/390385.png?logo_version=1"></a>
 		</div>
-		<div id="menubar" class="w3-center " data-spy="affix" data-offset-top="43" style="list-style: none;">
+		<div id="menubar" class="w3-center w3-container" data-spy="affix" data-offset-top="43" style="padding-left: 0px; padding-right: 0px;">
 			<div class="w3-row w3-xlarge" id="row">
-				<ul style="list-style-type: none;" id="top_menu">
+				<ul style="list-style-type: none" id="top_menu">
 					<li class="w3-col m2">
-						<a id="top_a1" class="top_a" style="color:black;" href="#" >
-							<span class="w3-border-0" >공지사항</span>
+						<a id="top_a1" class="top_a" href="#">
+							<span class="w3-border-0">국내차트</span>
 						</a>
 					</li>
 					<li class="w3-col m2">
-						<a id="top_a2" class="top_a" style="color:black;" href="${pageContext.request.contextPath}/music/weekList">
-							<span class="w3-border-0">차 트</span>
+						<a id="top_a2" class="top_a" href="#">
+							<span class="w3-border-0">해외차트</span>
 						</a>
 					</li>
 					<li class="w3-col m2">
-						<a id="top_a3" class="top_a" style="color:black;" href="${pageContext.request.contextPath}/bbs/list?col=&word=&nowPage=1">
+						<a id="top_a3" class="top_a" href="${root}/bbs/list?col=&word=&nowPage=1">
 							<span class="w3-border-0">자유게시판</span>
 						</a>
 					</li>
 					<li class="w3-col m2">
-						<a id="top_a4" class="top_a" style="color:black;" href="${pageContext.request.contextPath}/guest/list?col=&word=&nowPage=1">
+						<a id="top_a4" class="top_a" href="${root}/guest/list?col=&word=&nowPage=1">
 							<span class="w3-border-0">방명록</span>
 						</a>
 					</li>
 					<li class="w3-col m2">
-						<a id="top_a5" class="top_a" style="color:black;" href="">
+						<a id="top_a5" class="top_a" href="">
 							<span class="w3-border-0">고객지원센터</span>
 						</a>
 					</li>
 					<li class="w3-col m2">
-						<a id="top_a6" class="top_a" style="color:black;" href="#">
-							<span class="w3-border-0">로그인</span>
+						<a id="top_a6" class="top_a" href="">
+							<span class="w3-border-0">회원정보</span>
 						</a>
 					</li>
 				</ul>
@@ -297,13 +297,13 @@ $(document).ready(function() {
 					<li class="w3-col m2">
 						<ul style="list-style-type: none">
 						<li>
-							<a class="w3-text-white" href="${root}/faq/list">
-								<span class="w3-border-0">F a Q</span>
+							<a class="w3-text-white" href="#">
+								<span class="w3-border-0">item222</span>
 							</a>
 						</li>
 						<li>
-							<a class="w3-text-white" href="${root}/qna/list">
-								<span class="w3-border-0">Q n A</span>
+							<a class="w3-text-white" href="#">
+								<span class="w3-border-0">item333</span>
 							</a>
 						</li>
 						<li>
