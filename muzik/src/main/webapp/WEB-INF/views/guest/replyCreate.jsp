@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -34,7 +35,7 @@
 <body>
 	<div class="well" class="col-sm-8" align="center" id="replyCreate${guestid}">
 		<FORM name='frm' method='POST' onsubmit="return createSubmit('${guestid}')">
-			<input type="hidden" name="id" value="게스트" id="replyCreateId${guestid}" />
+			<input type="hidden" name="id" value="${sessionScope.nickname}" id="replyCreateId${guestid}" />
 			<!-- 페이지와 검색 유지를 위해서 -->
 			<input name="col" value="${col}" type="hidden" id="replyCreateCol${guestid}">
 			<input name="word" value="${word}" type="hidden" id="replyCreateWord${guestid}">

@@ -86,7 +86,7 @@
 		});
 	});
 </script>
-<%-- <link href="${pageContext.request.contextPath}/css/style.css" rel="Stylesheet" type="text/css"> --%>
+<link href="${pageContext.request.contextPath}/css/style.css" rel="Stylesheet" type="text/css">
 </head>
 <body class="board_body">
 	<div id="replyContent${dto.guestid}">
@@ -109,21 +109,19 @@
 										<span class="badge"> ${rdto.guestrid}</span>
 									</h1>
 
-									<!-- 세션의 아이디 확인해서 동일할때만 나오게끔 바꿔줘야 한다. -->
-									<%-- 
-									<br>
-									<a id="rupdate" data-rid='${rdto.guestrid}'>
-										<button type="button" class="btn btn-default btn-sm">
-											<span>수정</span>
-										</button>
-									</a>
-									<a id="rdelete" data-rid='${rdto.guestrid}'>
-										<button type="button" class="btn btn-default btn-sm">
-											<span>삭제</span>
-										</button>
-									</a>
-									 --%>
-									<!-- 세션의 아이디 확인해서 동일할때만 나오게끔 바꿔줘야 한다. -->
+									<c:if test="${sessionScope.nickname==rdto.id }">
+										<br>
+										<a id="rupdate" data-rid='${rdto.guestrid}'>
+											<button type="button" class="btn btn-default btn-sm">
+												<span>수정</span>
+											</button>
+										</a>
+										<a id="rdelete" data-rid='${rdto.guestrid}'>
+											<button type="button" class="btn btn-default btn-sm">
+												<span>삭제</span>
+											</button>
+										</a>
+									</c:if>
 
 								</td>
 
