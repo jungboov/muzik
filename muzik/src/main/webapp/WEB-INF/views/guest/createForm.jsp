@@ -45,7 +45,7 @@
 </head>
 <!-- *********************************************** -->
 <body class="board_body">
-<div id="element_to_pop_up" class="content"><span class="button b-close"><span>X</span></span></div>
+<div id="element_to_pop_up" class="content">로그인 창<span class="button b-close"><span>X</span></span></div>
 <div id="element_to_pop_up1" class="content1">회원가입 창<span class="button b-close"><span>X</span></span></div>
 <div id="element_to_pop_up2" class="content2">일반 로그인 창<span class="button b-close"><span>X</span></span></div>
 <div id="element_to_pop_up3" class="content3">일반 회원가입 창<span class="button b-close"><span>X</span></span></div>
@@ -60,7 +60,7 @@
 			</a>
 			글 작성
 		</h2>
-		<DIV class="content">
+		<DIV>
 
 			<FORM name='frm' method='POST' action='./create' enctype="multipart/form-data" onsubmit="return incheck(this)">
 				<input type="hidden" name="id" value="${sessionScope.nickname}" />
