@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" %> 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html> 
 <html> 
@@ -112,7 +113,7 @@ a{
 <div id="element_to_pop_up5" class="content5">닉네임 수정<span class="button b-close"><span>X</span></span></div>
 
 <div class="w3-container mainPosition" id="services">
-<h2 class="iconPosition"><span class="glyphicon glyphicon-th-list"></span>_게시판</h2>
+<h2 class="iconPosition"><span class="glyphicon glyphicon-th-list"></span>_자유게시판</h2>
 <hr class="w3-round border-position">
 </div> 
  
@@ -135,12 +136,9 @@ a{
             <textarea class="form-control" name="content" rows="5"></textarea>
         </div>
     </div>
- 	<div class="form-group">
-        <label class="col-md-3 control-label">성명</label>
-        <div class="col-md-6">
-            <input type="text" class="form-control" name="id" />
-        </div>
-    </div>
+    
+        <input type="hidden" class="form-control" name="id" value="${sessionScope.nickname}"/>
+
     <div class="form-group">
         <label class="col-md-3 control-label">파일등록</label>
         <div class="col-md-6">
