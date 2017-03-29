@@ -234,7 +234,7 @@ $(document).ready(function(){
   </TABLE>
   
 
-    <input type='submit' value='회원가입'> 
+    <!-- <input type='submit' value='회원가입'>  -->
     <input type='button'  class=”close-button” value='회원가입' onclick=" join(); return false;"> 
     <input type='reset' value='취소'>
 
