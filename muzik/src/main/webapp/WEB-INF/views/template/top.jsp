@@ -36,7 +36,7 @@
 #panel {
 	margin-left: -20px;
  	padding-right:20px; 
- 	padding-top:25px; 
+ 	padding-top:15px; 
 	padding-bottom: 20px;
 	display: none;
 	background-color: black !important;
@@ -69,9 +69,9 @@
 
 /* 큰 제목 부분 */
 #top_menu {
-	height: 50px;
-	padding-bottom: 15px;
-	padding-top: 50px;
+	height: 35px;
+	padding-bottom: 5px;
+	padding-top: 15px;
 /* 	 !important; */
 /* 	border-bottom: solid 1px white; */
 }
@@ -81,7 +81,7 @@
 	width: 100%;
 	left: 0;
 	right: 0;
-	z-index: 9999 !important;
+	z-index: 999 !important;
 	right: 0;
 	background-color: black;
 	color: white;
@@ -163,10 +163,10 @@ $(document).ready(function() {
 
 	});
 	$("#menubar:hover").hover(function(){
-			$("#menubar ").css("background-color","black");
+// 			$("#menubar ").css("background-color","black");
 			$("#menubar a").css("color","white");
 		},function(){
-			$("#menubar span").css("background-color","white");
+// 			$("#menubar span").css("background-color","white");
 			$("#menubar a").css("color","black");
 		}
 	);
@@ -182,32 +182,32 @@ $(document).ready(function() {
 			<div class="w3-row w3-xlarge" id="row">
 				<ul style="list-style-type: none" id="top_menu">
 					<li class="w3-col m2">
-						<a id="top_a1" class="top_a" href="#">
-							<span class="w3-border-0">국내차트</span>
+						<a id="top_a1" class="top_a" style="color:black;" href="#">
+							<span class="w3-border-0">공지사항</span>
 						</a>
 					</li>
 					<li class="w3-col m2">
-						<a id="top_a2" class="top_a" href="#">
-							<span class="w3-border-0">해외차트</span>
+						<a id="top_a2" class="top_a" style="color:black;" href="#">
+							<span class="w3-border-0">차 트</span>
 						</a>
 					</li>
 					<li class="w3-col m2">
-						<a id="top_a3" class="top_a" href="${root}/bbs/list?col=&word=&nowPage=1">
+						<a id="top_a3" class="top_a" style="color:black;" href="${root}/bbs/list?col=&word=&nowPage=1">
 							<span class="w3-border-0">자유게시판</span>
 						</a>
 					</li>
 					<li class="w3-col m2">
-						<a id="top_a4" class="top_a" href="${root}/guest/list?col=&word=&nowPage=1">
+						<a id="top_a4" class="top_a" style="color:black;" href="${root}/guest/list?col=&word=&nowPage=1">
 							<span class="w3-border-0">방명록</span>
 						</a>
 					</li>
 					<li class="w3-col m2">
-						<a id="top_a5" class="top_a" href="">
+						<a id="top_a5" class="top_a" style="color:black;" href="">
 							<span class="w3-border-0">고객지원센터</span>
 						</a>
 					</li>
 					<li class="w3-col m2">
-						<a id="top_a6" class="top_a" href="">
+						<a id="top_a6" class="top_a"style="color:black;"  href="">
 							<span class="w3-border-0">회원정보</span>
 						</a>
 					</li>
@@ -240,7 +240,7 @@ $(document).ready(function() {
 							</li>
 							<li>
 								<a class="w3-text-white" href="#">
-									<span class="w3-border-0">item4444</span>
+									<span class="w3-border-0">차트생성</span>
 								</a>
 							</li>	
 						</ul>					
@@ -249,24 +249,14 @@ $(document).ready(function() {
 						<ul  style="list-style-type: none;margin-left:-18px">
 							<li>
 								<a class="w3-text-white" href="${pageContext.request.contextPath}/music/weekList">
-									<span class="w3-border-0">국내차트</span>
+									<span class="w3-border-0">자유게시판</span>
 								</a>
-							</li>
+							</li>							
 							<li>
-								<a class="w3-text-white" href="${pageContext.request.contextPath}/music/weekPopList">
-									<span class="w3-border-0">해외차트</span>
+								<a class="w3-text-white" href="${pageContext.request.contextPath}/music/weekList">
+									<span class="w3-border-0">글쓰기</span>
 								</a>
-							</li>
-							<li>
-								<a class="w3-text-white" href="#">
-									<span class="w3-border-0">인기주간</span>
-								</a>
-							</li>
-							<li>
-								<a class="w3-text-white" href="#">
-									<span class="w3-border-0">item4444</span>
-								</a>
-							</li>	
+							</li>							
 						</ul>
 					</li>
 					
@@ -279,36 +269,21 @@ $(document).ready(function() {
 							</li>
 							<li>
 								<a class="w3-text-white" href="#">
-									<span class="w3-border-0">item333</span>
+									<span class="w3-border-0">방명록</span>
 								</a>
-							</li>
-							<li>
-								<a class="w3-text-white" href="#">
-									<span class="w3-border-0">item4444</span>
-								</a>
-							</li>
-							<li>
-								<a class="w3-text-white" href="#">
-									<span class="w3-border-0">item4444</span>
-								</a>
-							</li>
+							</li>						
 						</ul>
 					</li>
 					<li class="w3-col m2">
 						<ul style="list-style-type: none">
 						<li>
 							<a class="w3-text-white" href="#">
-								<span class="w3-border-0">item222</span>
+								<span class="w3-border-0">F A Q</span>
 							</a>
 						</li>
 						<li>
 							<a class="w3-text-white" href="#">
-								<span class="w3-border-0">item333</span>
-							</a>
-						</li>
-						<li>
-							<a class="w3-text-white" href="#">
-								<span class="w3-border-0">item4444</span>
+								<span class="w3-border-0">Q & A</span>
 							</a>
 						</li>
 						<li>
@@ -316,6 +291,7 @@ $(document).ready(function() {
 								<span class="w3-border-0">item4444</span>
 							</a>
 						</li>
+						
 
 					</ul>
 					</li>
