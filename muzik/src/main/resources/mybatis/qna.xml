@@ -6,21 +6,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="qna">
 
 	<insert id="create" parameterType="QnaDTO">
-		INSERT INTO m_QnA(qnaid, title, content, memberid, cdate, grpno)  
+		INSERT INTO m_QnA(qnaid, title, content, nickname, cdate, grpno)  
 		VALUES((SELECT NVL(MAX(qnaid), 0) + 1 as qnaid FROM m_QnA), 
-		#{title}, #{content}, #{memberid}, sysdate, 
+		#{title}, #{content}, #{nickname}, sysdate, 
 		(SELECT NVL(MAX(grpno),0) + 1 as grpno from m_QnA))
 	</insert>
 	
 	<insert id="createReply" parameterType="QnaDTO">
         INSERT INTO m_qna
-        (qnaid, title, content, memberid, cdate, grpno, indent, ansnum, refno)  
+        (qnaid, title, content, nickname, cdate, grpno, indent, ansnum, refno)  
         VALUES((SELECT NVL(MAX(qnaid), 0) + 1 as qnaid FROM m_QnA), 
-        #{title}, #{content}, #{memberid}, sysdate, #{grpno}, #{indent}+1, #{ansnum}+1, #{qnaid})
+        #{title}, #{content}, #{nickname}, sysdate, #{grpno}, #{indent}+1, #{ansnum}+1, #{qnaid})
     </insert>
 	
 	<select id="read" resultType="QnaDTO" parameterType="int">
-		SELECT qnaid, title, content, memberid, cdate, viewcnt
+		SELECT qnaid, title, content, nickname, cdate, viewcnt
 		FROM m_QnA
 		WHERE qnaid = #{qnaid}
 	</select>
@@ -62,12 +62,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</delete>
 
 	<select id="list" resultType="QnaDTO" parameterType="Map">
-		SELECT qnaid, title, memberid, to_char(cdate, 'yyyy-mm-dd') cdate, viewcnt, 
+		SELECT qnaid, title, nickname, to_char(cdate, 'yyyy-mm-dd') cdate, viewcnt, 
 		grpno, indent, ansnum, rownum r
 		FROM(
-		SELECT qnaid, title, memberid, cdate, viewcnt, grpno, indent, ansnum, rownum r
+		SELECT qnaid, title, nickname, cdate, viewcnt, grpno, indent, ansnum, rownum r
 		FROM(
-		SELECT qnaid, title, memberid, cdate, viewcnt, grpno, indent, ansnum
+		SELECT qnaid, title, nickname, cdate, viewcnt, grpno, indent, ansnum
 		FROM m_QnA
 		<where>
 			<choose>

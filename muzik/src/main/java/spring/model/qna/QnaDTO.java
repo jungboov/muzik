@@ -4,7 +4,7 @@ public class QnaDTO {
 	private int qnaid;
 	private String title;
 	private String content;            
-	private String memberid;
+	private String nickname;
 	private String cdate;
 	private int viewcnt;
 	private int grpno;
@@ -30,11 +30,11 @@ public class QnaDTO {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public String getMemberid() {
-		return memberid;
+	public String getNickname() {
+		return nickname;
 	}
-	public void setMemberid(String memberid) {
-		this.memberid = memberid;
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
 	public String getCdate() {
 		return cdate;

@@ -109,11 +109,13 @@ function fdelete(faqid){
       <div class="panel-body">
         ${dto.content }
         <p>
+        <c:if test="${not empty sessionScope.id && sessionScope.grade=='A' }">
         <input type="hidden" name="faqid" value="${dto.faqid}">
         <button type="submit" class="btn btn-default btn-sm" onclick="fupdate('${dto.faqid}')">
         <span class="glyphicon glyphicon-ok"></span> 수정 </button>
         <button type="button" class="btn btn-default btn-sm" onclick="fdelete('${dto.faqid}')">
         <span class="glyphicon glyphicon-remove"></span> 삭제 </button>
+        </c:if>
       </div>
     </div>
   </div>
@@ -140,8 +142,10 @@ function fdelete(faqid){
       <div class="input-group-btn">
         <button type="submit" class="btn btn-default btn-sm">
         <span class="glyphicon glyphicon-search"></span> 검색 </button>
+        <c:if test="${not empty sessionScope.id && sessionScope.grade=='A' }">
         <button type="button" class="btn btn-default btn-sm" onclick="fcreate()">
         <span class="glyphicon glyphicon-pencil"></span> 등록 </button>
+        </c:if>
       </div>
     </div>
 </div>

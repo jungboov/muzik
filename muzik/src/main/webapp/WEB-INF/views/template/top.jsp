@@ -144,7 +144,7 @@
 <body id="myHeader">
 	<div id="flip" class="w3-center w3-container ">
 		<div class="w3-center w3-container">
-			<img src="https://s3.amazonaws.com/lg-vectors/bitmaps/583093/390385.png?logo_version=1">
+			<a href="${root }/home"><img src="https://s3.amazonaws.com/lg-vectors/bitmaps/583093/390385.png?logo_version=1"></a>
 		</div>
 		<div id="menubar" class="w3-center w3-container" data-spy="affix" data-offset-top="43" style="padding-left: 0px; padding-right: 0px;">
 			<div class="w3-row w3-xlarge" id="row">
@@ -175,8 +175,8 @@
 						</a>
 					</li>
 					<li class="w3-col m2">
-						<a id="top_a6" class="top_a" href="#">
-							<span class="w3-border-0">로그인</span>
+						<a id="top_a6" class="top_a" href="">
+							<span class="w3-border-0">회원정보</span>
 						</a>
 					</li>
 				</ul>
@@ -287,17 +287,6 @@
 								<span class="w3-border-0">Q n A</span>
 							</a>
 						</li>
-						<li>
-							<a class="w3-text-white" href="#">
-								<span class="w3-border-0">item4444</span>
-							</a>
-						</li>
-						<li>
-							<a class="w3-text-white" href="#">
-								<span class="w3-border-0">item4444</span>
-							</a>
-						</li>
-
 					</ul>
 
 					<ul class="w3-col m2" style="list-style-type: none">

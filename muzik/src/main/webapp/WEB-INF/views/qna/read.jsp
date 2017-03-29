@@ -77,7 +77,7 @@
         <td>${dto.content}</td>
       <tr>
         <th>작성자</th>
-        <td>${dto.memberid}</td>
+        <td>${dto.nickname}</td>
       </tr>
       <tr>
         <th>작성일</th>

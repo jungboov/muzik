@@ -20,4 +20,4 @@
         <put-attribute name="body" value="/WEB-INF/views/faq/update.jsp" /> 
     </definition>  
    
-</tiles-definitions> 
+</tiles-definitions>

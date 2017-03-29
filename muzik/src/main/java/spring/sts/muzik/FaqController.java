@@ -105,6 +105,7 @@ public class FaqController {
 	@RequestMapping(value = "/faq/update", method = RequestMethod.GET)
 	public String update(int faqid, Model model) throws Exception {
 		model.addAttribute("dto", dao.read(faqid));
+		
 		return "/faq/update";
 	}
 
