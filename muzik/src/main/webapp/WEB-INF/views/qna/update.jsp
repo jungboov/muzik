@@ -39,8 +39,8 @@ function input(frm){
     <label for="title">제목</label>
     <input type="text" class="form-control" name="title" value="${dto.title}">
     
-    <label for="memberid">작성자</label>
-    <input type="text" class="form-control" name="memberid" value="${dto.memberid}">
+    <label for="nickname">작성자</label>
+    <input type="text" class="form-control" name="nickname" value="${dto.nickname}">
 
     <label for="content">내용</label>
     <textarea class="form-control" rows="30" name="content">${dto.content}</textarea>

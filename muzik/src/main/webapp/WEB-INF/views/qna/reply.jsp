@@ -49,8 +49,8 @@
  	
 <div class="container">
   <div class="form-group">
-    <label for="memberid">작성자</label>
-    <input type="text" class="form-control" name="memberid" value="guest">
+    <label for="nickname">작성자</label>
+    <input type="text" class="form-control" name="nickname" value="${sessionScope.nickname}">
     
     <label for="title">제목</label>
     <input type="text" class="form-control" name="title" value="${dto.title}">

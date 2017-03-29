@@ -71,7 +71,7 @@ function qread(qnaid){
 	        <img src="${pageContext.request.contextPath}/images/new.gif">
 	      </c:if>
         </td>
-        <td>${dto.memberid}</td>
+        <td>${dto.nickname}</td>
         <td>${fn:substring(dto.cdate,0,10)}</td>
         <td>${dto.viewcnt}</td>        
       </tr>
@@ -83,7 +83,6 @@ function qread(qnaid){
 </div>
 
 <form class="form-inline" method="post" action="./list">
-
 <div class="container">
   <div class="form-group">
     <select class="form-control" name="col">
@@ -101,10 +100,11 @@ function qread(qnaid){
       <div class="input-group-btn">
         <button type="submit" class="btn btn-default btn-sm">
         <span class="glyphicon glyphicon-search"></span> 검색 </button>
-	    <button type="submit" class="btn btn-default btn-sm" onclick="location.href='./create'">
-    <span class="glyphicon glyphicon-ok"></span> 등록 </button>
-      </div>
+      
+	    <button type="button" class="btn btn-default btn-sm" onclick="location.href='./create'">
+        <span class="glyphicon glyphicon-ok"></span> 등록 </button>
     </div>
+  </div>
 </div>
 </form> 
   

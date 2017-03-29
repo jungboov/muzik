@@ -49,7 +49,7 @@ public class QnaDAOTest {
 		QnaDTO dto = new QnaDTO();
 		dto.setTitle("JUnit Test 제목");
 		dto.setContent("JUnit4 Test 내용");
-		dto.setMemberid("guest");
+		dto.setNickname("guest");
 		
 		try {
 			assertTrue(qdao.create(dto));
@@ -124,7 +124,7 @@ public class QnaDAOTest {
 		QnaDTO dto = qdao.read(1);
 		dto.setTitle("JUnit4 Reply Test");
 		dto.setContent("JUnit4 Reply Test");
-		dto.setMemberid("CR7");
+		dto.setNickname("CR7");
 		
 		Map map = new HashMap();
 		map.put("grpno", dto.getGrpno());
