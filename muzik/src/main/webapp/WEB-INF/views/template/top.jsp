@@ -171,7 +171,7 @@
 	<div id="flip" class="w3-center">
 		<div class="w3-center w3-container">
 			<a href="${pageContext.request.contextPath}">
-				<img src="https://s3.amazonaws.com/lg-vectors/bitmaps/583093/390385.png?logo_version=1">
+				<img src="${pageContext.request.contextPath}/images/muzik_top.png">
 			</a>
 		</div>
 		<div id="menubar" class="w3-center w3-container" data-spy="affix" data-offset-top="43" style="padding-left: 0px; padding-right: 0px;">
