@@ -175,9 +175,18 @@
 						</a>
 					</li>
 					<li class="w3-col m2">
+						<c:choose>
+							<c:when test="${empty sessionScope.id}">
 						<a id="top_a6" class="top_a" href="#">
 							<span class="w3-border-0">로그인</span>
 						</a>
+							</c:when>
+							<c:otherwise>
+							<a id="top_a6" class="top_a" href="#">
+								<span class="w3-border-0">회원정보</span>
+							</a>
+							</c:otherwise>
+						</c:choose>
 					</li>
 				</ul>
 			</div>
