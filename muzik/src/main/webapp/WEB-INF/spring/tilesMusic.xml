@@ -24,9 +24,9 @@
 <!--         <put-attribute name="title" value="musicUpdate" ></put-attribute>  -->
 <!--         <put-attribute name="body" value="/WEB-INF/views/music/iframePlayer.jsp" />  -->
 <!--     </definition>   -->
-    <definition name="/music/mysong" extends="main"> 
+    <definition name="/music/wcreate" extends="main"> 
         <put-attribute name="title" value="musicUpdate" ></put-attribute> 
-        <put-attribute name="body" value="/WEB-INF/views/music/mysong.jsp" /> 
+        <put-attribute name="body" value="/WEB-INF/views/music/wcreate.jsp" /> 
     </definition>  
 </tiles-definitions> 
     

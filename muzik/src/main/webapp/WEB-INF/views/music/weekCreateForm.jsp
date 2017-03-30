@@ -26,9 +26,10 @@
 <!-- *********************************************** -->
 <body>
 	<!-- *********************************************** -->
+	<br>
+<div class="container text-center">
 	<DIV class="title">주간차트 등록</DIV>
 	<a href="http://gaonchart.co.kr/main/section/chart/online.gaon?nationGbn=T&serviceGbn=ALL&termGbn=week" class="btn btn-link">Gaon !</a>
-<div class="container text-center">
 	<Form name='frm' method='POST' action='./wcreate'
 		onsubmit="return input(this)" class="form-horizontal">
 		<div class="col-sm-1"></div>

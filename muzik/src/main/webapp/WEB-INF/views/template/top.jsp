@@ -234,11 +234,13 @@
 									<span class="w3-border-0">인기주간</span>
 								</a>
 							</li>
-							<li>
-								<a class="w3-text-white" href="${pageContext.request.contextPath}/music/wcreate">
-									<span class="w3-border-0">차트생성</span>
-								</a>
-							</li>
+							<c:if test="${sessionScope.grade=='A'}">
+								<li>
+									<a class="w3-text-white" href="${pageContext.request.contextPath}/music/wcreate">
+										<span class="w3-border-0">차트생성</span>
+									</a>
+								</li>
+							</c:if>								
 						</ul>
 					</li>
 					<li class="w3-col m2">
