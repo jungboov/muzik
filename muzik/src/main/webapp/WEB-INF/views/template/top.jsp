@@ -178,7 +178,7 @@
 			<div class="w3-row w3-xlarge" id="row">
 				<ul style="list-style-type: none" id="top_menu">
 					<li class="w3-col m2">
-						<a id="top_a1" class="top_a" style="color: black;" href="">
+						<a id="top_a1" class="top_a" style="color: black;" href="${pageContext.request.contextPath}/notice/list">
 							<span class="w3-border-0">공지사항</span>
 						</a>
 					</li>
@@ -213,7 +213,7 @@
 			<div class="w3-center " id="panel">
 				<ul style="list-style-type: none" id="list_menu">
 					<li class="w3-col m2">
-						<a id="top_a1" class="top_a" href="">
+						<a id="top_a1" class="top_a" href="${pageContext.request.contextPath}/notice/list">
 							<span class="w3-border-0">공지사항</span>
 						</a>
 					</li>
@@ -230,7 +230,7 @@
 								</a>
 							</li>
 							<li>
-								<a class="w3-text-white" href="">
+								<a class="w3-text-white" href="${pageContext.request.contextPath}/best/list">
 									<span class="w3-border-0">인기주간</span>
 								</a>
 							</li>
