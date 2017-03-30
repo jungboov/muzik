@@ -74,13 +74,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		order by invenid
 	</select>
 	<select id="readInvenTitle" parameterType="Map" resultType="String">
-		select title
+		select invenname
 		from M_INVENTORY
 		where id=#{id} and INVENID=#{invenId}
 	</select>
 	<update id="updateInvenTitle" parameterType="Map" >
 		update M_INVENTORY 
-		set title=#{title}
+		set invenname=#{title}
 		where id=#{id} and INVENID=#{invenId}
 	</update>
 	<select id="readInven" parameterType="Map" resultType="String">
