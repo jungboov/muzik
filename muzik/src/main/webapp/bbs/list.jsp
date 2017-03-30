@@ -62,9 +62,9 @@ color: navy;
 <div id="element_to_pop_up4" class="content4">회원정보 <span class="button b-close"><span>X</span></span></div>
 <div id="element_to_pop_up5" class="content5">닉네임 수정<span class="button b-close"><span>X</span></span></div>
 
-<div class="w3-container mainPosition" id="services">
 <h2 class="iconPosition"><span class="glyphicon glyphicon-th-list"></span>_게시판</h2>
 <hr class="w3-round border-position">
+<div class="w3-container mainPosition" id="services">
 </div> 
   
 <div class="container">

@@ -62,7 +62,7 @@ button{
 }
 .menuList{
 	padding-top:10px;
-	border-top: 2px solid black;
+	
 }
 .menulist div span{
 	margin:10px;
@@ -610,14 +610,15 @@ $(function(){
 		</span>
 	</div>
 <!-- *********************************************** -->
+<h2 class="iconPosition"><span class="glyphicon glyphicon-music"></span>_차 트</h2>
+<hr class="w3-round border-position">
 <div class="container ">
 <div class="w3-center row menuList w3-xlarge w3-center">
 	<div class="col-sm-3"></div>
 	<div id="chart1" class="col-sm-3"><span><b>국내 주간</b></span></div>
-	<div id="chart2" class="col-sm-3"><span><b>해외 주간</b></span></div>
-	
+	<div id="chart2" class="col-sm-3"><span><b>해외 주간</b></span></div>	
 </div>
-<br>
+<br><br>
 <div class="w3-right">
 <!-- 	<label for="sel1">Select list:</label> -->
   	<select class="form-control" id="scroll_week">

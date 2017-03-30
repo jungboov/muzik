@@ -120,13 +120,16 @@
 			<span>X</span>
 		</span>
 	</div>
+	<h2 class="iconPosition">
+		<a class="text-left" href="./list?col=&word=&nowPage=1" style="color: black;">
+				<span class="glyphicon glyphicon-list-alt h2_span"></span>_방명록
+		</a>
+	</h2>
+	<hr class="w3-round border-position">
 	<div class="container" id="container">
 		<!-- *********************************************** -->
 		<h2>
-			<a href="./list?col=&word=&nowPage=1" style="color: black;">
-				<span class="glyphicon glyphicon-list-alt h2_span"></span>
-				방명록
-			</a>
+
 		</h2>
 		<div align="center">
 			<form method="get" action="./list">
