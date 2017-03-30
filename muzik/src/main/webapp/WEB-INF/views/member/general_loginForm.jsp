@@ -125,7 +125,7 @@ $(document).ready(function(){
 
     <input type='button'  class=”close-button”  value='로그인' onclick="login(); return false;"> 
     <!-- <input type='button'  class=”close-button”  value='관리자 로그인' onclick="login_admin()">  -->
-    <input type='button' value='회원가입' onclick="location.href='agree'">
+    <input type='button' value='회원가입' onclick="location.href='./general_create'">
 <br><br>
 
 </FORM>
