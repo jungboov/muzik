@@ -154,7 +154,7 @@ $(document).ready(function(){
        var url = "./top100Player";  
        url+="?period=${weekList[0].period}";
        url+="&chartType=kpop";
-       window.open(url,"top100", "width=640,height=410"); 
+       window.open(url,"top100", "width=655,height=410"); 
 	});
 });
 //내 리스트 듣기

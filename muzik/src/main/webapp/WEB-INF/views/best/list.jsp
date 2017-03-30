@@ -102,7 +102,7 @@ $(function(){
 	<div class="col-sm-8 col-sm-offset-2 ">
 <!-- 	<DIV class="title">국내차트</DIV> -->
 	<c:choose>
-		<c:when  test="${param.chartType eq 'kpop' }">		
+		<c:when  test="${param.chartType eq 'kpop' ||empty param.chartType }">		
 			<h2 class="text-success">>국내 차트</h2>
 		</c:when>
 		<c:when  test="${param.chartType eq 'pop' && not empty param.chartType }">		
