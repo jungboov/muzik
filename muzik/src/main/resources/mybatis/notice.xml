@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="notice">
+
+	<delete id="delete" parameterType="int">
+		delete from m_notice
+		where noticeid = #{noticeid}
+	</delete>
+
+	<update id="update" parameterType="NoticeDTO">
+		UPDATE m_notice
+		SET title=#{title}, content=#{content}
+		WHERE noticeid = #{noticeid}
+	</update>
+
+	<insert id="create" parameterType="NoticeDTO">
+		INSERT INTO m_notice(noticeid, title, content, cdate)
+		VALUES((SELECT NVL(MAX(noticeid), 0) + 1 FROM m_notice),
+		#{title}, #{content}, sysdate)
+	</insert>
+
+	<!-- <update id="upViewcnt" parameterType="int"> -->
+	<!-- update m_notice -->
+	<!-- set viewcnt = viewcnt + 1 -->
+	<!-- where noticeid = #{noticeid} -->
+	<!-- </update> -->
+
+	<select id="total" parameterType="Map" resultType="int">
+		select count(*) from m_notice
+		<where>
+			<choose>
+				<when test="col=='title'">
+					title like '%'||#{word}||'%'
+				</when>
+				<when test="col=='content'">
+					content like '%'||#{word}||'%'
+				</when>
+
+			</choose>
+		</where>
+
+	</select>
+
+
+	<select id="list" resultType="NoticeDTO" parameterType="Map">
+
+		SELECT noticeid, content, title, cdate, r
+		FROM (
+		SELECT noticeid, content, title, cdate, rownum as r
+		FROM (
+		SELECT noticeid, content, title, cdate
+		FROM m_notice
+		<where>
+			<choose>
+				<when test="col=='title'">
+					title like '%'||#{word}||'%'
+				</when>
+				<when test="col=='content'">
+					content like '%'||#{word}||'%'
+				</when>
+			</choose>
+		</where>
+		order by noticeid desc
+		)
+		)                                                                            
+   <![CDATA[
+     where r>=#{sno} and r<=#{eno}
+    ]]>
+	</select>
+
+	<select id="read" resultType="NoticeDTO" parameterType="int">
+		SELECT noticeid, title, cdate, content
+		FROM m_notice
+		WHERE noticeid = #{noticeid}
+	</select>
+
+</mapper>

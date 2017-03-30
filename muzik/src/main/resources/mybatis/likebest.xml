@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="likebest">
+
+<!--   베스트 순위 시작 -->
+
+	<select id="total" parameterType="String" resultType="int">
+	
+	select count(*) from m_best
+	where chartType=#{chartType}
+<!-- 	<where> -->
+<!-- 	<choose> -->
+<!-- 	<when test="col=='period'"> -->
+<!-- 	period like '%'||#{word}||'%' -->
+<!-- 	</when> -->
+<!-- 	<when test="col=='chartType'"> -->
+<!-- 	chartType like '%'||#{word}||'%' -->
+<!-- 	</when> -->
+<!-- 	</choose> -->
+<!-- 	</where>  -->
+	
+	</select>
+
+    <select id="klist" parameterType="Map"  resultType="BestDTO">
+     	select chartid, title, artist, thumbnail, rank, chrank, url, period, separator, mlike, album, chartType, r
+		from(
+			select chartid, title, artist, thumbnail, rank, chrank, url, period, separator, mlike, album, chartType, rownum r
+			from(
+				select chartid, title, artist, thumbnail, rank, chrank, url, period, separator, mlike, album, chartType
+				from m_chart
+				where charttype=#{chartType} and period=#{period}
+				order by period DESC, rank asc
+				)
+			)
+			<![CDATA[  
+			where r<=5  		
+			]]>
+    </select>
+    <select id="plist" parameterType="Map"  resultType="BestDTO">
+     	select chartid, title, artist, thumbnail, rank, chrank, url, period, separator, mlike, album, chartType, r
+		from(
+			select chartid, title, artist, thumbnail, rank, chrank, url, period, separator, mlike, album, chartType, rownum r
+			from(
+				select chartid, title, artist, thumbnail, rank, chrank, url, period, separator, mlike, album, chartType
+				from m_chart
+				where charttype=#{chartType} and period=#{period}
+				order by period DESC, rank asc
+				)
+			)
+			<![CDATA[  		
+ 				 where r<=5  	  		
+ 			]]> 
+<!--  							 where r<=5   -->
+    </select>
+    
+<!--     <insert id="create1" parameterType="BestDTO"> -->
+<!-- 	INSERT INTO m_best(bestid, title, mlike, period, url, chartid) -->
+<!-- 	VALUES((SELECT NVL(MAX(bestid), 0) + 1 FROM m_best),                                   -->
+<!-- 	#{title},#{mlike}, #{period}, #{url}, #{chartid})                                      -->
+<!-- 	</insert> -->
+    <insert id="create" parameterType="Map">
+		INSERT INTO m_best(bestid, id_list, period, chartType)
+		VALUES((SELECT NVL(MAX(bestid), 0) + 1 FROM m_best),#{id_list},#{period},#{chartType})
+	</insert>
+	<insert id="popcreate" parameterType="Map">
+		INSERT INTO m_best(bestid,  id_list, period, chartType)
+		VALUES((SELECT NVL(MAX(bestid), 0) + 1 FROM m_best),#{pop_list},#{period},#{chartType})
+	</insert>
+	
+	<select id="list" parameterType="Map" resultType="BestDTO">
+		
+		select bestid,id_list,period, chartType, r
+		from(
+			select bestid,id_list,period, chartType, rownum r
+			from(
+					select bestid,id_list,period, chartType
+					from m_best
+					where chartType = #{chartType}
+					order by period desc
+				)
+			)
+ 			<![CDATA[ 
+			where  r>=${sno} and r<=${eno}
+			]]>
+	</select>
+	
+	
+	
+	
+<!-- 	<select id="popList" parameterType="Map" resultType="BestDTO"> -->
+		
+		
+<!-- 		select bestid,title,id_list,period, chartType, r -->
+<!-- 		from( -->
+<!-- 			select bestid,title,id_list,period, chartType, rownum r -->
+<!-- 			from( -->
+<!-- 				select bestid,title,id_list,period, chartType -->
+<!-- 				from m_best -->
+<!-- 					where chartType = #{chartType} -->
+<!-- 						order by period desc -->
+<!-- 				) -->
+<!-- 			) -->
+<!--  			<![CDATA[  -->
+<!-- 			where  r>=${sno} and r<=${eno} -->
+<!-- 			]]> -->
+		
+		
+<!-- 		select bestid,id_list,period, chartType, r -->
+<!-- 		from( -->
+<!-- 			select bestid,id_list,period, chartType, rownum r -->
+<!-- 			from( -->
+<!-- 				select bestid,id_list,period, chartType -->
+<!-- 				from m_best -->
+<!-- 					where chartType = #{chartType} -->
+<!-- 						order by period desc -->
+<!-- 				) -->
+<!-- 			) -->
+<!-- 			<![CDATA[   -->
+<!-- 			where CHARTTYPE=#{chartType} and ROWNUM <= 5 -->
+<!-- 			]]> -->
+		
+<!-- 		select bestid,id_list,period -->
+		
+<!-- 		from m_best -->
+<!-- 		<![CDATA[     -->
+<!-- 		where CHARTTYPE=#{chartType} and ROWNUM <=#{rownum}  -->
+<!-- 		]]> -->
+<!-- 		order by period desc -->
+<!-- 	</select> -->
+<!-- 	금주 추천곡 읽어옴 -->
+	<select id="readBest" parameterType="int" resultType="String">
+		select id_list
+		from m_best
+		where bestid=#{bestid}
+	</select>
+<!-- 	노래정보읽어옴 -->
+	<select id="readSong" parameterType="String" resultType="BestDTO">
+		select title, artist, thumbnail, url, period, mlike, chartType
+		from m_chart
+<!-- 		order by mlike DESC  -->
+ 		where chartid=#{chartid}
+<!--  		where title=#{title} -->
+	</select>
+
+<!-- 	<select id="readPopSong" parameterType="String" resultType="BestDTO"> -->
+<!-- 		select title, artist, thumbnail, url, period,mlike, chartType  -->
+<!-- 		from m_popchart -->
+<!-- 		where popchartid=#{popchartid} -->
+<!-- 	</select> -->
+	
+	
+      
+</mapper>

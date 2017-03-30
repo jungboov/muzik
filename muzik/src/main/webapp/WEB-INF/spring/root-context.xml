@@ -43,6 +43,8 @@
                 <value>/WEB-INF/spring/tilesGuest.xml</value>
                 <value>/WEB-INF/spring/tilesBbs.xml</value>
                 <value>/WEB-INF/spring/tilesMusic.xml</value>
+                <value>/WEB-INF/spring/tilesNotice.xml</value>
+                <value>/WEB-INF/spring/tilesBest.xml</value>
             </list> 
         </property> 
     </bean>  

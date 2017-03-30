@@ -487,6 +487,140 @@ public class Utility {
 		public static int brcount(int guestid, BbsReplyDAO rdao) {
 			return rdao.rcount(guestid);
 		}
-	    
+	    //notice paging
+		public static String paging4(int totalRecord, int nowPage, int recordPerPage, String col, String word){ 
+		    int pagePerBlock = 10; // 블럭당 페이지 수 
+		    int morePage = nowPage + 1;
+		    int totalPage = (int)(Math.ceil((double)totalRecord/recordPerPage)); // 전체 페이지  
+		    int totalGrp = (int)(Math.ceil((double)totalPage/pagePerBlock));// 전체 그룹 
+		    int nowGrp = (int)(Math.ceil((double)nowPage/pagePerBlock));    // 현재 그룹 
+		    int startPage = ((nowGrp - 1) * pagePerBlock) + 1; // 특정 그룹의 페이지 목록 시작  
+		    int endPage = (nowGrp * pagePerBlock);             // 특정 그룹의 페이지 목록 종료   
+		     
+		    StringBuffer str = new StringBuffer(); 
+		     
+		    str.append("<style type='text/css'>"); 
+		    str.append("  #paging {text-align: center; margin-top: 5px; font-size: 1em;}"); 
+		    str.append("  #paging A:link {text-decoration:none; color:black; font-size: 1em;}"); 
+		    str.append("  #paging A:hover{text-decoration:none; background-color: #CCCCCC; color:black; font-size: 1em;}"); 
+		    str.append("  #paging A:visited {text-decoration:none;color:black; font-size: 1em;}"); 
+		    str.append("  .span_box_1{"); 
+		    str.append("    text-align: center;");    
+		    str.append("    font-size: 1em;"); 
+		    str.append("    border: 1px;"); 
+		    str.append("    border-style: solid;"); 
+		    str.append("    border-color: #cccccc;"); 
+		    str.append("    padding:1px 6px 1px 6px; /*위, 오른쪽, 아래, 왼쪽*/"); 
+		    str.append("    margin:1px 2px 1px 2px; /*위, 오른쪽, 아래, 왼쪽*/"); 
+		    str.append("  }"); 
+		    str.append("  .span_box_2{"); 
+		    str.append("    text-align: center;");    
+		    str.append("    background-color: #339999;"); 
+		    str.append("    color: #FFFFFF;"); 
+		    str.append("    font-size: 1em;"); 
+		    str.append("    border: 1px;"); 
+		    str.append("    border-style: solid;"); 
+		    str.append("    border-color: #cccccc;"); 
+		    str.append("    padding:1px 6px 1px 6px; /*위, 오른쪽, 아래, 왼쪽*/"); 
+		    str.append("    margin:1px 2px 1px 2px; /*위, 오른쪽, 아래, 왼쪽*/"); 
+		    str.append("  }"); 
+		    str.append("</style>"); 
+		    str.append("<DIV id='paging'>"); 
+//		    str.append("현재 페이지: " + nowPage + " / " + totalPage + "  "); 
+		    
+		    
+		    int _nowPage = nowPage-1;
+		    if (_nowPage != 0 ){ 
+			      str.append("<span class='span_box_1'><A href='./list?col="+col+"&word="+word+"&nowPage="+_nowPage+"'>이전</A></span>"); 
+			    } 
+			 
+		    
+		    
+		    
+		    for(int i=startPage; i<=endPage; i++){ 
+		      if (i > totalPage){ 
+		        break; 
+		      } 
+		      if (morePage ==i){ //현재보고있는 페이지가 같을때
+		    	  str.append("<span class='span_box_1'><A href='./list?col="+col+"&word="+word+"&nowPage="+i+"'>"+"다음"+"</A></span>");
+
+		      }
+		    } 
+		     
+		    return str.toString(); 
+		  } 	 
+		
+		
+		//best paging
+		public static String paging5(int total, int nowPage, int recordPerPage, String col, String word,String chartType) {
+			int pagePerBlock = 10; 														// 블럭당 페이지 수
+			int totalPage = (int) (Math.ceil((double) total / recordPerPage)); 			// 전체 페이지
+			int totalGrp = (int) (Math.ceil((double) totalPage / pagePerBlock));		// 전체 그룹
+			int nowGrp = (int) (Math.ceil((double) nowPage / pagePerBlock)); 			// 현재 그룹
+			int startPage = ((nowGrp - 1) * pagePerBlock) + 1; 							// 특정 그룹의 페이지 목록 시작
+			int endPage = (nowGrp * pagePerBlock);										// 특정 그룹의 페이지 목록 종료
+
+			StringBuffer str = new StringBuffer();
+
+			str.append("<style type='text/css'>");
+			str.append("  #paging {text-align: center; margin-top: 5px; font-size: 1em;}");
+			str.append("  #paging A:link {text-decoration:none; color:black; font-size: 1em;}");
+			str.append("  #paging A:hover{text-decoration:none; background-color: #CCCCCC; color:black; font-size: 1em;}");
+			str.append("  #paging A:visited {text-decoration:none;color:black; font-size: 1em;}");
+			str.append("  .span_box_1{");
+			str.append("    text-align: center;");
+			str.append("    font-size: 1em;");
+			str.append("    border: 1px;");
+			str.append("    border-style: solid;");
+			str.append("    border-color: #cccccc;");
+			str.append("    padding:1px 6px 1px 6px; /*위, 오른쪽, 아래, 왼쪽*/");
+			str.append("    margin:1px 2px 1px 2px; /*위, 오른쪽, 아래, 왼쪽*/");
+			str.append("  }");
+			str.append("  .span_box_2{");
+			str.append("    text-align: center;");
+			str.append("    background-color: #444444;");
+			str.append("    color: #FFFFFF;");
+			str.append("    font-size: 1em;");
+			str.append("    border: 1px;");
+			str.append("    border-style: solid;");
+			str.append("    border-color: #cccccc;");
+			str.append("    padding:1px 6px 1px 6px; /*위, 오른쪽, 아래, 왼쪽*/");
+			str.append("    margin:1px 2px 1px 2px; /*위, 오른쪽, 아래, 왼쪽*/");
+			str.append("  }");
+			str.append("</style>");
+			str.append("<DIV id='paging'>");
+			// str.append("현재 페이지: " + nowPage + " / " + totalPage + " ");
+
+			int _nowPage = (nowGrp - 1) * pagePerBlock; // 10개 이전 페이지로 이동
+			if (nowGrp >= 2) {
+				str.append("<span class='span_box_1'><A href='./list?col=" + col + "&word=" + word + "&nowPage="
+						+ _nowPage+ "&chartType=" + chartType + "'>이전</A></span>");
+			}
+
+			for (int i = startPage; i <= endPage; i++) {
+				if (i > totalPage) {
+					break;
+				}
+
+				if (nowPage == i) {
+					str.append("<span class='span_box_2'>" + i + "</span>");
+				} else {
+					str.append("<span class='span_box_1'><A href='./list?col=" + col + "&word=" + word + "&nowPage=" + i+ "&chartType=" + chartType
+							+ "'>" + i + "</A></span>");
+				}
+			}
+
+			_nowPage = (nowGrp * pagePerBlock) + 1; // 10개 다음 페이지로 이동
+			if (nowGrp < totalGrp) {
+				str.append("<span class='span_box_1'><A href='./list?col=" + col + "&word=" + word + "&nowPage="
+						+ _nowPage+ "&chartType=" + chartType + "'>다음</A></span>");
+			}
+			str.append("</DIV>");
+
+			return str.toString();
+		}
+
+		
+		
 
 }
