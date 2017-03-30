@@ -7,6 +7,10 @@
 <head>
 <meta charset="UTF-8">
 <title></title>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script type="text/javascript" src="<c:url value="/resources/js/jquery.bpopup.min.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/resources/js/other.bpopup.js"/>"></script>
+<link href="<c:url value='/css/bpopup.css'/>" rel="stylesheet">
 <style type="text/css">
 * {
 	font-family: gulim;
@@ -58,7 +62,6 @@ button{
 }
 .menuList{
 	padding-top:10px;
-	border-top: 2px solid black;
 }
 .menulist div span{
 	margin:10px;
@@ -119,7 +122,7 @@ $(document).ready(function(){
 	 	$("span#btn_add").prepend('<img style="width:16px;height:16px;margin-bottom:0px; margin-right:3px;" src="${pageContext.request.contextPath}/music/storage/plus.png" />');
 	 	$("span#btn_inven").prepend('<img style="width:16px;height:16px;margin-bottom:0px; margin-right:3px;" src="${pageContext.request.contextPath}/music/storage/inven.png" />');	 	
 	 	$("span#btn_close").prepend('<img style="width:16px;height:16px;margin-bottom:0px; margin-right:3px;" src="${pageContext.request.contextPath}/music/storage/close.png" />');
-	 	$("#chart1 span:first-child").prepend('<img style="width:16px;height:auto;margin-bottom:0px; margin-right:3px; margin-top:-5px;" src="${pageContext.request.contextPath}/music/storage/this.png" />');
+	 	$("#chart2 span:first-child").prepend('<img style="width:16px;height:auto;margin-bottom:0px; margin-right:3px; margin-top:-5px;" src="${pageContext.request.contextPath}/music/storage/this.png" />');
 });
 // //리스트안에 뮤비hover할 때 버튼 이미지 처리
 // $(document).ready(function(){	
@@ -569,7 +572,7 @@ $(function(){
 </head>
 <body>
 <!-- *********************************************** -->
-<div id="element_to_pop_up" class="content">
+	<div id="element_to_pop_up" class="content">
 		<span class="button b-close">
 			<span>X</span>
 		</span>
@@ -614,7 +617,7 @@ $(function(){
 	<div id="chart2" class="col-sm-3"><span><b>해외 주간</b></span></div>
 	
 </div>
-<br>
+<br><br>
 <div class="w3-right">
 <!-- 	<label for="sel1">Select list:</label> -->
   	<select class="form-control" id="scroll_week">

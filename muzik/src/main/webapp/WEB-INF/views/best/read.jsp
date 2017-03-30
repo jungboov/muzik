@@ -22,7 +22,6 @@
 		<tr>
 			<td>Title</td>
 			<td colspan="2">Artist</td>
-			<td>url</td>
 			<td>period</td>
 			<td>mlike</td>
 		</tr>
@@ -30,8 +29,10 @@
 			<tr>
 				<td>${dto.title }</td>
 				<td>${dto.artist}</td>
-				<td><img src="${dto.thumbnail}" width="55px" height="30px"></td>
-				<td>${dto.url}</td>
+				<td>
+					<a href="../music/read?chartid=${dto.chartid}" onClick="window.open(this.href, 'viewMV', 'width=680, height=780'); return false;">
+						<img src="${dto.thumbnail}" width="55px" height="30px"></td>
+					</a>
 				<td>${dto.period}</td>
 				<td>${dto.mlike}</td>
 			</tr>

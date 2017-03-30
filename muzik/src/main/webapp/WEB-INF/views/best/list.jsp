@@ -15,7 +15,13 @@
 
 
 <script type="text/javascript">
-
+$(document).ready(function(){
+	if('${param.chartType}'=='' || '${param.chartType}'=="kpop"){
+ 		$("#chart1 span").prepend('<img style="width:16px;height:auto;margin-bottom:0px; margin-right:3px; margin-top:-2px;" src="${pageContext.request.contextPath}/music/storage/this.png" />');
+	}else if('${param.chartType}'=="pop"){
+ 		$("#chart2 span").prepend('<img style="width:16px;height:auto;margin-bottom:0px; margin-right:3px; margin-top:-2px;" src="${pageContext.request.contextPath}/music/storage/this.png" />');
+	}
+});
 $(function(){
 	$("#chart1").click(function(){
 		location.href="./list?chartType=kpop";
@@ -25,12 +31,11 @@ $(function(){
 	});
 });
 $(function(){
-	$("#read_Best").click(function(){
-		var period=$(this).text();
+	$("a#read_Best").click(function(){
+		var period=$(this).data("period");
 		var chartType=$(this).data("charttype");
 		var bestid=$(this).data("bestid");
 		
-		alert(period+"_"+chartType);
 		if(chartType=="kpop"){			
 			$(".modal-title").html("Kpop_LikeBest "+period);
 		}else if(chartType=="pop"){
@@ -61,11 +66,13 @@ $(function(){
 
 <body>
 <br><br><br>
+<h2 class="iconPosition"><span class="glyphicon glyphicon-music"></span>_차 트</h2>
+<hr class="w3-round border-position">
 <div class="container ">
 <div class="row">
 	<div class="col-sm-6 col-sm-offset-3"></div>
-	<button type="button" class="btn btn-primary" id="chart1"><i class="fa fa-arrow-right"></i>국내 차트</button>
-	<button type="button" class="btn btn-danger" id="chart2">해외 차트</button>
+	<button type="button" class="btn btn-default" id="chart1"><span></span>국내 차트</button>
+	<button type="button" class="btn btn-default" id="chart2"><span></span>해외 차트</button>
 		</div>
 		</div>
 	<br><br><br>
@@ -80,7 +87,7 @@ $(function(){
           <h4 class="modal-title"></h4>
         </div>
         <div class="modal-body">
-          <p>오류</p>
+          <p>Loading</p>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -89,6 +96,7 @@ $(function(){
       
     </div>
   </div>	
+  
 	<div class="container-fluid">
 	<div class="row">
 	<div class="col-sm-8 col-sm-offset-2 ">
@@ -101,7 +109,8 @@ $(function(){
 			<h2 class="text-success">>해외 차트</h2>
 		</c:when>
 	</c:choose>	
-		<h6>버튼을 클릭하시면 주 단위 베스트곡을 볼수 있습니다.</h6>
+	<br>
+		<h6>버튼을 클릭하시면 주 단위 베스트곡을 확인할 수 있습니다.</h6>
 	<c:forEach items="${list}" var="dto"  varStatus="status">
 			
 		<table class="table table-hover" >

@@ -138,7 +138,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 <!-- 	노래정보읽어옴 -->
 	<select id="readSong" parameterType="String" resultType="BestDTO">
-		select title, artist, thumbnail, url, period, mlike, chartType
+		select chartid,title, artist, thumbnail, url, period, mlike, chartType
 		from m_chart
 <!-- 		order by mlike DESC  -->
  		where chartid=#{chartid}
