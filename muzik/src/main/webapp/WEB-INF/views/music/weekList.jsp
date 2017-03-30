@@ -571,9 +571,8 @@ $(function(){
 });
 </script>
 </head> 
-<!-- *********************************************** -->
 <body>
-
+<!-- *********************************************** -->
 <div id="element_to_pop_up" class="content">
 		<span class="button b-close">
 			<span>X</span>

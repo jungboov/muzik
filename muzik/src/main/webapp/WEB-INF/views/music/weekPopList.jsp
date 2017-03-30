@@ -102,32 +102,35 @@ button{
 <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
 <script type="text/javascript">
 //순위변동
- $(document).ready(function(){	
- 	$("span.up").before("&#8593;");
- 	$("span.up").css("color", "#ff471a");
- 	$("span.down").before("&#8595;");
- 	$("span.down").css("color", "#0066ff");
- 	$("span.new").css("color", "#ffd633");
- });
- //버튼 이미지 처리
- $(document).ready(function(){	
+$(document).ready(function(){	
+	$("span.up").before("&#8593;");
+	$("span.up").css("color", "#ff471a");
+	$("span.up").css("font-weight", "bold");
+	$("span.down").before("&#8595;");
+	$("span.down").css("color", "#0066ff");
+	$("span.down").css("font-weight", "bold");
+	$("span.new").css("color", "#d2d22d");
+	$("span.new").css("font-weight", "bold");
+});
+//버튼 이미지 처리
+$(document).ready(function(){	
 	 	$("span#btn_play").prepend('<img style="width:14px;height:16px;margin-bottom:0px; margin-right:3px;" src="${pageContext.request.contextPath}/music/storage/play.png" />');
 	 	$("span#btn_check").prepend('<img style="width:14px;height:16px;margin-bottom:0px; margin-right:3px;" src="${pageContext.request.contextPath}/music/storage/check.png" />');
 	 	$("span#btn_add").prepend('<img style="width:16px;height:16px;margin-bottom:0px; margin-right:3px;" src="${pageContext.request.contextPath}/music/storage/plus.png" />');
 	 	$("span#btn_inven").prepend('<img style="width:16px;height:16px;margin-bottom:0px; margin-right:3px;" src="${pageContext.request.contextPath}/music/storage/inven.png" />');	 	
 	 	$("span#btn_close").prepend('<img style="width:16px;height:16px;margin-bottom:0px; margin-right:3px;" src="${pageContext.request.contextPath}/music/storage/close.png" />');
-	 	$("#chart2 span:last-child").prepend('<img style="width:16px;height:auto;margin-bottom:0px; margin-right:10px;margin-top:-5px;" src="${pageContext.request.contextPath}/music/storage/this.png" />');
- });
-//  //리스트안에 뮤비hover할 때 버튼 이미지 처리
-//  $(document).ready(function(){	
-// 	 	$("a#playMV").hover(
-// 	 		function(){
-// 	 			$(this+":nth-child(2)").show();
-// 	 		},function(){
-// 	 			$(this+":nth-child(2)").hide();
-// 	 		}
-// 	 	);	
-//  });
+	 	$("#chart1 span:first-child").prepend('<img style="width:16px;height:auto;margin-bottom:0px; margin-right:3px; margin-top:-5px;" src="${pageContext.request.contextPath}/music/storage/this.png" />');
+});
+// //리스트안에 뮤비hover할 때 버튼 이미지 처리
+// $(document).ready(function(){	
+//	 	$("a#playMV").hover(
+//	 		function(){
+//	 			$(this+":nth-child(2)").show();
+//	 		},function(){
+//	 			$(this+":nth-child(2)").hide();
+//	 		}
+//	 	);	
+// });
 //체크박스 전체선택
 $(document).ready(function(){	
 	$('button#checkAll1').click(function(){
@@ -140,34 +143,35 @@ $(document).ready(function(){
 		$("button#checkAll2").hide();
 		$("button#checkAll1").show();
 	});
-// 	  	$("input:checkbox[name='input_check']").attr("checked","checked");
+//	  	$("input:checkbox[name='input_check']").attr("checked","checked");
 });
 //top100듣기
 $(document).ready(function(){
 	$("#playChart").click(function(){
-        var url = "./top100Player";  
-        url+="?period=${weekList[0].period}";
-        url+="&chartType=pop";
-        window.open(url,"top100", "width=640,height=410"); 
+       var url = "./top100Player";  
+       url+="?period=${weekList[0].period}";
+       url+="&chartType=kpop";
+       window.open(url,"top100", "width=640,height=410"); 
 	});
 });
 //내 리스트 듣기
 	$(document).on("click","#playMyList",function(){		
 		var invenId=$(this).data("invenid");
-        var url = "./selectPlayer";  
-        url+="?invenId="+invenId;
-        window.open(url,"child", "width=640,height=410"); 
-//         window.open(url,"_blank", "width=640,height=400,status=no,toolbar=no"); 
-        //<a onfocus=blur() href="javascript:void(window.open('http://링크주소','win0','width=1024,height=768,status=no,toolbar=no,scrollbars=no'))">메뉴</a>
+       var url = "./selectPlayer";  
+       url+="?invenId="+invenId;
+       window.open(url,"child", "width=640,height=410"); 
+//        window.open(url,"_blank", "width=640,height=400,status=no,toolbar=no"); 
+       //<a onfocus=blur() href="javascript:void(window.open('http://링크주소','win0','width=1024,height=768,status=no,toolbar=no,scrollbars=no'))">메뉴</a>
 	});
 
 //선택곡있는지 체크
 $(document).ready(function(){	
-	$("#addSelect").click(function(){		
+	$(document).on("click","#addSelect",function(){	
 	    if($("input:checkbox:checked").length==0){
 	    	alert("선택된 곡이 없습니다.");
 	    }else{
-	    	$("#titlePanel").show();	    	
+	    	$("#titlePanel").show();	   
+	    	$("#titlePanel > #myTitle").focus();
 	    }
 	});
 });
@@ -189,20 +193,20 @@ $(document).ready(function(){
 	        url+="?myList="+list;
 	        window.open(url,"child", "width=640,height=410");
 	        chrome.tabs.update(undefined, {url: 'http://example.com'});
-// 			$.post("./playSelect",
-// 			        {
-// 			          myList: list         			          
-// 			        },		      
-// 			        function(data,status){
-// 			            if(status="success"){
-// 			            	$("#titlePanel").hide();
-// 			            	$("#inventoryPanel").show();
-// 			            	$("#inventoryPanel").html(data);
-// 			            }else{
-// 			            	alert("오류");
-// 			            }
+//			$.post("./playSelect",
+//			        {
+//			          myList: list         			          
+//			        },		      
+//			        function(data,status){
+//			            if(status="success"){
+//			            	$("#titlePanel").hide();
+//			            	$("#inventoryPanel").show();
+//			            	$("#inventoryPanel").html(data);
+//			            }else{
+//			            	alert("오류");
+//			            }
 			            	
-// 			 });
+//			 });
 	   }
 	});	
 });
@@ -215,7 +219,6 @@ $(document).ready(function(){
 		var myList=new Array();
 	    var list;
 	    $("#titlePanel").show();	
-		
 	    $("input[name='input_check']:checkbox:checked").each(function (index){    	
 			myList.push($(this).val());
 			//myList[index]=$(this).val();
@@ -223,6 +226,9 @@ $(document).ready(function(){
 	    list=myList.join(",");
 	    if($("input[name='input_check']:checkbox:checked").length==0){
 			$("#titlePanel").hide();
+	    }else if($("#myTitle").val().length < 2){
+	    	$("#myTitle").focus();
+	    	$("#text_warning").show();
 	    }else{	
 			$.post("./addSelect",
 			        {
@@ -243,6 +249,11 @@ $(document).ready(function(){
 			 });
 	   }
 	});	
+	$('#myTitle').keyup(function(){
+		if ($(this).val().length > 2){
+			$("#text_warning").hide();
+		}
+	});
 });
 //선택곡을 기존 보관함에 담기 & 취소
 $(document).on("click","#appendInven",function(){
@@ -276,9 +287,9 @@ $(document).on("click","#appendInven",function(){
 });
 //Inventory, readInnven(보관함 상세히 보기)
 $(document).on("click","a#read_inven",function(){				
-    	var invenId=$(this).data("invenid");
-    	var invenname=$(this).text();
-    	
+   	var invenId=$(this).data("invenid");
+   	var invenname=$(this).text();
+   	
 
 		$.post("./readInven",
 		        {
@@ -298,39 +309,39 @@ $(document).on("click","a#read_inven",function(){
 //Inventory, updateInvenTitle - 변경버튼 눌렀을 때
 $(document).on("click","#changeInven",function(){	
 		var title=$("#changeInven").data("title");
-    	$("#modalHeader").hide();
-    	$("#changeTitle").show();
-    	$("#changeTitle").val(title);
-    	$("#changeInvenSubmit").show();
-    	$("#changeInvenCancel").show();
-    	
-    	
-    	$("#playMyList").hide();
-    	$("#changeInven").hide();
-    	$("#appendInven").hide();
-    	$("#deleteBtn").hide();
-    	$("a#deleteAllBtn").hide();
-    	
+   	$("#modalHeader").hide();
+   	$("#changeTitle").show();
+   	$("#changeTitle").val(title);
+   	$("#changeInvenSubmit").show();
+   	$("#changeInvenCancel").show();
+   	
+   	
+   	$("#playMyList").hide();
+   	$("#changeInven").hide();
+   	$("#appendInven").hide();
+   	$("#deleteBtn").hide();
+   	$("a#deleteAllBtn").hide();
+   	
 });	
 //updateInvenTitle - 변경취소
 $(document).on("click"," #changeInvenCancel,button[data-dismiss='modal']",function(){				
-    	$("#modalHeader").show();
-    	$("#changeTitle").hide();
-    	$("#changeInvenSubmit").hide();
-    	$("#changeInvenCancel").hide();
-    	
-    	$("#playMyList").show();
-    	$("#changeInven").show();
-    	$("#appendInven").show();
-    	$("#deleteBtn").show();
-    	$("a#deleteAllBtn").show();
-    	
+   	$("#modalHeader").show();
+   	$("#changeTitle").hide();
+   	$("#changeInvenSubmit").hide();
+   	$("#changeInvenCancel").hide();
+   	
+   	$("#playMyList").show();
+   	$("#changeInven").show();
+   	$("#appendInven").show();
+   	$("#deleteBtn").show();
+   	$("a#deleteAllBtn").show();
+   	
 });	
 //updateInvenTitle -변경 sumbit
 $(document).on("click","#changeInvenSubmit",function(){	
-    	var invenId=$("#changeInven").data("invenid");
-    	var title=$("#changeInven").data("title");
-   		var changeTitle=$("#changeTitle").val();
+   	var invenId=$("#changeInven").data("invenid");
+   	var title=$("#changeInven").data("title");
+  		var changeTitle=$("#changeTitle").val();
 		$.post("./updateInvenTitle",
 		        {
 				  invenId: invenId,
@@ -359,19 +370,19 @@ $(document).on("click","#changeInvenSubmit",function(){
 $(document).on("click","#deleteSelect",function(){		
 	 
 		var invenId=$(this).data("invenid");
-    	var list=new Array();
-    	var chartidList;
+   	var list=new Array();
+   	var chartidList;
 		    	
-         $("input[name='deleteSelector']:checkbox:checked").each(function (index){    		 
- 			list.push($(this).data("chartid"));
- 			//myList[index]=$(this).val();
- 		});
-    	 chartidList=list.join(",");
-    	 $('#confirmDelete').modal('hide');//modal close
- 	    if($("input[name='deleteSelector']:checkbox:checked").length==0){
- 			//$("#confirmDelete").hide();
- 	    					
- 	    }else{		    
+        $("input[name='deleteSelector']:checkbox:checked").each(function (index){    		 
+			list.push($(this).data("chartid"));
+			//myList[index]=$(this).val();
+		});
+   	 chartidList=list.join(",");
+   	 
+	    if($("input[name='deleteSelector']:checkbox:checked").length==0){
+			//$("#confirmDelete").hide();
+	    					
+	    }else{		    
 			$.post("./deleteSelect",
 			        {
 					  invenId: invenId,
@@ -379,20 +390,24 @@ $(document).on("click","#deleteSelect",function(){
 			        },		       
 			        function(data,status){
 			            if(status="success"){			 
-			            	$("#modalBody").html(data);	
-			            	//$("#playMyList").data("data-invenId", invenId);
+			            	$("#modalBody").html(data);
+			            	//$('#confirmDelete').modal().hide();//modal close
+			            	$('#confirmDelete').modal('hide');//modal close
 			            }else{
 			            	alert("오류");
 			            }		            	
 			 });
- 	    }
+	    }
 });	 
+$(document).on("click","#close_backdrop",function(){ 	    	
+	$("div.modal-backdrop").hide();
+});
 //Inventory, deleteAll - 보고있는 리스트 전부 제거
 $(document).on("click","#deleteAll",function(){				
 		var invenId=$(this).data("invenid");
 		var url="./deleteAll";
-    	url+="?invenId="+invenId;
-    	location.href=url;
+   	url+="?invenId="+invenId;
+   	location.href=url;
 });	
 //Inventory, deleteAll - modal invenid 전달
 $(document).on("click","a[href='#confirmDeleteAll']",function(){		
@@ -412,24 +427,6 @@ $(document).on("click","#dclose1",function(){
 $(document).on("click","#dclose2",function(){		
 	$('#confirmDelete').modal('hide');
 });	
-// //Inventory, td_label(td 클릭시 label 효과) 
-// $(document).on("click","#td_label",function(){		
-// 		var child=$(this).children();
-// 		if(child.prop("checked")==false){
-// 			child.prop("checked",true);
-// 		}else{
-// 			child.prop("checked",false);
-// 		}		
-// });	
-// //musiclist, td_label
-// $(document).on("click","#week_label",function(){		
-// 	var child=$(this).children();
-// 	if(child.prop("checked")==false){
-// 		child.prop("checked",true);
-// 	}else{
-// 		child.prop("checked",false);
-// 	}
-// });
 //보관함 show()&hide
 $(document).ready(function(){
 	$(document).on("click","button#closeInven",function(){	
@@ -440,11 +437,11 @@ $(document).ready(function(){
 	$("#showInven1").click(function(){
 		$("#showInven1").hide();
 		$("#showInven2").show();
-    	var id="${sessionScope.id}";
+   	var id="${sessionScope.id}";
 		$.post("./inventory",
-// 		        {
-// 				  id: id		         
-// 		        },		      
+//		        {
+//				  id: id		         
+//		        },		      
 		        function(data,status){
 		            if(status="success"){
 		            	$("#titlePanel").hide();
@@ -524,8 +521,8 @@ $(function(){
 	$("#scroll_week").change(function(){
 		var period=$(this).val();	
 		var selected = $(this).find('option:selected');
-		var url="./weekPopList";
-		url+="?period="+period;		
+		var url="./weekList";
+		url+="?period="+period;
 		if(selected.data("change")=="yes"){		
 			location.href=url;
 		}else{
@@ -536,29 +533,29 @@ $(function(){
 });
 //top으로 이동 하는 버튼
 $(document).ready(function(){
-    var $body = $(document.body), //자주 사용하기에 캐시되게 변수에 넣어준다
-        $top = '';
+   var $body = $(document.body), //자주 사용하기에 캐시되게 변수에 넣어준다
+       $top = '';
 
-    $top=$('<div>') //div 를 만들고 
-            .addClass('btn_top') //top className을 주고
-            .hide() //처음에는 숨겨둔다
-            .click(function(){  // 클릭이 이벤트 할당
-                $body.animate({ scrollTop: 0 }); //animation효과로 scollTop=0으로 이동 ==처음 위치로 이동
-            })
-            .appendTo($body); // body에 top을 넣는다
+   $top=$('<div>') //div 를 만들고 
+           .addClass('btn_top') //top className을 주고
+           .hide() //처음에는 숨겨둔다
+           .click(function(){  // 클릭이 이벤트 할당
+               $body.animate({ scrollTop: 0 }); //animation효과로 scollTop=0으로 이동 ==처음 위치로 이동
+           })
+           .appendTo($body); // body에 top을 넣는다
 
-    //윈도우의 스크롤위치로 위로가기 버튼을 보여줘야기에 핸들러 작성
-    $(window).scroll(function(){
+   //윈도우의 스크롤위치로 위로가기 버튼을 보여줘야기에 핸들러 작성
+   $(window).scroll(function(){
 
-        var y = $(this).scrollTop();
+       var y = $(this).scrollTop();
 
-        if(y >= 100){
-            $top.fadeIn();
-        }
-        else {
-            $top.fadeOut();
-        }
-    });
+       if(y >= 100){
+           $top.fadeIn();
+       }
+       else {
+           $top.fadeOut();
+       }
+   });
 });
 $(function(){
 	$("#chart1").click(function(){
@@ -569,10 +566,47 @@ $(function(){
 	});
 });
 </script>
-</head> 
-<!-- *********************************************** -->
+</head>
 <body>
 <!-- *********************************************** -->
+<div id="element_to_pop_up" class="content">
+		<span class="button b-close">
+			<span>X</span>
+		</span>
+	</div>
+	<div id="element_to_pop_up1" class="content1">
+		회원가입 창
+		<span class="button b-close">
+			<span>X</span>
+		</span>
+	</div>
+	<div id="element_to_pop_up2" class="content2">
+		일반 로그인 창
+		<span class="button b-close">
+			<span>X</span>
+		</span>
+	</div>
+	<div id="element_to_pop_up3" class="content3">
+		일반 회원가입 창
+		<span class="button b-close">
+			<span>X</span>
+		</span>
+	</div>
+	<div id="element_to_pop_up4" class="content4">
+		회원정보
+		<span class="button b-close">
+			<span>X</span>
+		</span>
+	</div>
+	<div id="element_to_pop_up5" class="content5">
+		닉네임 수정
+		<span class="button b-close">
+			<span>X</span>
+		</span>
+	</div>
+<!-- *********************************************** -->
+<h2 class="iconPosition"><span class="glyphicon glyphicon-music"></span>_차 트</h2>
+<hr class="w3-round border-position">
 <div class="container ">
 <div class="w3-center row menuList w3-xlarge w3-center">
 	<div class="col-sm-3"></div>
@@ -610,7 +644,7 @@ $(function(){
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <button type="button" class="close" data-dismiss="modal" id="close_backdrop" aria-hidden="true">&times;</button>
           <h4 class="modal-title" id="modalHeader"></h4>
           <div class="form-group row">     				
           	<div class="col-sm-6">
@@ -622,7 +656,7 @@ $(function(){
         <div id="modalBody"></div>
         </div>
         <div class="modal-footer" id="modalFooter">
-          <button type="button" class="btn btn-default" id="btn_close" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-default" id="close_backdrop" data-dismiss="modal">Close</button>
         </div>
       </div>
       
