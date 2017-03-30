@@ -20,10 +20,10 @@
 <body>
 	<table class="table table-hover" >
 		<tr>
-			<td>Title</td>
-			<td colspan="2">Artist</td>
-			<td>period</td>
-			<td>mlike</td>
+			<th>Title</th>
+			<th colspan="2">Artist</th>
+			<th>period</th>
+			<th>mlike</th>
 		</tr>
 		<c:forEach items="${list}" var="dto">
 			<tr>
@@ -31,7 +31,7 @@
 				<td>${dto.artist}</td>
 				<td>
 					<a href="../music/read?chartid=${dto.chartid}" onClick="window.open(this.href, 'viewMV', 'width=680, height=780'); return false;">
-						<img src="${dto.thumbnail}" width="55px" height="30px"></td>
+						<img class="thumb_size w3-card-4 w3-hover-opacity" height="60" width="auto" src="${dto.thumbnail}"></td>
 					</a>
 				<td>${dto.period}</td>
 				<td>${dto.mlike}</td>
