@@ -170,11 +170,12 @@ $(document).ready(function(){
 
 //선택곡있는지 체크
 $(document).ready(function(){	
-	$("#addSelect").click(function(){		
+	$(document).on("click","#addSelect",function(){	
 	    if($("input:checkbox:checked").length==0){
 	    	alert("선택된 곡이 없습니다.");
 	    }else{
-	    	$("#titlePanel").show();	    	
+	    	$("#titlePanel").show();	   
+	    	$("#titlePanel > #myTitle").focus();
 	    }
 	});
 });
@@ -222,7 +223,6 @@ $(document).ready(function(){
 		var myList=new Array();
 	    var list;
 	    $("#titlePanel").show();	
-		
 	    $("input[name='input_check']:checkbox:checked").each(function (index){    	
 			myList.push($(this).val());
 			//myList[index]=$(this).val();
@@ -230,6 +230,9 @@ $(document).ready(function(){
 	    list=myList.join(",");
 	    if($("input[name='input_check']:checkbox:checked").length==0){
 			$("#titlePanel").hide();
+	    }else if($("#myTitle").val().length < 2){
+	    	$("#myTitle").focus();
+	    	$("#text_warning").show();
 	    }else{	
 			$.post("./addSelect",
 			        {
@@ -250,6 +253,11 @@ $(document).ready(function(){
 			 });
 	   }
 	});	
+	$('#myTitle').keyup(function(){
+		if ($(this).val().length > 2){
+			$("#text_warning").hide();
+		}
+	});
 });
 //선택곡을 기존 보관함에 담기 & 취소
 $(document).on("click","#appendInven",function(){
@@ -374,7 +382,7 @@ $(document).on("click","#deleteSelect",function(){
  			//myList[index]=$(this).val();
  		});
     	 chartidList=list.join(",");
-    	 $('#confirmDelete').modal('hide');//modal close
+    	 
  	    if($("input[name='deleteSelector']:checkbox:checked").length==0){
  			//$("#confirmDelete").hide();
  	    					
@@ -386,14 +394,18 @@ $(document).on("click","#deleteSelect",function(){
 			        },		       
 			        function(data,status){
 			            if(status="success"){			 
-			            	$("#modalBody").html(data);	
-			            	//$("#playMyList").data("data-invenId", invenId);
+			            	$("#modalBody").html(data);
+			            	//$('#confirmDelete').modal().hide();//modal close
+			            	$('#confirmDelete').modal('hide');//modal close
 			            }else{
 			            	alert("오류");
 			            }		            	
 			 });
  	    }
 });	 
+$(document).on("click","#close_backdrop",function(){ 	    	
+	$("div.modal-backdrop").hide();
+});
 //Inventory, deleteAll - 보고있는 리스트 전부 제거
 $(document).on("click","#deleteAll",function(){				
 		var invenId=$(this).data("invenid");
@@ -419,24 +431,6 @@ $(document).on("click","#dclose1",function(){
 $(document).on("click","#dclose2",function(){		
 	$('#confirmDelete').modal('hide');
 });	
-// //Inventory, td_label(td 클릭시 label 효과) 
-// $(document).on("click","#td_label",function(){		
-// 		var child=$(this).children();
-// 		if(child.prop("checked")==false){
-// 			child.prop("checked",true);
-// 		}else{
-// 			child.prop("checked",false);
-// 		}		
-// });	
-// //musiclist, td_label
-// $(document).on("click","#week_label",function(){		
-// 	var child=$(this).children();
-// 	if(child.prop("checked")==false){
-// 		child.prop("checked",true);
-// 	}else{
-// 		child.prop("checked",false);
-// 	}
-// });
 //보관함 show()&hide
 $(document).ready(function(){
 	$(document).on("click","button#closeInven",function(){	
@@ -653,7 +647,7 @@ $(function(){
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <button type="button" class="close" id="close_backdrop" data-dismiss="modal" aria-hidden="true">&times;</button>
           <h4 class="modal-title" id="modalHeader"></h4>
           <div class="form-group row">     				
           	<div class="col-sm-6">
@@ -665,7 +659,7 @@ $(function(){
         <div id="modalBody"></div>
         </div>
         <div class="modal-footer" id="modalFooter">
-          <button type="button" class="btn btn-default" id="btn_close" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-default" id="close_backdrop" data-dismiss="modal">Close</button>
         </div>
       </div>
       
@@ -698,6 +692,7 @@ $(function(){
 	</div>
 	<div id="titlePanel" style="display: none; margin-bottom:5px;">
 		<input type="text" id="myTitle" placeholder="Enter ListNmae" class="form-control">
+		<p id="text_warning" class="text-danger">2글자이상 입력해주세요<p>
 		<input type="button" id="addSubmit" class="btn btn-success" value="곡 담기">
 		<input type="button" id="addCancel" class="btn btn-danger" value="취소">
 	</div>

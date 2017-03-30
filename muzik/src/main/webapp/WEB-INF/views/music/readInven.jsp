@@ -10,7 +10,7 @@ $(function(){
 	$("#playMyList > span").prepend('<img style="width:14px;height:16px;margin-bottom:0px; margin-right:3px;" src="${pageContext.request.contextPath}/music/storage/play.png" />');
  	$("#appendInven > span").prepend('<img style="width:16px;height:16px;margin-bottom:0px; margin-right:3px;" src="${pageContext.request.contextPath}/music/storage/plus.png" />');
  	$("#changeInven > span").prepend('<img style="width:15px;height:15px;margin-bottom:0px; margin-right:3px;" src="${pageContext.request.contextPath}/music/storage/change.png" />');
- 	$("#deleteBtn > span").prepend('<img style="width:14px;height:14px;margin-bottom:0px; margin-right:3px;" src="${pageContext.request.contextPath}/music/storage/minus.png" />');
+ 	$("#deleteBtn >  span").prepend('<img style="width:14px;height:14px;margin-bottom:0px; margin-right:3px;" src="${pageContext.request.contextPath}/music/storage/minus.png" />');
  	$("#deleteAllBtn > span").prepend('<img style="width:14px;height:14px;margin-bottom:0px; margin-right:3px;" src="${pageContext.request.contextPath}/music/storage/delete.png" />');
 });
 </script>
@@ -64,8 +64,8 @@ $(function(){
 <button type="button" class="btn btn-default" id="changeInven" data-invenid="${invenId}" data-title="${title}"><span>이름 변경</span></button>
 <button type="button" class="btn btn-default" id="appendInven" data-invenid="${invenId}" data-title="${title}" title="체크한 곡을 목록에 추가"><span>추가</span></button>
 <span class="w3-right">	
-	<a  id="deleteBtn" class="btn btn-default" data-invenid="${invenId}" data-toggle="modal" href="#confirmDelete"><span>선택 삭제</span></a>
-	<a  id="deleteAllBtn" class="btn btn-default" data-invenid="${invenId}" data-toggle="modal" href="#confirmDeleteAll"><span>전체 삭제</span></a>
+	<a  id="deleteBtn" class="btn btn-default" data-invenid="${invenId}" data-toggle="modal" href="#confirmDelete"><span class="w3-text-black">선택 삭제</span></a>
+	<a  id="deleteAllBtn" class="btn btn-default" data-invenid="${invenId}" data-toggle="modal" href="#confirmDeleteAll"><span class="w3-text-black" >전체 삭제</span></a>
 </span>
 	<button type="button" class="btn btn-success" id="changeInvenSubmit" style="display: none;" ">변경</button>
 	<button type="button" class="btn btn-warning" id="changeInvenCancel" style="display: none;" ">변경 취소</button>
